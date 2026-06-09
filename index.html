@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부자관광 웹사이트 리디자인 — UX/UI Case Study</title>
+<meta name="description" content="부자관광 웹사이트 리디자인 UX/UI 포트폴리오 케이스 스터디">
+<link rel="stylesheet" href="styles.css">
+<script defer src="main.js"></script>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="brand">부자관광<span class="dot"></span><small>Buja Tour Redesign</small></div>
+  <div class="meta">UX / UI Case Study · 2025</div>
+</nav>
+<div class="progress" id="progress"></div>
+
+<!-- ============ 01 · HERO ============ -->
+<header class="hero" data-screen-label="Hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="kicker">UX / UI · Web Redesign</span>
+      <span class="cap" style="color: #8a94ab; letter-spacing: .04em; font-size: 6px">기획 · 디자인 · 퍼블리싱 · 영업 제안  |  2026</span>
+    </div>
+
+    <h1 class="display">
+      <span class="sub-en">BUJA TOUR</span>
+      부자관광 웹사이트<br>리디자인
+    </h1>
+
+    <p class="lead" style="max-width:680px;margin-top:30px">28년 업력의 전세버스 회사 홈페이지를 — 핵심 서비스인 차량 대절이 첫 화면부터 보이고, <br>
+문의까지 자연스럽게 이어지도록 다시 설계했습니다.</p>
+
+    <div class="roleline">
+      <div class="ri"><span class="rk">My Role</span><span class="rv" style="padding: 9px 0px 0px">기획 · UX/UI · 퍼블리싱</span></div>
+      <div class="ri" style="gap: 6px; align-items: stretch; justify-content: flex-start; padding: 22px 35px 0px"><span class="rk">Team</span><span class="rv" style="padding: 9px 0px 0px">4인 프로젝트</span></div>
+      <div class="ri"><span class="rk">Contribution</span><span class="rv red" style="padding: 10px 0px 0px">기획·디자인·구현 주도</span></div>
+      <div class="ri"><span class="rk">Deliverable</span><span class="rv" style="padding: 10px 0px 0px">웹사이트 + 영업 제안서</span></div>
+    </div>
+
+    <div class="hero-device reveal">
+      <div class="browser dark">
+        <div class="bar"><i></i><i></i><i></i><span class="url">bujatour.com · redesign</span></div>
+        <div class="shot-window"><img class="shot" src="assets/re-home.webp" alt="부자관광 리디자인 홈" style="object-fit:cover;object-position:top;height:380px"></div>
+      </div>
+      <span class="badge" style="bottom: -14px; left: 30px; font-size: 10px">After · 서비스가 먼저 보이는 첫 화면</span>
+    </div>
+  </div>
+  <div class="scrollcue" style="gap: 13px; flex-direction: column; justify-content: flex-start; padding: 0px; margin: 0px"><span>Scroll</span><span class="ln"></span></div>
+</header>
+
+<!-- ============ 02 · INTRO / 한 줄 정의 ============ -->
+<section class="section bg-navy" data-screen-label="Intro">
+  <div class="wrap intro-grid" style="grid-template-columns:1.7fr 1fr">
+    <div class="reveal" style="width: 720px">
+      <span class="kicker">The One Line</span>
+      <p class="pull" style="margin-top: 26px; font-size: 30px">
+        멀쩡히 ‘있는’ 사이트였지만,<br>정작 <span class="hl" style="font-size: 32px">무엇을 하는 곳인지</span>는<br>웹에서 보이지 않았습니다.
+      </p>
+      <p class="body" style="margin-top: 26px; max-width: 720px; width: 720px; margin: 26px 0px 0px; white-space: nowrap; font-size: 16px">이 프로젝트는 ‘무엇을 더 넣을까’가 아니라 ‘무엇을 먼저 보여줄까’에서 출발했습니다. <br>
+리서치부터 IA·UI, 실제 퍼블리싱, 그리고 회사에 전할 영업 제안서까지 한 흐름으로 끌고 갔습니다.</p>
+    </div>
+    <div class="reveal">
+      <div class="cap" style="margin-bottom:14px;letter-spacing:.18em;text-transform:uppercase">내가 만든 결과물</div>
+      <div class="deliverables">
+        <div class="row"><span class="rn">01</span><span class="rt">UX 리서치 · IA 재설계</span><span class="rd">진단 · 경쟁 분석 · 구조</span></div>
+        <div class="row"><span class="rn">02</span><span class="rt">UI 디자인 · 디자인 시스템</span><span class="rd">컬러 · 타입 · 컴포넌트</span></div>
+        <div class="row"><span class="rn">03</span><span class="rt">프론트엔드 퍼블리싱</span><span class="rd">실제 동작 화면 구현</span></div>
+        <div class="row"><span class="rn">04</span><span class="rt">영업 제안서</span><span class="rd">실 사용처를 향한 제안</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · OVERVIEW / 배경 ============ -->
+<section class="section bg-paper" data-screen-label="Background">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight: 600">01 _BACKGROUND</span>
+      <h2 class="h-xl" style="font-size: 30px">차량도, 경력도 충분한 회사가<br>왜 웹에서는 작아 보였을까</h2>
+      <p class="lead sub" style="font-size: 16px">부자관광은 평택을 거점으로 통근·통학·전세버스를 운영하는 28년 업력의 회사입니다. 
+보유 차량과 운행 경험은 넉넉했지만, 그 강점이 첫 화면에는 거의 담겨 있지 않았습니다.</p>
+    </div>
+    <div class="figrow c4 reveal">
+      <div class="fig"><div class="v">28<u style="font-size: 14px">년</u></div><div class="k">업력 · 운행 노하우</div><div class="d">평택 기반 전세·통근·통학</div></div>
+      <div class="fig"><div class="v">5<u style="font-size: 14px">종</u></div><div class="k">보유 차량 라인업</div><div class="d">16·21·25·32·45인승</div></div>
+      <div class="fig"><div class="v">1<u style="font-size: 14px">장</u></div><div class="k">기존 홈 = 큰 사진 한 장</div><div class="d">서비스 설명 카피 없음</div></div>
+      <div class="fig"><div class="v">0<u style="font-size: 14px">개</u></div><div class="k">첫 화면 행동 유도(CTA)</div><div class="d">문의로 이어줄 버튼 부재</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · PROBLEM / 진단 ============ -->
+<section class="section bg-sand" data-screen-label="Diagnosis">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="kicker center" style="font-weight: 600">02 _DIAGNOSIS</span>
+      <h2 class="h-xl" style="font-size: 6px">“사이트는 있었지만,<br>서비스는 보이지 않았다”</h2>
+      <p class="lead sub" style="margin-left: auto; margin-right: auto; font-size: 16px">기존 화면들을 그대로 펼쳐 놓고 사용자의 첫 시선이 어디서 멈추는지 따라가 봤습니다. <br>
+문제는 한 페이지가 아니라 ‘첫인상 전체’에 있었습니다.</p>
+    </div>
+
+    <div class="figrow c3 reveal" style="border:0;gap:26px;display:grid">
+      <div class="pcell">
+        <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="shot-window" style="height:240px"><img class="shot" src="assets/old-home.webp" alt="기존 홈" style="height: 240px; object-fit: cover; object-position: top"></div></div>
+        <div class="show-cap">기존 홈 — 사진 한 장 + 메뉴 4개</div>
+      </div>
+      <div class="pcell">
+        <div class="browser"><div class="bar" style="opacity: 1"><i></i><i></i><i></i></div><div class="shot-window" style="height:240px"><img class="shot" src="assets/old-vehicle.webp" alt="기존 차량안내" style="height:240px;object-fit:cover;object-position:top"></div></div>
+        <div class="show-cap">기존 차량안내 — 사진만, 비교 불가</div>
+      </div>
+      <div class="pcell">
+        <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="shot-window" style="height:240px"><img class="shot" src="assets/old-contact.webp" alt="기존 문의" style="height:240px;object-fit:cover;object-position:top"></div></div>
+        <div class="show-cap">기존 문의 — 일반 양식 하나로 분리</div>
+      </div>
+    </div>
+
+    <div class="wrap-narrow reveal" style="margin-top:70px">
+      <div class="annos">
+        <div class="a"><span class="n">01</span><div class="tx"><h4>한 줄의 설명도 없다</h4><p>무엇을 하는 회사인지 첫 화면이 말해주지 않습니다. 진입한 사람은 ‘무슨 회사지?’부터 추측해야 했습니다.</p></div></div>
+        <div class="a"><span class="n">02</span><div class="tx"><h4>핵심 서비스가 메뉴 속에 숨어 있다</h4><p>차량·약관·문의가 모두 상단 메뉴 안에만 있어, 정작 핵심인 ‘차량 대절’의 단서를 첫 화면에서 찾기 어려웠습니다.</p></div></div>
+        <div class="a"><span class="n">03</span><div class="tx"><h4>다음 행동이 없다</h4><p>클릭하거나 문의할 버튼(CTA)이 화면에 없습니다. 정보를 ‘보여주는’ 화면일 뿐, 행동으로 이어주는 화면이 아니었습니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · USER JOURNEY ============ -->
+<section class="section bg-paper" data-screen-label="User Journey">
+  <div class="wrap">
+    <div class="shead reveal" style="max-width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
+      <div style="max-width:560px">
+        <span class="kicker" style="font-weight: 600">03 _USER JOURNEY</span>
+        <h2 class="h-xl" style="margin-top: 22px; font-size: 6px">진입에서 문의까지,<br>어디서 멈칫했을까</h2>
+      </div>
+      <p class="body" style="max-width: 380px; font-size: 16px">‘무엇을 하는 곳이지?’부터 ‘어떻게 물어보지?’까지 — 매 단계마다 사용자를 멈춰 세우는 지점이 있었습니다.</p>
+    </div>
+
+    <div class="journey reveal" style="border-color: rgb(136, 136, 153)">
+      <div class="st"><div class="sn">STEP 01</div><div class="sh">홈 진입</div><div class="sp">큰 이미지 한 장과 마주함</div><div class="bar"><i style="width:18%"></i></div><div class="dl">멈칫 낮음</div></div>
+      <div class="st"><div class="sn">STEP 02</div><div class="sh">‘무슨 회사지?’</div><div class="sp">설명 카피가 없어 추측해야 함</div><div class="bar"><i style="width:62%"></i></div><div class="dl">멈칫 높음</div></div>
+      <div class="st"><div class="sn">STEP 03</div><div class="sh">메뉴 뒤지기</div><div class="sp">상단 메뉴에서 차량안내를 탐색</div><div class="bar"><i style="width:48%"></i></div><div class="dl">멈칫 중간</div></div>
+      <div class="st"><div class="sn">STEP 04</div><div class="sh">차량 확인</div><div class="sp">정보 빈약 · 비교 어려움</div><div class="bar"><i style="width:52%"></i></div><div class="dl">멈칫 중간</div></div>
+      <div class="st"><div class="sn">STEP 05</div><div class="sh">문의 방법 찾기</div><div class="sp">어디서 어떻게 물어볼지 불명확</div><div class="bar"><i style="width:78%"></i></div><div class="dl">이탈 위험</div></div>
+    </div>
+
+    <div class="reveal" style="display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:center;margin-top:64px">
+      <div>
+        <div class="cap" style="margin-bottom:16px;display:flex;justify-content:space-between"><span>진입 → 문의 도달 (예상 퍼널)</span><span style="color:var(--red)">추정 · 가정</span></div>
+        <div class="funnel">
+          <div class="fr"><span class="fl" style="font-weight: 500">홈 진입</span><span class="fb" style="width:100%"></span><span class="fv">100</span></div>
+          <div class="fr"><span class="fl" style="font-weight: 500">서비스 이해</span><span class="fb" style="width:62%"></span><span class="fv">62</span></div>
+          <div class="fr"><span class="fl" style="font-weight: 500">차량 탐색</span><span class="fb" style="width:38%;background:var(--slate)"></span><span class="fv">38</span></div>
+          <div class="fr warn"><span class="fl" style="font-weight: 500">문의 도달</span><span class="fb" style="width:18%"></span><span class="fv">18</span></div>
+        </div>
+      </div>
+      <div style="border-left: 2px solid var(--red); padding-left: 26px; font-size: 22px">
+        <div class="cap" style="margin-bottom: 10px; font-size: 12px">핵심 인사이트</div>
+        <p class="pull" style="font-size: 26px; font-weight: 400">이탈은 ‘문의 단계’가 아니라<br><span class="hl" style="font-weight: 600">첫인상에서 이미</span> 시작되고 있었다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · COMPETITIVE ============ -->
+<section class="section bg-sand" data-screen-label="Competitive" style="font-weight: 400; background-color: rgb(250, 248, 244)">
+  <div class="wrap">
+    <div class="shead reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap">
+      <div style="max-width:560px">
+        <span class="kicker" style="font-weight: 600">04 _COMPETITIVE REVIEW</span>
+        <h2 class="h-xl" style="margin-top: 22px; font-weight: 600">경쟁사는 무엇을<br>‘<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
+      </div>
+      <p class="body" style="max-width: 560px; width: 540px; margin: 0px -33px 0px 0px; padding: 0px; font-size: 16px">전세버스 업체 사이트 5곳을 휴리스틱으로 비교했습니다. <br>
+공통점은 첫 화면에서 ‘무엇을’과 ‘바로 문의’를 동시에 보여준다는 점이었습니다.</p>
+    </div>
+    <div class="reveal" style="background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden">
+      <table class="ctab">
+        <thead><tr><th style="width:46%">사용자가 첫 화면에서 기대하는 것</th><th class="mid">경쟁 업체</th><th class="mid col-us">기존 부자관광</th></tr></thead>
+        <tbody>
+          <tr><th>무엇을 하는 회사인지 한눈에</th><td class="mid yes">제시</td><td class="mid col-us"><span class="no">없음</span></td></tr>
+          <tr><th>차량 라인업·종류 즉시 확인</th><td class="mid yes">노출</td><td class="mid col-us"><span class="no">메뉴 속</span></td></tr>
+          <tr><th>명확한 문의·견적 버튼(CTA)</th><td class="mid yes">상시</td><td class="mid col-us"><span class="no">없음</span></td></tr>
+          <tr><th>후기·실적 등 신뢰 요소</th><td class="mid yes">강조</td><td class="mid col-us"><span class="no">없음</span></td></tr>
+          <tr><th>차량별 상세·비교 정보</th><td class="mid yes">제공</td><td class="mid col-us"><span class="no">빈약</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="reveal pull" style="font-size: 24px; margin-top: 54px; max-width: 780px; font-weight: 400; width: 781px">
+      부자관광은 ‘더 많은 차량과 경력’을 가지고도<br><span class="hl" style="font-weight: 600; font-size: 26px">더 적게 보여주고</span> 있었습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 08 · STRATEGY / 개선 방향 ============ -->
+<section class="section bg-paper" data-screen-label="Strategy">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight: 600">05 — Strategy</span>
+      <h2 class="h-xl" style="font-size: 30px">문제를 하나씩,<br>화면의 결정으로 바꾸다</h2>
+      <p class="lead sub" style="font-size: 16px">진단에서 나온 문제를 ‘무엇을 어떻게 바꿀지’로 1:1 매핑했습니다. 더 넣기보다, 순서를 바꾸는 결정이 많았습니다.</p>
+    </div>
+    <div class="reveal">
+      <div class="maprow">
+        <div class="from" style="width: 450px"><span class="lab" style="font-weight: 400">Before</span><span class="t" style="width: 450px">설명 카피 없는 큰 사진 한 장</span></div>
+        <div class="arrow" style="gap: 0px; padding: 0px; justify-content: center">→</div>
+        <div class="to" style="gap: 7px; padding: 0px"><span class="lab" style="font-weight: 500">After</span><span class="t" style="font-weight: 600">“품격 있는 이동 서비스” 한 문장 + 히어로</span></div>
+      </div>
+      <div class="maprow">
+        <div class="from" style="width: 450px"><span class="lab" style="font-weight: 400">Before</span><span class="t">메뉴 속에 숨은 핵심 서비스</span></div>
+        <div class="arrow">→</div>
+        <div class="to"><span class="lab" style="font-weight: 500">After</span><span class="t" style="font-weight: 600">차량·신뢰·후기를 메인 전면에 배치</span></div>
+      </div>
+      <div class="maprow">
+        <div class="from" style="width: 450px"><span class="lab" style="font-weight: 400">Before</span><span class="t">화면에 없는 행동 유도(CTA)</span></div>
+        <div class="arrow">→</div>
+        <div class="to"><span class="lab" style="font-weight: 500">After</span><span class="t" style="font-weight: 600">상시 노출되는 ‘문의하기’ 동선</span></div>
+      </div>
+      <div class="maprow">
+        <div class="from" style="width: 450px"><span class="lab" style="font-weight: 400">Before</span><span class="t">흩어진 문의 · 빈약한 신뢰 근거</span></div>
+        <div class="arrow">→</div>
+        <div class="to"><span class="lab" style="font-weight: 500">After</span><span class="t" style="font-weight: 600">문의 허브 통합 + 후기·실적 신설</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · GOAL BANNER ============ -->
+<section class="section goal" data-screen-label="Goal">
+  <div class="goal-mark" aria-hidden="true">HMW?</div>
+  <div class="wrap reveal" style="position:relative;z-index:2">
+    <div style="max-width:880px;margin:0 auto;text-align:center">
+      <span class="goal-rule"></span>
+      <span class="kicker center goal-kicker" style="font-weight: 600">Defining the Goal</span>
+      <div class="goal-tag" style="font-weight: 600">How might we …</div>
+      <p class="pull goal-q" style="font-size: 26px">
+        충분한 차량과 경력을 가진 회사가,<br>첫 화면부터 <span class="hl" style="line-height: 1.85; font-size: 28px; font-family: Pretendard">핵심 서비스를 전달</span>하고<br><span class="hl">문의까지 자연스럽게</span> 이어지게 하려면?
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 · STYLE GUIDE ============ -->
+<section class="section bg-paper" data-screen-label="Style Guide">
+  <div class="wrap">
+    <div class="shead center reveal" style="width: 789px; margin: 0px 254px 52px 216px">
+      <span class="kicker center" style="font-weight: 600">06 _STYLE GUIDE</span>
+      <h2 class="h-xl">신뢰는 어떻게 디자인되는가</h2>
+      <p class="lead sub" style="margin-left: auto; margin-right: auto; width: 749px; font-size: 16px">화려함보다 ‘품격’과 ‘안정감’. 절제된 네이비와 시그니처 레드, 넉넉한 여백과 정돈된 타이포로 신뢰를 시각화했습니다.</p>
+    </div>
+
+    <div class="sg-grid reveal">
+      <div class="sg-block">
+        <div class="sgk">Color</div>
+        <div class="swatches">
+          <div class="sw" style="background:#0c1830"><span style="color:#fff">Navy Deep</span><span class="hex" style="color:#fff">#0C1830</span></div>
+          <div class="sw" style="background:#13264a"><span style="color:#fff">Navy</span><span class="hex" style="color:#fff">#13264A</span></div>
+          <div class="sw" style="background:#4a5c80"><span style="color:#fff">Slate</span><span class="hex" style="color:#fff">#4A5C80</span></div>
+          <div class="sw" style="background:#d6382a"><span style="color:#fff">Signature Red</span><span class="hex" style="color:#fff">#D6382A</span></div>
+          <div class="sw" style="background:#f0eae0;border-color:#e3ddd1"><span style="color:#403d39">Sand</span><span class="hex" style="color:#8a857c">#F0EAE0</span></div>
+          <div class="sw" style="background:#1d1c1a"><span style="color:#fff">Ink</span><span class="hex" style="color:#fff">#1D1C1A</span></div>
+        </div>
+        <p class="small" style="margin-top:18px">네이비·레드 일변도를 벗어나 샌드·슬레이트를 중간톤으로 더해, <br>
+강조(레드)가 더 또렷하게 보이도록 균형을 잡았습니다.</p>
+      </div>
+
+      <div class="sg-block">
+        <div class="sgk">Typography · Pretendard</div>
+        <div class="type-spec">
+          <div class="tl"><span class="tn" style="font-size: 34px; font-weight: 800">부자관광.</span><span class="tm">Display · 800</span></div>
+          <div class="tl"><span class="tn" style="font-size: 25px; font-weight: 600">품격 있는 이동 서비스</span><span class="tm">Heading · 600</span></div>
+          <div class="tl"><span class="tn" style="font-size:18px;font-weight:450;color:var(--ink-2)">안전하고 편안한 운행으로</span><span class="tm">Body · 450</span></div>
+          <div class="tl"><span class="tn" style="font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--red)">SERVICE / CTA</span><span class="tm">Label · 700</span></div>
+        </div>
+      </div>
+
+      <div class="sg-block">
+        <div class="sgk">Spacing &amp; Layout</div>
+        <div style="display:flex;flex-direction:column;gap:13px">
+          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">4</span><span style="height:14px;width:4%;background:var(--slate);border-radius:2px"></span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">8</span><span style="height:14px;width:8%;background:var(--slate);border-radius:2px"></span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">16</span><span style="height:14px;width:16%;background:var(--slate);border-radius:2px"></span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">24</span><span style="height:14px;width:24%;background:var(--slate);border-radius:2px"></span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">40</span><span style="height:14px;width:40%;background:var(--navy);border-radius:2px"></span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">64</span><span style="height:14px;width:64%;background:var(--navy);border-radius:2px"></span></div>
+        </div>
+        <p class="small" style="margin-top:18px">4px 기반 스페이싱 스케일. 섹션 간 큰 여백으로 정보의 위계와 ‘숨’을 만들었습니다.</p>
+      </div>
+
+      <div class="sg-block">
+        <div class="sgk">Components</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 7px; align-items: center; padding: 0px; margin: 48px 0px 0px">
+          <span style="background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:11px 20px;border-radius:8px">문의하기 →</span>
+          <span style="border:1.5px solid var(--navy);color:var(--navy);font-weight:700;font-size:14px;padding:10px 18px;border-radius:8px">서비스 살펴보기</span>
+          <span class="tag"><span class="d"></span>16인승</span>
+          <span class="tag">Wi-Fi</span>
+          <span style="background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:5px 11px;border-radius:5px">BEST 기사님</span>
+        </div>
+        <p class="small" style="margin-top:18px">버튼·태그·뱃지·후기 카드 등 재사용 단위를 규칙으로 정의해, <br>
+화면 전체에 일관된 톤을 유지했습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · HOME SHOWCASE (annotated) ============ -->
+<section class="section bg-sand" data-screen-label="Redesign Home">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight: 600">07 _THE REDESIGN · HOME</span>
+      <h2 class="h-xl" style="font-size: 30px">보던 화면을,<br><span class="red-ink">행동하는 화면</span>으로</h2>
+      <p class="lead sub" style="font-size: 16px">홈 한 페이지 안에서 ‘이해 → 신뢰 → 비교 → 문의’가 한 흐름으로 이어지도록 다시 짰습니다.</p>
+    </div>
+
+    <div class="showcase reveal">
+      <div class="show-notes">
+        <div class="annos ok">
+          <div class="a" style="gap: 11px"><span class="n">A</span><div class="tx"><h4>말을 거는 첫 화면</h4><p style="width: 253px; margin: 20px 0px 0px">‘품격 있는 이동 서비스’ 한 문장 + 상시 CTA로 3초 안에 무슨 회사인지 전달.</p></div></div>
+          <div class="a" style="gap: 15px"><span class="n">B</span><div class="tx"><h4>신뢰를 먼저 증명</h4><p style="margin: 20px 0px 0px">안전·전문 기사·신속 대응을 신뢰 시스템으로<br>
+전면 배치.</p></div></div>
+          <div class="a" style="gap: 15px"><span class="n">C</span><div class="tx"><h4>목적·인원별 차량</h4><p style="margin: 21px 0px 0px">고르고 바로 비교·문의로 이어지는 차량 진입.</p></div></div>
+          <div class="a" style="gap: 15px"><span class="n">D</span><div class="tx"><h4>실고객 후기</h4><p style="margin: 20px 0px 0px">후기를 메인에 노출해 문의 결정의 부담을 낮춤.</p></div></div>
+        </div>
+      </div>
+      <div class="show-frame">
+        <div class="browser">
+          <div class="bar"><i></i><i></i><i></i><span class="url">bujatour.com</span></div>
+          <div class="tall"><img class="shot" src="assets/re-home.webp" alt="부자관광 리디자인 홈 전체"></div>
+        </div>
+        <div class="show-cap">리디자인 홈 — 전체 스크롤 (실제 퍼블리싱 화면)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 · BEFORE / AFTER key pages ============ -->
+<section class="section bg-paper" data-screen-label="Before After">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight: 600">08 _BEFORE / AFTER</span>
+      <h2 class="h-xl" style="font-size: 30px">페이지를 열어보면,<br>차이는 더 분명해진다</h2>
+    </div>
+
+    <!-- 차량안내 -->
+    <div class="reveal" style="display:grid;grid-template-columns:230px 1fr 44px 1fr;gap:22px;align-items:center;border-top:1px solid var(--line);padding:34px 0">
+      <div><div class="h-md" style="color:var(--navy)">차량안내</div><p class="small" style="margin-top: 8px; width: 235px">사진뿐이던 페이지에<br>
+스펙·좌석배치·편의사양과 온라인 견적 폼까지.</p></div>
+      <div><div class="cap" style="margin-bottom:8px">Before</div><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window" style="height:188px"><img class="shot" src="assets/old-vehicle.webp" style="height:188px;object-fit:cover;object-position:top" alt="기존 차량안내"></div></div></div>
+      <div style="text-align:center;color:var(--red);font-size:26px;font-weight:800">→</div>
+      <div><div class="cap" style="margin-bottom:8px;color:var(--red)">After</div><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window" style="height:188px"><img class="shot" src="assets/re-vehicles.webp" style="height:188px;object-fit:cover;object-position:top" alt="리디자인 차량안내"></div></div></div>
+    </div>
+
+    <!-- 문의 -->
+    <div class="reveal" style="display:grid;grid-template-columns:230px 1fr 44px 1fr;gap:22px;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0">
+      <div><div class="h-md" style="color:var(--navy)">문의</div><p class="small" style="margin-top: 8px; font-size: 13px">깊숙이 분리됐던 일반 양식을 <b style="font-size: 14px">FAQ·기사모집·법인(B2B)</b>으로 분기되는 <b style="font-size: 14px">문의 허브</b>로.</p></div>
+      <div><div class="cap" style="margin-bottom:8px">Before</div><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window" style="height:188px"><img class="shot" src="assets/old-contact.webp" style="height:188px;object-fit:cover;object-position:top" alt="기존 문의"></div></div></div>
+      <div style="text-align:center;color:var(--red);font-size:26px;font-weight:800">→</div>
+      <div><div class="cap" style="margin-bottom:8px;color:var(--red)">After</div><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window" style="height:188px"><img class="shot" src="assets/re-inquiry.webp" style="height: 187px; object-fit: cover; object-position: top" alt="리디자인 문의"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 · PAGE TOUR ============ -->
+<section class="section bg-sand" data-screen-label="Pages" style="background-color: rgb(250, 248, 244)">
+  <div class="wrap">
+    <div class="shead reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; margin: 0px -10px 52px 0px; padding: 0px 14px 0px 0px">
+      <div style="max-width:560px"><span class="kicker">09_ THE PAGES</span><h2 class="h-xl" style="margin-top: 22px; font-size: 30px">다섯 개의 화면,<br>하나의 목적</h2></div>
+      <p class="body" style="max-width: 620px; width: 600px; margin: 0px 9px 0px 1px; padding: 0px 35px 0px 0px; font-size: 16px">모든 페이지가 결국 <b>‘차량 대절 문의’</b> 한 곳을 향하도록 설계했습니다.</p>
+    </div>
+    <div class="pagestrip reveal">
+      <div class="pcell"><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window"><img class="shot" src="assets/re-home.webp" style="height:330px;object-fit:cover;object-position:top" alt="홈"></div></div><div class="pl"><span class="pi">01</span><span class="pt">홈</span></div><p class="pd">서비스·신뢰·차량·CTA를 한 흐름에</p></div>
+      <div class="pcell"><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window"><img class="shot" src="assets/re-vehicles.webp" style="height:330px;object-fit:cover;object-position:top" alt="차량안내"></div></div><div class="pl"><span class="pi">02</span><span class="pt">차량안내</span></div><p class="pd">스펙·좌석·견적을 한 화면에</p></div>
+      <div class="pcell"><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window"><img class="shot" src="assets/re-reviews.webp" style="height:330px;object-fit:cover;object-position:top" alt="고객후기"></div></div><div class="pl"><span class="pi">03</span><span class="pt">고객후기</span></div><p class="pd">필터·평점 있는 실고객 후기</p></div>
+      <div class="pcell"><div class="browser"><div class="bar" style="height:24px"><i></i><i></i><i></i></div><div class="shot-window"><img class="shot" src="assets/re-inquiry.webp" style="height:330px;object-fit:cover;object-position:top" alt="문의하기"></div></div><div class="pl"><span class="pi">04</span><span class="pt">문의하기</span></div><p class="pd">FAQ·기사모집·B2B 분기 허브</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · 영업 제안서 ============ -->
+<section class="section bg-navy-2" data-screen-label="Sales Proposal">
+  <div class="wrap">
+    <div class="shead reveal" style="max-width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-bottom: 48px; margin: 0px 17px 48px 0px">
+      <div>
+        <span class="kicker">10 — Beyond the Screen</span>
+        <h2 class="h-xl" style="margin-top: 22px; font-size: 30px">디자인에서 멈추지 않고,<br>제안까지</h2>
+      </div>
+      <p class="body" style="width: 583px; margin: 81px -62px 0px 3px; height: 74px; font-size: 16px">학습 프로젝트로 끝내고 싶지 않았습니다.  리디자인의 근거와 기대 효과를 정리해,  <br>
+회사가 실제로 검토할 수 있는 영업 제안서로 만들었습니다.  <br>
+‘왜 바꿔야 하는가’를 설득하는 문서까지가 이 프로젝트의 끝이었습니다.</p>
+    </div>
+    <div class="reveal" style="background:var(--paper-2);border-radius:16px;padding:26px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
+      <div style="width:100%;height:340px;border-radius:10px;overflow:hidden"><img src="assets/proposal-1.webp" alt="영업 제안서 — 표지" style="width:100%;height:100%;object-fit:cover;object-position:45% 50%"></div>
+      <div style="width:100%;height:340px;border-radius:10px;overflow:hidden"><img src="assets/proposal-2.webp" alt="영업 제안서 — 전달 메일" style="width:100%;height:100%;object-fit:cover;object-position:50% 17%"></div>
+    </div>
+    <p class="cap reveal" style="margin-top:18px;color:#9aa3b8">↑ 회사에 실제로 전달한 영업 제안서와 메일.</p>
+  </div>
+</section>
+
+<!-- ============ 07 · 시행착오 / TEAM PROCESS ============ -->
+<section class="section bg-navy" data-screen-label="Behind the Process" style="background-color: rgb(18, 38, 74)">
+  <div class="wrap">
+    <div class="shead center reveal">
+      <span class="kicker center">11 _BEHIND THE PROCESS</span>
+      <h2 class="h-xl" style="font-size: 30px">혼자가 아니라,<br>끝까지 끌고 간 시간</h2>
+      <p class="lead sub" style="margin-left: auto; margin-right: auto; font-size: 16px">이 프로젝트는 팀으로 시작했습니다. <br>
+가장 어려웠던 건 디자인이 아니라, 같은 결과를 향해 서로의 ‘노력의 농도’를 맞추는 일이었습니다.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="tphase">
+        <div class="ph-l"><div class="pnum">PHASE 01</div><div class="pttl">함께 출발</div><div class="ptag">방향 정렬 · 역할 분배</div>
+          <div class="skill"><div class="sk-lab" style="margin: 65px 0px 11px">발휘한 역량</div><div class="sk-chips" style="width: 256px"><span class="chip">협업 리딩</span><span class="chip">목표 정렬</span><span class="chip">커뮤니케이션</span></div></div>
+        </div>
+        <div class="ph-r">
+          <p>초반에는 팀을 잘 이끌어보려 했습니다.  리서치 결과를 공유하고, 문제 정의와 화면 구조를 함께 합의하고, 각자 맡을 영역을 나눴습니다. <br>
+모두가 같은 그림을 보고 있다고 믿었습니다.</p>
+          <p class="q" style="font-size: 20px">“좋은 결과를 함께 만들고 싶다” — 그게 출발점이었습니다.</p>
+        </div>
+      </div>
+      <div class="tphase">
+        <div class="ph-l"><div class="pnum">PHASE 02</div><div class="pttl">농도의 차이</div><div class="ptag">현실 직면 · 속도 정체</div>
+          <div class="skill"><div class="sk-lab" style="margin: 52px 0px 11px">발휘한 역량</div><div class="sk-chips" style="width: 275px"><span class="chip">문제 해결</span><span class="chip">디자인 시스템화</span><span class="chip">구조적 사고</span></div></div>
+        </div>
+        <div class="ph-r" style="height: 122px">
+          <p>진행될수록, 같은 목표를 보면서도 거기에 들이는 에너지의 농도가 서로 다르다는 걸 알게 됐습니다.  <br>
+누군가를 탓하기보다, 프로젝트가 멈추지 않게 하는 게 먼저였습니다.</p>
+          <p>그래서 비는 부분을 메우는 방식을 택했습니다. 공통으로 쓸 화면 구조와 컴포넌트를 먼저 정리해 두니, 각자가 손대기 쉬워졌고 합치는 비용도 줄었습니다.</p>
+        </div>
+      </div>
+      <div class="tphase">
+        <div class="ph-l"><div class="pnum">PHASE 03</div><div class="pttl">오너십으로 완주</div><div class="ptag">기획 → 디자인 → 퍼블리싱</div>
+          <div class="skill"><div class="sk-lab" style="margin: 56px 0px 11px">발휘한 역량</div><div class="sk-chips" style="width: 264px"><span class="chip">오너십</span><span class="chip">엔드투엔드 실행</span><span class="chip">주도적 제안</span></div></div>
+        </div>
+        <div class="ph-r" style="height: 148px">
+          <p>마무리 단계에서는 결국 흩어진 조각을 하나의 완성된 결과로 묶는 일을 제가 맡아 끝까지 가져갔습니다.  <br>
+기획과 UI를 다듬고, 실제 화면을 직접 퍼블리싱해 ‘돌아가는 결과물’로 만들었습니다.</p>
+          <p>그 과정에서 욕심을 더 내,  디자인을 넘어 회사에 실제로 제안할 수 있는 영업 제안서까지 만들었습니다. <br>
+학습 프로젝트를 ‘쓸 수 있는 제안’으로 끌어올리고 싶었습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson reveal">
+      <div class="lk">What I took away</div>
+      <p class="pull" style="font-size:clamp(20px,2.4vw,28px);margin-top:18px;color:#fff">
+        리딩은 ‘끌고 가는 것’이 아니라,<br><span class="hl">남이 손대기 쉽게 판을 깔아두는 것</span>에 가깝다는 걸 배웠습니다.
+      </p>
+      <p class="body" style="margin-top:18px;max-width:680px;color:#aab3c6">통제하려 할수록 멈췄고, 구조와 기준을 먼저 만들어 두니 비로소 굴러갔습니다.  <br>
+혼자 끝낸 경험이 아니라, 책임의 무게와 협업의 설계를 같이 배운 시간으로 남았습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15 · OUTCOME / 회고 ============ -->
+<section class="section bg-navy" data-screen-label="Outcome">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="kicker">12 _OUTCOME &amp; REFLECTION</span>
+      <h2 class="h-xl" style="font-size: 30px">없던 강점을 만든 게 아니라,<br><span class="red-ink">있던 강점</span>을 보이게 했다</h2>
+      <p class="lead sub" style="font-size: 16px">차량·경력·신뢰라는 강점을 첫 화면부터 ‘순서대로’ 드러냈을 뿐입니다. <br>
+그 작은 차이가 ‘무엇을 하는 곳인지’를 즉시 전하고, 문의까지의 길을 짧게 만듭니다.</p>
+    </div>
+    <div class="reflect reveal">
+      <div>
+        <div class="ritem"><h4>설계로 증명한 것</h4><p>진입 즉시 ‘무엇을 하는 곳’인지 이해되고, 탐색에서 문의까지 끊김 없는 동선을 만들었습니다.   <br>
+신뢰 요소로 문의 결정의 부담을 낮췄습니다.</p></div>
+        <div class="ritem"><h4>직접 끝낸 범위</h4><p>리서치·IA·UI를 넘어 실제 퍼블리싱과 영업 제안서까지, <br>
+‘기획부터 전달’을 한 사람의 손으로 완결했습니다.</p></div>
+      </div>
+      <div>
+        <div class="ritem"><h4>사람으로 배운 것</h4><p>가장 큰 난관은 디자인이 아니라 협업이었습니다.  <br>
+통제 대신 구조와 기준을 먼저 깔아두는 것이 팀을 움직인다는 걸 몸으로 배웠습니다.</p></div>
+        <div class="ritem"><h4>다음엔 이렇게</h4><p>역할의 ‘농도’를 초반에 합의하고, 진행 상태를 더 자주 가시화하는 장치를 두겠습니다.  <br>
+끝까지 책임지되, 혼자 짊어지지 않도록.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16 · CLOSING ============ -->
+<section class="section bg-navy-2 closing" data-screen-label="Closing" style="padding-top: 120px; padding-bottom: 120px; height: 350px; text-align: center; margin: 0px; padding: 120px 40px 125px">
+  <div class="wrap reveal" style="text-align: center; height: 218px; margin: 0px; padding: 0px">
+    <span class="kicker center">Thank you</span>
+    <p class="big" style="margin-top: 28px; font-size: 40px">서비스가 먼저 보이는<br>첫 화면을 위해.</p>
+    <div class="sign" style="margin: 38px 0px 0px"><span>부자관광 웹사이트 리디자인</span><span class="dot"></span><span>UX/UI Case Study · 2025</span></div>
+  </div>
+</section>
+
+<footer class="foot">© 2025 부자관광 Redesign — UX/UI Case Study · 기획 · 디자인 · 퍼블리싱 · 영업 제안</footer>
+
+</body>
+</html>
