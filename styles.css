@@ -349,9 +349,28 @@ b,strong{font-weight:600;color:var(--ink)}
 .reflect .ritem p{font-size:14.5px;line-height:1.8;color:#aab3c6}
 
 /* closing */
-.closing{text-align:center}
-.closing .big{font-size:clamp(30px,4.4vw,58px);font-weight:600;letter-spacing:-.03em;line-height:1.08;color:#fff}
-.closing .sign{margin-top:38px;display:inline-flex;align-items:center;gap:14px;font-size:13px;color:#9aa3b8}
+.closing{
+  min-height:350px;
+  padding:120px 40px 125px;
+  margin:0;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.closing .wrap{
+  width:100%;
+  max-width:none;
+  padding:0;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.closing .big{margin-top:28px;font-size:clamp(30px,4.4vw,58px);font-weight:600;letter-spacing:-.03em;line-height:1.08;color:#fff}
+.closing .sign{margin-top:38px;display:inline-flex;align-items:center;justify-content:center;gap:14px;font-size:13px;color:#9aa3b8}
 .closing .sign .dot{width:6px;height:6px;border-radius:50%;background:var(--sand-ink)}
 
 footer.foot{background:var(--navy-deep);color:#7e89a1;padding:30px 40px;text-align:center;font-size:12.5px;letter-spacing:.04em;
