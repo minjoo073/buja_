@@ -7,6 +7,12 @@
   document.head.appendChild(font);
 })();
 
+var previewMode = new URLSearchParams(window.location.search).get("preview") === "1";
+
+if (previewMode) {
+  document.body.classList.add("exporting");
+}
+
 var prog = document.getElementById("progress");
 
 function onScroll() {
@@ -30,7 +36,9 @@ var io = new IntersectionObserver(
   { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
 );
 
-document.querySelectorAll(".reveal").forEach(function (element) {
+var revealElements = Array.from(document.querySelectorAll(".reveal"));
+
+revealElements.forEach(function (element) {
   io.observe(element);
 });
 
@@ -113,6 +121,17 @@ bars.forEach(function (bar) {
   bar.__bar = bar;
   dataIO.observe(bar);
 });
+
+if (previewMode) {
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      revealElements.forEach(function (element) {
+        element.classList.add("in");
+      });
+      settleAll();
+    });
+  });
+}
 
 function settleAll() {
   figVals.forEach(function (item) {

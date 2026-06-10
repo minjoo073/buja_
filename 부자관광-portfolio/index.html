@@ -4,9 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>부자관광 웹사이트 리디자인 — UX/UI Case Study</title>
-<meta name="description" content="부자관광 웹사이트 리디자인 UX/UI 포트폴리오 케이스 스터디">
-<link rel="stylesheet" href="styles.css">
-<script defer src="main.js"></script>
+<link rel="stylesheet" href="case.css">
+<script>
+  // Load Pretendard from CDN at runtime (kept out of the offline bundle to
+  // stay light; the design is served online in the portfolio).
+  (function(){
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css';
+    document.head.appendChild(l);
+  })();
+</script>
 </head>
 <body>
 
@@ -55,10 +63,10 @@
   <div class="wrap intro-grid" style="grid-template-columns:1.7fr 1fr">
     <div class="reveal" style="width: 720px">
       <span class="kicker">The One Line</span>
-      <p class="pull" style="margin-top: 26px">
+      <p class="pull" style="margin-top: 26px; font-size: 30px">
         멀쩡히 ‘있는’ 사이트였지만,<br>정작 <span class="hl" style="font-size: 32px">무엇을 하는 곳인지</span>는<br>웹에서 보이지 않았습니다.
       </p>
-      <p class="body" style="margin-top: 26px; max-width: 720px; width: 720px; margin: 26px 0px 0px; white-space: nowrap">이 프로젝트는 ‘무엇을 더 넣을까’가 아니라 ‘무엇을 먼저 보여줄까’에서 출발했습니다. <br>
+      <p class="body" style="margin-top: 26px; max-width: 720px; width: 720px; margin: 26px 0px 0px; white-space: nowrap; font-size: 16px">이 프로젝트는 ‘무엇을 더 넣을까’가 아니라 ‘무엇을 먼저 보여줄까’에서 출발했습니다. <br>
 리서치부터 IA·UI, 실제 퍼블리싱, 그리고 회사에 전할 영업 제안서까지 한 흐름으로 끌고 갔습니다.</p>
     </div>
     <div class="reveal">
@@ -111,8 +119,8 @@
   <div class="wrap">
     <div class="shead center reveal">
       <span class="kicker center" style="font-weight: 600">02 _DIAGNOSIS</span>
-      <h2 class="h-xl">“사이트는 있었지만,<br><span class="red-ink" style="font-weight: 700">서비스</span>는 보이지 않았다”</h2>
-      <p class="lead sub" style="margin-left: auto; margin-right: auto">기존 화면들을 그대로 펼쳐 놓고 사용자의 첫 시선이 어디서 멈추는지 따라가 봤습니다. <br>
+      <h2 class="h-xl" style="font-size: 6px">“사이트는 있었지만,<br>서비스는 보이지 않았다”</h2>
+      <p class="lead sub" style="margin-left: auto; margin-right: auto; font-size: 16px">기존 화면들을 그대로 펼쳐 놓고 사용자의 첫 시선이 어디서 멈추는지 따라가 봤습니다. <br>
 문제는 한 페이지가 아니라 ‘첫인상 전체’에 있었습니다.</p>
     </div>
 
@@ -147,9 +155,9 @@
     <div class="shead reveal" style="max-width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
       <div style="max-width:560px">
         <span class="kicker" style="font-weight: 600">03 _USER JOURNEY</span>
-        <h2 class="h-xl" style="margin-top: 22px">진입에서 문의까지,<br>어디서 멈칫했을까</h2>
+        <h2 class="h-xl" style="margin-top: 22px; font-size: 6px">진입에서 문의까지,<br>어디서 멈칫했을까</h2>
       </div>
-      <p class="body" style="max-width: 380px">‘무엇을 하는 곳이지?’부터 ‘어떻게 물어보지?’까지 — 매 단계마다 사용자를 멈춰 세우는 지점이 있었습니다.</p>
+      <p class="body" style="max-width: 380px; font-size: 16px">‘무엇을 하는 곳이지?’부터 ‘어떻게 물어보지?’까지 — 매 단계마다 사용자를 멈춰 세우는 지점이 있었습니다.</p>
     </div>
 
     <div class="journey reveal" style="border-color: rgb(136, 136, 153)">
@@ -170,9 +178,9 @@
           <div class="fr warn"><span class="fl" style="font-weight: 500">문의 도달</span><span class="fb" style="width:18%"></span><span class="fv">18</span></div>
         </div>
       </div>
-      <div style="border-left: 2px solid var(--red); padding-left: 26px">
+      <div style="border-left: 2px solid var(--red); padding-left: 26px; font-size: 22px">
         <div class="cap" style="margin-bottom: 10px; font-size: 12px">핵심 인사이트</div>
-        <p class="pull" style="font-weight: 500">이탈은 ‘문의 단계’가 아니라<br><span class="hl" style="font-weight: 650">첫인상에서 이미</span> 시작되고 있었다.</p>
+        <p class="pull" style="font-size: 26px; font-weight: 400">이탈은 ‘문의 단계’가 아니라<br><span class="hl" style="font-weight: 600">첫인상에서 이미</span> 시작되고 있었다.</p>
       </div>
     </div>
   </div>
@@ -184,9 +192,9 @@
     <div class="shead reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap">
       <div style="max-width:560px">
         <span class="kicker" style="font-weight: 600">04 _COMPETITIVE REVIEW</span>
-        <h2 class="h-xl" style="margin-top: 22px">경쟁사는 무엇을<br>‘<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
+        <h2 class="h-xl" style="margin-top: 22px; font-weight: 600">경쟁사는 무엇을<br>‘<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
       </div>
-      <p class="body" style="max-width: 560px; width: 540px; margin: 0px -33px 0px 0px; padding: 0px">전세버스 업체 사이트 5곳을 휴리스틱으로 비교했습니다. <br>
+      <p class="body" style="max-width: 560px; width: 540px; margin: 0px -33px 0px 0px; padding: 0px; font-size: 16px">전세버스 업체 사이트 5곳을 휴리스틱으로 비교했습니다. <br>
 공통점은 첫 화면에서 ‘무엇을’과 ‘바로 문의’를 동시에 보여준다는 점이었습니다.</p>
     </div>
     <div class="competitive-board reveal">
@@ -257,8 +265,8 @@
   <div class="wrap">
     <div class="shead reveal">
       <span class="kicker" style="font-weight: 600">05 — Strategy</span>
-      <h2 class="h-xl">문제를 하나씩,<br>화면의 결정으로 바꾸다</h2>
-      <p class="lead sub">진단에서 나온 문제를 ‘무엇을 어떻게 바꿀지’로 1:1 매핑했습니다. 더 넣기보다, 순서를 바꾸는 결정이 많았습니다.</p>
+      <h2 class="h-xl" style="font-size: 30px">문제를 하나씩,<br>화면의 결정으로 바꾸다</h2>
+      <p class="lead sub" style="font-size: 16px">진단에서 나온 문제를 ‘무엇을 어떻게 바꿀지’로 1:1 매핑했습니다. 더 넣기보다, 순서를 바꾸는 결정이 많았습니다.</p>
     </div>
     <div class="strategy-minimal reveal">
       <div class="strategy-mini-head">
@@ -399,8 +407,8 @@
   <div class="wrap">
     <div class="shead reveal">
       <span class="kicker" style="font-weight: 600">07 _THE REDESIGN · HOME</span>
-      <h2 class="h-xl">보던 화면을,<br><span class="red-ink">행동하는 화면</span>으로</h2>
-      <p class="lead sub">홈 한 페이지 안에서 ‘이해 → 신뢰 → 비교 → 문의’가 한 흐름으로 이어지도록 다시 짰습니다.</p>
+      <h2 class="h-xl" style="font-size: 30px">보던 화면을,<br><span class="red-ink">행동하는 화면</span>으로</h2>
+      <p class="lead sub" style="font-size: 16px">홈 한 페이지 안에서 ‘이해 → 신뢰 → 비교 → 문의’가 한 흐름으로 이어지도록 다시 짰습니다.</p>
     </div>
 
     <div class="showcase reveal">
@@ -428,7 +436,7 @@
   <div class="wrap">
     <div class="shead reveal">
       <span class="kicker" style="font-weight: 600">08 _BEFORE / AFTER</span>
-      <h2 class="h-xl">페이지를 열어보면,<br>차이는 더 분명해진다</h2>
+      <h2 class="h-xl" style="font-size: 30px">페이지를 열어보면,<br>차이는 더 분명해진다</h2>
     </div>
 
     <!-- 차량안내 -->
@@ -454,8 +462,8 @@
 <section class="section bg-sand pages-soft-section" data-screen-label="Pages" style="background-color: rgb(250, 248, 244)">
   <div class="wrap">
     <div class="shead reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; margin: 0px -10px 52px 0px; padding: 0px 14px 0px 0px">
-      <div style="max-width:560px"><span class="kicker">09_ THE PAGES</span><h2 class="h-xl" style="margin-top: 22px">다섯 개의 화면,<br>하나의 목적</h2></div>
-      <p class="body" style="max-width: 620px; width: 600px; margin: 0px 9px 0px 1px; padding: 0px 35px 0px 0px">모든 페이지가 결국 <b>‘차량 대절 문의’</b> 한 곳을 향하도록 설계했습니다.</p>
+      <div style="max-width:560px"><span class="kicker">09_ THE PAGES</span><h2 class="h-xl" style="margin-top: 22px; font-size: 30px">다섯 개의 화면,<br>하나의 목적</h2></div>
+      <p class="body" style="max-width: 620px; width: 600px; margin: 0px 9px 0px 1px; padding: 0px 35px 0px 0px; font-size: 16px">모든 페이지가 결국 <b>‘차량 대절 문의’</b> 한 곳을 향하도록 설계했습니다.</p>
     </div>
     <div class="pagestrip reveal">
       <div class="pcell"><div class="shot-panel shot-page"><img class="shot" src="assets/re-home.webp" style="height:330px;object-fit:cover;object-position:top" alt="홈"></div><div class="pl"><span class="pi">01</span><span class="pt">홈</span></div><p class="pd">서비스·신뢰·차량·CTA를 한 흐름에</p></div>
@@ -472,15 +480,15 @@
     <div class="shead reveal" style="max-width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-bottom: 48px; margin: 0px 17px 48px 0px">
       <div>
         <span class="kicker">10 — Beyond the Screen</span>
-        <h2 class="h-xl" style="margin-top: 22px">디자인에서 멈추지 않고,<br>제안까지</h2>
+        <h2 class="h-xl" style="margin-top: 22px; font-size: 30px">디자인에서 멈추지 않고,<br>제안까지</h2>
       </div>
       <p class="body" style="width: 583px; margin: 81px -62px 0px 3px; height: 74px; font-size: 16px">학습 프로젝트로 끝내고 싶지 않았습니다.  리디자인의 근거와 기대 효과를 정리해,  <br>
 회사가 실제로 검토할 수 있는 영업 제안서로 만들었습니다.  <br>
 ‘왜 바꿔야 하는가’를 설득하는 문서까지가 이 프로젝트의 끝이었습니다.</p>
     </div>
     <div class="reveal" style="background:var(--paper-2);border-radius:16px;padding:26px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
-      <div style="width:100%;height:340px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center"><img src="assets/proposal-cover-hires.png" alt="영업 제안서 — 표지" style="width:100%;height:100%;object-fit:contain;object-position:center"></div>
-      <div style="width:100%;height:340px;border-radius:10px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center"><img src="assets/proposal-mail-hires.jpg" alt="영업 제안서 — 전달 메일" style="width:100%;height:100%;object-fit:cover;object-position:center 18%"></div>
+      <div style="width:100%;height:340px;border-radius:10px;overflow:hidden"><img src="assets/proposal-1.webp" alt="영업 제안서 — 표지" style="width:100%;height:100%;object-fit:cover;object-position:45% 50%"></div>
+      <div style="width:100%;height:340px;border-radius:10px;overflow:hidden"><img src="assets/proposal-2.webp" alt="영업 제안서 — 전달 메일" style="width:100%;height:100%;object-fit:cover;object-position:50% 17%"></div>
     </div>
     <p class="cap reveal" style="margin-top:18px;color:#9aa3b8">↑ 회사에 실제로 전달한 영업 제안서와 메일.</p>
   </div>
@@ -491,8 +499,8 @@
   <div class="wrap">
     <div class="shead center reveal">
       <span class="kicker center">11 _BEHIND THE PROCESS</span>
-      <h2 class="h-xl">혼자가 아니라,<br>끝까지 끌고 간 시간</h2>
-      <p class="lead sub" style="margin-left: auto; margin-right: auto">이 프로젝트는 팀으로 시작했습니다. <br>
+      <h2 class="h-xl" style="font-size: 30px">혼자가 아니라,<br>끝까지 끌고 간 시간</h2>
+      <p class="lead sub" style="margin-left: auto; margin-right: auto; font-size: 16px">이 프로젝트는 팀으로 시작했습니다. <br>
 가장 어려웠던 건 디자인이 아니라, 같은 결과를 향해 서로의 ‘노력의 농도’를 맞추는 일이었습니다.</p>
     </div>
 
@@ -546,8 +554,8 @@
   <div class="wrap">
     <div class="shead reveal">
       <span class="kicker">12 _OUTCOME &amp; REFLECTION</span>
-      <h2 class="h-xl">없던 강점을 만든 게 아니라,<br><span class="red-ink">있던 강점</span>을 보이게 했다</h2>
-      <p class="lead sub">차량·경력·신뢰라는 강점을 첫 화면부터 ‘순서대로’ 드러냈을 뿐입니다. <br>
+      <h2 class="h-xl" style="font-size: 30px">없던 강점을 만든 게 아니라,<br><span class="red-ink">있던 강점</span>을 보이게 했다</h2>
+      <p class="lead sub" style="font-size: 16px">차량·경력·신뢰라는 강점을 첫 화면부터 ‘순서대로’ 드러냈을 뿐입니다. <br>
 그 작은 차이가 ‘무엇을 하는 곳인지’를 즉시 전하고, 문의까지의 길을 짧게 만듭니다.</p>
     </div>
     <div class="reflect reveal">
@@ -568,15 +576,119 @@
 </section>
 
 <!-- ============ 16 · CLOSING ============ -->
-<section class="section bg-navy-2 closing" data-screen-label="Closing">
-  <div class="wrap reveal">
+<section class="section bg-navy-2 closing" data-screen-label="Closing" style="padding-top: 120px; padding-bottom: 120px; height: 350px; text-align: center; margin: 0px; padding: 120px 40px 125px">
+  <div class="wrap reveal" style="text-align: center; height: 218px; margin: 0px; padding: 0px">
     <span class="kicker center">Thank you</span>
-    <p class="big">서비스가 먼저 보이는<br>첫 화면을 위해.</p>
-    <div class="sign"><span>부자관광 웹사이트 리디자인</span><span class="dot"></span><span>UX/UI Case Study · 2025</span></div>
+    <p class="big" style="margin-top: 28px; font-size: 40px">서비스가 먼저 보이는<br>첫 화면을 위해.</p>
+    <div class="sign" style="margin: 38px 0px 0px"><span>부자관광 웹사이트 리디자인</span><span class="dot"></span><span>UX/UI Case Study · 2025</span></div>
   </div>
 </section>
 
 <footer class="foot">© 2025 부자관광 Redesign — UX/UI Case Study · 기획 · 디자인 · 퍼블리싱 · 영업 제안</footer>
 
+<script>
+  // progress bar
+  const prog = document.getElementById('progress');
+  function onScroll(){
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const st = window.scrollY || document.documentElement.scrollTop;
+    prog.style.width = (h>0 ? st/h*100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ---- subtle data animation: count-up + bar fill ---- */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // figures: animate the leading number (keeps the unit <u> suffix intact)
+  const figVals = [...document.querySelectorAll('.figrow .fig .v')].map(v=>{
+    const node = v.firstChild; // text node holding the number
+    const target = node ? parseInt(node.textContent, 10) : NaN;
+    return {v, node, target};
+  }).filter(o=>o.node && !isNaN(o.target));
+
+  // bars (journey friction + funnel): remember target widths, then start at 0
+  const bars = [...document.querySelectorAll('.journey .st .bar i, .funnel .fb')];
+  bars.forEach(b=>{
+    b.dataset.w = b.style.width || getComputedStyle(b).width;
+    if(!reduceMotion){
+      b.style.transition = 'width 1.1s cubic-bezier(.2,.7,.2,1)';
+      b.style.width = '0%';
+    }
+  });
+
+  function fillBar(b){ b.style.width = b.dataset.w; }
+  function runCount(o){
+    if(reduceMotion){ return; }
+    const dur = 1100, start = performance.now();
+    function tick(now){
+      const p = Math.min(1, (now-start)/dur);
+      const eased = 1 - Math.pow(1-p, 3);
+      o.node.textContent = Math.round(o.target * eased);
+      if(p < 1) requestAnimationFrame(tick);
+      else o.node.textContent = o.target;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const dataIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const t = e.target;
+      if(t.__fig) runCount(t.__fig);
+      if(t.__bar) fillBar(t.__bar);
+      dataIO.unobserve(t);
+    });
+  }, {threshold:0.4});
+  figVals.forEach(o=>{ o.v.__fig = o; dataIO.observe(o.v); });
+  bars.forEach(b=>{ b.__bar = b; dataIO.observe(b); });
+
+  // print / PDF export: force final state so nothing renders empty
+  function settleAll(){
+    figVals.forEach(o=>{ o.node.textContent = o.target; });
+    bars.forEach(b=>{ b.style.transition='none'; b.style.width = b.dataset.w; });
+  }
+  window.addEventListener('beforeprint', settleAll);
+</script>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#13264a"/>
+    <rect x="30" y="44" width="40" height="20" rx="3" fill="#d6382a"/>
+    <circle cx="40" cy="66" r="4" fill="#0c1830" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="60" cy="66" r="4" fill="#0c1830" stroke="#fff" stroke-width="1.5"/>
+    <text x="50" y="30" font-family="sans-serif" font-size="11" font-weight="800" fill="#fff" text-anchor="middle">부자관광</text>
+  </svg>
+</template>
+
 </body>
 </html>
+
+<style id="__om-edit-overrides">
+:is(h1,h2,h3,h4,h5,h6) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) { font-weight: 600 !important }
+.shead >.body >div { width: 400px !important }
+.shead >.body >div { width: 352px !important }
+.shead >.body >div { width: 468px !important }
+.intro-grid :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div { width: 574px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 534px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 482px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { padding: 0px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { padding: 0px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 434px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 387px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 375px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 349px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 423px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { height: 75px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { height: 54px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(1) { width: 385px !important }
+:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(2) { width: 479px !important }
+:is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div:nth-child(2) { width: 418px !important }
+.bg-navy-2 :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,figcaption,label,span,a,em,strong,small,td,th,caption) >div { height: 0px !important }
+</style>
