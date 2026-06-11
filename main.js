@@ -7,10 +7,65 @@
   document.head.appendChild(font);
 })();
 
-var previewMode = new URLSearchParams(window.location.search).get("preview") === "1";
+var params = new URLSearchParams(window.location.search);
+var previewMode = params.get("preview") === "1";
+var exportSection = params.get("export_section");
+var PORTFOLIO_BASE_WIDTH = 1440;
+var PORTFOLIO_MAX_SCALE = 1920 / 1440;
 
-if (previewMode) {
+if (previewMode || exportSection) {
   document.body.classList.add("exporting");
+}
+
+function updatePortfolioScale() {
+  var scale = Math.min(window.innerWidth / PORTFOLIO_BASE_WIDTH, PORTFOLIO_MAX_SCALE);
+  scale = Math.max(scale, 1);
+
+  if (previewMode || exportSection) {
+    scale = 1;
+  }
+
+  document.documentElement.style.setProperty("--portfolio-scale", scale.toFixed(4));
+}
+
+window.addEventListener("resize", updatePortfolioScale, { passive: true });
+updatePortfolioScale();
+
+if (exportSection) {
+  window.addEventListener("load", function () {
+    var query = exportSection.toLowerCase();
+    var sections = Array.from(document.querySelectorAll("header.hero, section"));
+    var target = sections.find(function (section) {
+      var label = (section.dataset.screenLabel || "").toLowerCase();
+      var id = (section.id || "").toLowerCase();
+      return label === query || id === query;
+    });
+
+    if (!target) {
+      return;
+    }
+
+    Array.from(document.body.children).forEach(function (child) {
+      if (child !== target) {
+        child.style.display = "none";
+      }
+    });
+
+    target.style.display = "block";
+    target.style.minHeight = "auto";
+    target.style.margin = "0";
+
+    document.body.style.background = getComputedStyle(target).backgroundColor;
+    document.documentElement.style.background = getComputedStyle(target).backgroundColor;
+
+    Array.from(target.querySelectorAll(".reveal")).forEach(function (element) {
+      element.classList.add("in");
+      element.style.opacity = "1";
+      element.style.transform = "none";
+    });
+
+    window.scrollTo(0, 0);
+  });
 }
 
 var prog = document.getElementById("progress");
