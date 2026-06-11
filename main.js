@@ -10,19 +10,22 @@
 var params = new URLSearchParams(window.location.search);
 var previewMode = params.get("preview") === "1";
 var exportSection = params.get("export_section");
-var PORTFOLIO_BASE_WIDTH = 1440;
-var PORTFOLIO_MAX_SCALE = 1920 / 1440;
+const PORTFOLIO_BASE_WIDTH = 1440;
+const PORTFOLIO_MAX_SCALE = 1920 / 1440;
 
 if (previewMode || exportSection) {
   document.body.classList.add("exporting");
 }
 
 function updatePortfolioScale() {
-  var scale = Math.min(window.innerWidth / PORTFOLIO_BASE_WIDTH, PORTFOLIO_MAX_SCALE);
-  scale = Math.max(scale, 1);
+  const scale = Math.min(
+    window.innerWidth / PORTFOLIO_BASE_WIDTH,
+    PORTFOLIO_MAX_SCALE
+  );
 
   if (previewMode || exportSection) {
-    scale = 1;
+    document.documentElement.style.setProperty("--portfolio-scale", "1");
+    return;
   }
 
   document.documentElement.style.setProperty("--portfolio-scale", scale.toFixed(4));
@@ -200,3 +203,73 @@ function settleAll() {
 }
 
 window.addEventListener("beforeprint", settleAll);
+
+function setupDeliverablesTicker() {
+  var groups = Array.from(document.querySelectorAll(".deliverables"));
+
+  if (!groups.length || reduceMotion || previewMode || exportSection) {
+    return;
+  }
+
+  groups.forEach(function (group) {
+    var rows = Array.from(group.querySelectorAll(".row"));
+
+    if (!rows.length) {
+      return;
+    }
+
+    var activeIndex = 0;
+    var timer = null;
+
+    function paint(index) {
+      rows.forEach(function (row, rowIndex) {
+        row.classList.toggle("is-active", rowIndex === index);
+      });
+    }
+
+    function start() {
+      if (timer) {
+        return;
+      }
+
+      group.classList.add("is-animated");
+      paint(activeIndex);
+
+      timer = window.setInterval(function () {
+        activeIndex = (activeIndex + 1) % rows.length;
+        paint(activeIndex);
+      }, 1650);
+    }
+
+    function stop() {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    paint(activeIndex);
+    group.classList.add("is-animated");
+
+    var tickerIO = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            start();
+          } else {
+            stop();
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -12% 0px" }
+    );
+
+    tickerIO.observe(group);
+
+    window.setTimeout(function () {
+      start();
+    }, 500);
+  });
+}
+
+setupDeliverablesTicker();

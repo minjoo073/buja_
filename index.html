@@ -5,8 +5,365 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>부자관광 웹사이트 리디자인 — UX/UI Case Study</title>
 <meta name="description" content="부자관광 웹사이트 리디자인 UX/UI 포트폴리오 케이스 스터디">
-<link rel="stylesheet" href="styles.css?v=20260611-1156">
-<script defer src="main.js?v=20260611-1156"></script>
+<link rel="stylesheet" href="styles.css?v=20260612-0012">
+<script defer src="main.js?v=20260612-0012"></script>
+<style id="live-overrides">
+  :root{
+    --page-margin:64px;
+    --paper:#fcfbf8;
+    --paper-2:#f8f4ec;
+    --paper-3:#efe8dc;
+  }
+  @media (min-width:1280px) and (max-width:1439px){
+    :root{ --page-margin:36px; }
+  }
+  @media (max-width:1279px){
+    :root{ --page-margin:24px; }
+  }
+
+  .wrap,
+  .hero .wrap{
+    width:min(calc(100vw - (var(--page-margin) * 2)), 1440px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+  .wrap-narrow{
+    width:min(calc(100vw - (var(--page-margin) * 2)), 1120px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+  .shead.center{
+    width:min(calc(100vw - (var(--page-margin) * 2)), 980px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  .section{padding:150px 40px !important}
+  .section.tight{padding:120px 40px !important}
+  .goal{padding-top:150px !important; padding-bottom:150px !important}
+  .section[data-screen-label="Intro"] .intro-grid{
+    min-height:auto !important;
+    padding-top:0 !important;
+    gap:72px !important;
+  }
+  .shead{margin-bottom:40px !important}
+  .background-overview{margin-top:18px !important}
+
+  .bg-paper,.bg-sand,.bg-navy,.bg-navy-2,.bg-red,.goal,.closing,footer.foot{
+    background:#f8f4ec !important;
+    color:var(--ink) !important;
+  }
+
+  .h-xl,
+  .background-section-title,
+  .goal-q{
+    font-size:clamp(2.1rem, 2.5vw, 3rem) !important;
+    font-weight:500 !important;
+    line-height:1.22 !important;
+    letter-spacing:-.03em !important;
+  }
+  @media (min-width:1440px){
+    .h-xl,
+    .background-section-title,
+    .goal-q{
+      font-size:clamp(2rem, 2.2vw, 2.8rem) !important;
+    }
+  }
+
+  .h-xl em,
+  .h-xl .hl,
+  .background-section-title em,
+  .background-section-title .hl,
+  .goal-q em,
+  .goal-q .hl{
+    font-size:1.17em !important;
+    font-style:normal !important;
+  }
+
+  .lead{font-size:1.1rem !important; line-height:1.8 !important; font-weight:400 !important}
+  .body{font-size:1rem !important; line-height:1.82 !important; font-weight:400 !important}
+  .small{font-size:.88rem !important; line-height:1.72 !important; font-weight:300 !important}
+  .cap,.kicker{font-size:.75rem !important}
+
+  .background-section-body,
+  .background-overview-body,
+  .compare-detail,
+  .redesign-notes .tx p,
+  [data-screen-label="Behind the Process"] .tphase .ph-r p,
+  .competitive-finding p{
+    font-size:.88rem !important;
+    line-height:1.78 !important;
+    font-weight:300 !important;
+  }
+
+  .background-overview-title,
+  .strategy-mini-title,
+  .pull,
+  [data-screen-label="Behind the Process"] .tphase .ph-r .q{
+    font-size:1.7rem !important;
+    line-height:1.42 !important;
+    font-weight:400 !important;
+  }
+
+  .section[data-screen-label="Intro"] .deliverables{
+    width:min(760px,100%) !important;
+    margin:0 auto !important;
+  }
+  .section[data-screen-label="Intro"] .intro-grid{
+    gap:48px !important;
+  }
+  .section[data-screen-label="Intro"] .intro-grid > .reveal:last-child > .cap{
+    margin-bottom:12px !important;
+  }
+  .deliverables .rn,
+  .strategy-row-label,
+  .comp-row-label,
+  .competitive-finding .finding-label{
+    font-size:.66rem !important;
+    font-weight:500 !important;
+  }
+  .deliverables .rt,
+  .redesign-notes .tx h4,
+  .competitive-row .comp-cell.current strong,
+  [data-screen-label="Behind the Process"] .tphase .ph-l .pttl{
+    font-size:.96rem !important;
+    font-weight:400 !important;
+    color:var(--ink) !important;
+    line-height:1.34 !important;
+  }
+  .deliverables .rd,
+  .competitive-row .comp-cell.current span{
+    font-size:.66rem !important;
+    font-weight:300 !important;
+    line-height:1.7 !important;
+  }
+  .section[data-screen-label="Intro"] .deliverables .row{
+    gap:12px !important;
+    padding:12px 0 !important;
+  }
+  .section[data-screen-label="Intro"] .deliverables .rn{
+    width:36px !important;
+  }
+  .section[data-screen-label="Intro"] .deliverables .rt{
+    flex:0 1 280px !important;
+  }
+  .section[data-screen-label="Intro"] .deliverables .rd{
+    flex:0 0 150px !important;
+    margin-left:0 !important;
+    text-align:left !important;
+  }
+
+  .show-cap,
+  .pagestrip .pcell .pd,
+  .type-showcase,
+  .wire-card p{
+    font-size:.88rem !important;
+  }
+  section[data-screen-label="Background"] .shead,
+  section[data-screen-label="Diagnosis"] .shead,
+  section[data-screen-label="Competitive"] .shead,
+  section[data-screen-label="Strategy"] .shead,
+  section[data-screen-label="Goal"] .shead,
+  section[data-screen-label="Style Guide"] .shead,
+  section[data-screen-label="Before After"] .shead,
+  section[data-screen-label="Pages"] .shead,
+  section[data-screen-label="Sales Proposal"] .shead{
+    width:min(calc(100vw - (var(--page-margin) * 2)), 980px) !important;
+    max-width:980px !important;
+    margin-left:0 !important;
+    margin-right:auto !important;
+    text-align:left !important;
+  }
+  section[data-screen-label="Background"] .shead .kicker,
+  section[data-screen-label="Diagnosis"] .shead .kicker,
+  section[data-screen-label="Competitive"] .shead .kicker,
+  section[data-screen-label="Strategy"] .shead .kicker,
+  section[data-screen-label="Goal"] .shead .kicker,
+  section[data-screen-label="Style Guide"] .shead .kicker,
+  section[data-screen-label="Before After"] .shead .kicker,
+  section[data-screen-label="Pages"] .shead .kicker,
+  section[data-screen-label="Sales Proposal"] .shead .kicker{
+    justify-content:flex-start !important;
+  }
+  section[data-screen-label="Background"] .shead.center,
+  section[data-screen-label="Diagnosis"] .shead.center,
+  section[data-screen-label="Competitive"] .shead.center,
+  section[data-screen-label="Strategy"] .shead.center,
+  section[data-screen-label="Goal"] .shead.center,
+  section[data-screen-label="Style Guide"] .shead.center,
+  section[data-screen-label="Before After"] .shead.center,
+  section[data-screen-label="Pages"] .shead.center,
+  section[data-screen-label="Sales Proposal"] .shead.center{
+    margin-left:0 !important;
+    margin-right:auto !important;
+    text-align:left !important;
+  }
+  section[data-screen-label="Style Guide"] .style-guide-sub,
+  section[data-screen-label="Goal"] .goal-q{
+    margin-left:0 !important;
+    margin-right:auto !important;
+    text-align:left !important;
+  }
+  .background-section-title{
+    font-size:clamp(2.1rem, 2.5vw, 3rem) !important;
+    font-weight:500 !important;
+    line-height:1.22 !important;
+  }
+  @media (min-width:1440px){
+    .background-section-title{
+      font-size:clamp(2rem, 2.2vw, 2.8rem) !important;
+    }
+  }
+  .background-section-body{
+    font-size:1rem !important;
+    line-height:1.82 !important;
+    font-weight:400 !important;
+    max-width:980px !important;
+  }
+  .background-overview-kicker{display:none !important}
+  .background-overview{
+    grid-template-columns:1fr !important;
+    gap:28px !important;
+    margin-top:28px !important;
+  }
+  .background-overview-title{
+    font-size:1.7rem !important;
+    line-height:1.42 !important;
+    font-weight:500 !important;
+    max-width:980px !important;
+  }
+  .background-overview-body{
+    font-size:1rem !important;
+    line-height:1.82 !important;
+    font-weight:400 !important;
+    color:var(--ink-2) !important;
+    max-width:980px !important;
+  }
+  .background-facts{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:20px !important;
+    margin-top:10px !important;
+    max-width:980px !important;
+  }
+  .background-fact{
+    padding:14px 0 0 !important;
+    border-top:1px solid var(--line) !important;
+    border-bottom:0 !important;
+  }
+  .background-fact .num{
+    font-size:1.15rem !important;
+    font-weight:600 !important;
+    color:var(--navy) !important;
+  }
+  .background-fact .label{
+    margin-top:8px !important;
+    font-size:.8rem !important;
+    line-height:1.65 !important;
+    color:var(--ink-2) !important;
+  }
+</style>
+  <style id="section-01-fix">
+    .background-overview-kicker{
+      display:none !important;
+    }
+    .background-overview{
+      display:grid !important;
+      grid-template-columns:1fr !important;
+      gap:20px !important;
+      margin-top:28px !important;
+      align-items:start !important;
+    }
+    .background-overview-copy{
+      max-width:980px !important;
+    }
+    .background-overview-title{
+      font-size:1.52rem !important;
+      line-height:1.48 !important;
+      font-weight:500 !important;
+      max-width:860px !important;
+    }
+    .background-overview-body{
+      margin-top:18px !important;
+      font-size:0.96rem !important;
+      line-height:1.78 !important;
+      font-weight:400 !important;
+      color:var(--ink-2) !important;
+      max-width:920px !important;
+    }
+    .background-facts{
+      grid-column:1 !important;
+      width:min(820px,100%) !important;
+      max-width:820px !important;
+      display:grid !important;
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      gap:18px !important;
+      margin-top:0 !important;
+      justify-self:start !important;
+    }
+    .background-fact{
+      padding:12px 0 0 !important;
+      border-top:1px solid var(--line) !important;
+      border-bottom:0 !important;
+    }
+    .background-fact .num{
+      font-size:1rem !important;
+      line-height:1.2 !important;
+      font-weight:600 !important;
+      color:var(--navy) !important;
+    }
+    .background-fact .label{
+      margin-top:6px !important;
+      font-size:0.74rem !important;
+      line-height:1.62 !important;
+      color:var(--ink-2) !important;
+    }
+  </style>
+  <style id="paper-tone-soften">
+    :root{
+      --paper:#fdfcf9 !important;
+      --paper-2:#faf8f3 !important;
+      --paper-3:#f4efe7 !important;
+    }
+    .bg-paper,.bg-sand,.bg-navy,.bg-navy-2,.bg-red,.goal,.closing,footer.foot{
+      background:#faf8f3 !important;
+    }
+    .hero{
+      background:#faf8f3 !important;
+    }
+    .hero::before{
+      background:linear-gradient(90deg, rgba(250,248,243,.94) 0%, rgba(250,248,243,.82) 34%, rgba(250,248,243,.42) 62%, rgba(250,248,243,.12) 100%) !important;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const introText = document.querySelector('.background-section-body');
+      if (introText && !introText.dataset.formatted) {
+        const raw = introText.textContent.replace(/\s+/g, ' ').trim();
+        const target = '부자관광은 평택을 거점으로 통근·통학·전세버스를 운영하는 28년 업력의 회사입니다. 보유 차량과 운행 경험은 넉넉했지만, 그 강점이 첫 화면에는 거의 담겨 있지 않았습니다.';
+        if (raw === target) {
+          introText.innerHTML = '부자관광은 평택을 거점으로 통근·통학·전세버스를 운영하는 28년 업력의 회사입니다.<br>보유 차량과 운행 경험은 넉넉했지만, 그 강점이 첫 화면에는 거의 담겨 있지 않았습니다.';
+          introText.dataset.formatted = 'true';
+        }
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const competitiveSection = document.querySelector('[data-screen-label="Competitive"]');
+      if (!competitiveSection) return;
+      const candidates = [...competitiveSection.querySelectorAll('div')];
+      const board = candidates.find((el) => {
+        const text = (el.textContent || '').replace(/\s+/g, ' ');
+        return text.includes('경쟁사 공통') && text.includes('기존 부자관광') && text.includes('Key Finding');
+      });
+      if (!board) return;
+      board.style.zoom = '0.88';
+      board.style.maxWidth = 'none';
+      board.style.marginLeft = '0';
+      board.style.marginRight = '0';
+      board.style.transformOrigin = 'top left';
+    });
+  </script>
 </head>
 <body>
 
@@ -39,30 +396,22 @@
       <div class="ri"><span class="rk">Contribution</span><span class="rv red" style="padding: 10px 0px 0px">기획·디자인·구현 주도</span></div>
       <div class="ri"><span class="rk">Deliverable</span><span class="rv" style="padding: 10px 0px 0px">웹사이트 + 영업 제안서</span></div>
     </div>
-
-    <div class="hero-device reveal">
-      <div class="shot-panel shot-hero">
-        <img class="shot" src="assets/re-home.webp" alt="부자관광 리디자인 홈" style="object-fit:cover;object-position:top;height:380px">
-      </div>
-      <span class="badge" style="bottom: -14px; left: 30px; font-size: 10px">After · 서비스가 먼저 보이는 첫 화면</span>
-    </div>
   </div>
-  <div class="scrollcue" style="gap: 13px; flex-direction: column; justify-content: flex-start; padding: 0px; margin: 0px"><span>Scroll</span><span class="ln"></span></div>
 </header>
 
 <!-- ============ 02 · INTRO / 한 줄 정의 ============ -->
 <section class="section bg-navy" data-screen-label="Intro">
-  <div class="wrap intro-grid" style="grid-template-columns:1.7fr 1fr">
-    <div class="reveal" style="width: 720px">
+  <div class="wrap intro-grid">
+    <div class="reveal">
       <span class="kicker">The One Line</span>
-      <p class="pull" style="margin-top: 26px">
-        멀쩡히 ‘있는’ 사이트였지만,<br>정작 <span class="hl">무엇을 하는 곳인지</span>는<br>웹에서 보이지 않았습니다.
+      <p class="pull intro-pull" style="margin-top: 26px">
+        멀쩡히 ‘있는’ 사이트였지만,<br>정작 <span class="hl">무엇을 하는 곳인지</span>는 웹에서 보이지 않았습니다.
       </p>
-      <p class="body" style="margin-top: 26px; max-width: 720px; width: 720px; margin: 26px 0px 0px; white-space: nowrap">이 프로젝트는 ‘무엇을 더 넣을까’가 아니라 ‘무엇을 먼저 보여줄까’에서 출발했습니다. <br>
+      <p class="body intro-body" style="margin-top: 26px">이 프로젝트는 ‘무엇을 더 넣을까’가 아니라 ‘무엇을 먼저 보여줄까’에서 출발했습니다. <br>
 리서치부터 IA·UI, 실제 퍼블리싱, 그리고 회사에 전할 영업 제안서까지 한 흐름으로 끌고 갔습니다.</p>
     </div>
     <div class="reveal">
-      <div class="cap" style="margin-bottom:14px;letter-spacing:.18em;text-transform:uppercase">내가 만든 결과물</div>
+      <div class="cap intro-cap" style="margin-bottom:14px;letter-spacing:.18em;text-transform:uppercase">내가 만든 결과물</div>
       <div class="deliverables">
         <div class="row"><span class="rn">01</span><span class="rt">UX 리서치 · IA 재설계</span><span class="rd">진단 · 경쟁 분석 · 구조</span></div>
         <div class="row"><span class="rn">02</span><span class="rt">UI 디자인 · 디자인 시스템</span><span class="rd">컬러 · 타입 · 컴포넌트</span></div>
