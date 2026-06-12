@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>부자관광 웹사이트 리디자인 — UX/UI Case Study</title>
 <meta name="description" content="부자관광 웹사이트 리디자인 UX/UI 포트폴리오 케이스 스터디">
-<link rel="stylesheet" href="styles.css?v=20260612-0012">
-<script defer src="main.js?v=20260612-0012"></script>
+<link rel="stylesheet" href="styles.css?v=20260612-0039">
+<script defer src="main.js?v=20260612-0039"></script>
 <style id="live-overrides">
   :root{
     --page-margin:64px;
@@ -419,6 +419,251 @@
     .sg2-tweight{ align-self:baseline !important; }
     .sg2-font-name{ color:var(--ink,#1d1c1a) !important; font-size:1.8rem !important; }
   </style>
+  <style id="goal-transition">
+    /* Goal/HMW banner → a tall, pinned stage that resolves into deep navy.
+       Visual motion is driven continuously from main.js. */
+    .goal{
+      height:200vh !important;
+      padding:0 !important;
+      overflow:visible !important;
+      background:#faf8f3 !important;
+    }
+    .goal-stage{
+      position:sticky;
+      top:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      text-align:center;
+      background:#faf8f3;            /* JS interpolates cream → navy */
+      will-change:background-color;
+    }
+    .goal-stage .goal-mark{ will-change:transform,opacity }
+    .goal-content{ will-change:opacity }
+
+    /* the redesign chapter below turns deep navy (flips while off-screen) */
+    body.goal-navy #redesign-home,
+    body.goal-navy [data-screen-label="Before After"],
+    body.goal-navy [data-screen-label="Pages"]{
+      color:#fff !important;
+    }
+    /* navy chapter darkens gradually toward the dark mock section that follows */
+    body.goal-navy #redesign-home{ background:linear-gradient(180deg,#22376A 0%,#1c2e56 100%) !important; }
+    body.goal-navy [data-screen-label="Before After"]{ background:linear-gradient(180deg,#1c2e56 0%,#0c1830 100%) !important; }
+    body.goal-navy [data-screen-label="Pages"]{ background:linear-gradient(180deg,#0c1830 0%,#0c1830 42%,#262629 100%) !important; }  /* navy → charcoal to meet the mockup top */
+    #redesign-home,
+    [data-screen-label="Before After"],
+    [data-screen-label="Pages"]{
+      transition:background-color .5s ease, color .5s ease, border-color .5s ease;
+    }
+
+    /* contrast — Redesign Home + Before/After sit directly on navy */
+    body.goal-navy :is(#redesign-home,[data-screen-label="Before After"]) :is(h1,h2,h3,h4,.h-xl,.h-md){ color:#fff !important }
+    body.goal-navy :is(#redesign-home,[data-screen-label="Before After"]) :is(.lead,.sub,.body){ color:rgba(255,255,255,.64) !important }
+    body.goal-navy :is(#redesign-home,[data-screen-label="Before After"]) :is(.cap,.show-cap,.small,.compare-detail){ color:rgba(255,255,255,.52) !important }
+    body.goal-navy :is(#redesign-home,[data-screen-label="Before After"]) .compare-detail b{ color:#fff !important }
+    body.goal-navy #redesign-home .annos .a{ border-color:rgba(255,255,255,.16) !important }
+    body.goal-navy #redesign-home .annos .a .tx h4{ color:#fff !important }
+    body.goal-navy #redesign-home .annos .a .tx p{ color:rgba(255,255,255,.62) !important }
+    body.goal-navy .show-cap::before{ background:rgba(255,255,255,.28) !important }
+    body.goal-navy [data-screen-label="Before After"] .before-after-row{ border-color:rgba(255,255,255,.16) !important }
+
+    /* === Redesign Home — annotated home mock (matches the design board) === */
+    #redesign-home .rh-stage{
+      position:relative;
+      margin-top:10px;
+    }
+    #redesign-home .rh-mock{
+      width:675px;                 /* = 900px at a 1920 viewport (page zooms 1440 → 1920) */
+      margin-left:auto;
+      border-radius:0;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 60px 120px -55px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.05);
+    }
+    #redesign-home .rh-mock .shot{ width:100%; display:block; }
+
+    #redesign-home .rh-a{
+      position:absolute;
+      right:930px;                 /* 675 mock + 240 dashed connector + 15 text gap */
+      width:330px;                 /* fixed text column, its right edge meets the gap */
+      text-align:left;
+    }
+    #redesign-home .rh-a h4{
+      color:#fff !important;
+      font-size:24px;
+      font-weight:650;
+      letter-spacing:-.015em;
+      line-height:1.3;
+      margin:0;
+    }
+    #redesign-home .rh-a p{
+      margin:15px 0 0 0;
+      color:rgba(255,255,255,.6) !important;
+      font-size:16px;
+      line-height:1.75;
+    }
+    #redesign-home .rh-a .rh-line{
+      position:absolute;
+      top:17px;
+      left:calc(100% + 15px);      /* dashes start 15px to the right of the text … */
+      width:240px;                 /* … and run left-to-right up to the mock's edge */
+      height:0;
+      border-top:2px dashed var(--red);
+    }
+    #redesign-home .rh-a .rh-line::after{   /* dot, vertically centred on the 2px dashed stroke */
+      content:"";
+      position:absolute;
+      right:-5px;
+      top:-6px;                    /* padding-box origin sits 2px below the stroke; -6 centres a 10px dot on it */
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--red);
+    }
+
+    /* stack on narrow screens */
+    @media (max-width:1040px){
+      #redesign-home .rh-mock{ width:100%; }
+      #redesign-home .rh-a{ position:static; right:auto; width:auto; text-align:left; margin-top:30px; }
+      #redesign-home .rh-a .rh-line{ display:none; }
+    }
+
+    /* === Before / After — stacked label + side-by-side full screenshots === */
+    [data-screen-label="Before After"] .shead{ margin-bottom:104px !important; }  /* title → first row gap */
+    [data-screen-label="Before After"] .ba-inner{
+      width:1185px;                /* 525 before + 135 gap + 525 after */
+      max-width:100%;
+      margin:0 auto;               /* centred; label sits above the Before shot */
+    }
+    [data-screen-label="Before After"] .ba-row + .ba-row{ margin-top:164px; }
+    [data-screen-label="Before After"] .ba-head{ margin-bottom:40px; }
+    [data-screen-label="Before After"] .ba-label{
+      color:#fff !important;
+      font-size:27px;
+      font-weight:650;
+      letter-spacing:-.015em;
+      margin:0;
+    }
+    [data-screen-label="Before After"] .ba-desc{
+      color:rgba(255,255,255,.62) !important;
+      font-size:17px;
+      line-height:1.72;
+      margin:14px 0 0;
+      max-width:640px;
+    }
+    [data-screen-label="Before After"] .ba-desc b{ color:#fff !important; font-weight:600; }
+    [data-screen-label="Before After"] .ba-pair{
+      display:flex;
+      gap:135px;                   /* 180px at a 1920 viewport */
+      align-items:flex-start;
+    }
+    [data-screen-label="Before After"] figure.ba-shot{ margin:0; }
+    [data-screen-label="Before After"] .ba-shot figcaption{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.2em;
+      color:rgba(255,255,255,.45);
+      margin-bottom:12px;
+    }
+    [data-screen-label="Before After"] .ba-after figcaption{ color:var(--red); }
+    [data-screen-label="Before After"] .ba-shot img{
+      display:block;
+      width:100%;
+      height:auto;
+      box-shadow:0 40px 90px -45px rgba(0,0,0,.55);
+    }
+    [data-screen-label="Before After"] .ba-before{ width:525px; }   /* 700px at a 1920 viewport */
+    [data-screen-label="Before After"] .ba-after{ width:525px; }    /* 700px at a 1920 viewport */
+    /* arrow centred vertically on the Before shot, horizontally in the gap */
+    [data-screen-label="Before After"] .ba-imgwrap{ position:relative; }
+    [data-screen-label="Before After"] .ba-arrow{
+      position:absolute;
+      top:50%;
+      right:-67.5px;               /* centre of the 135px gap */
+      transform:translate(50%,-50%);
+      color:var(--red);
+      font-size:34px;
+      font-weight:400;
+      line-height:1;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    @media (max-width:1040px){
+      [data-screen-label="Before After"] .ba-inner{ width:100%; }
+      [data-screen-label="Before After"] .ba-pair{ gap:32px; }
+      [data-screen-label="Before After"] .ba-before,
+      [data-screen-label="Before After"] .ba-after{ width:auto; flex:1; }
+      [data-screen-label="Before After"] .ba-arrow{ display:none; }
+    }
+
+    /* full-bleed mockup image — edge to edge, no wrap/padding */
+    .mockup-full{
+      padding:0 !important;
+      margin:0 !important;
+      width:100%;
+      background:#262629;            /* matches Pages bottom + the mockup top edge */
+      line-height:0;
+      overflow:hidden;
+    }
+    .mockup-full img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    /* Pages — dark navy, landscape thumbnails (350px @1920), no light card */
+    body.goal-navy [data-screen-label="Pages"] .shead :is(h2,.h-xl){ color:#fff !important }
+    [data-screen-label="Pages"]{ padding-bottom:500px !important; }   /* extra bottom space */
+    [data-screen-label="Pages"] .kicker{ color:var(--red) !important }
+    [data-screen-label="Pages"] .shead{ margin-bottom:84px !important; }
+    [data-screen-label="Pages"] .pages-lead{
+      color:rgba(255,255,255,.6) !important;
+      margin:22px 0 0;
+      max-width:640px;
+    }
+    [data-screen-label="Pages"] .pages-lead b{ color:#fff !important; }
+    [data-screen-label="Pages"] .pagestrip{
+      display:flex !important;
+      flex-wrap:nowrap;
+      gap:24px !important;
+      padding:0 !important;
+      align-items:flex-start !important;
+    }
+    [data-screen-label="Pages"] .pagestrip::before{ display:none !important; }
+    [data-screen-label="Pages"] .pcell{ flex:1 1 0; min-width:0; }   /* fill the row evenly */
+    [data-screen-label="Pages"] .shot-page{
+      height:auto !important;
+      border:none !important;
+      background:transparent !important;
+      border-radius:4px;
+      overflow:hidden;
+      box-shadow:0 26px 54px -34px rgba(0,0,0,.55) !important;
+    }
+    [data-screen-label="Pages"] .shot-page .shot{
+      width:100% !important;
+      height:auto !important;
+      object-fit:initial !important;
+    }
+    [data-screen-label="Pages"] .pl{ margin-top:18px !important; min-height:0 !important; }
+    [data-screen-label="Pages"] .pt{ color:#fff !important; font-size:16px; font-weight:650; }
+    [data-screen-label="Pages"] .pd{
+      color:rgba(255,255,255,.5) !important;
+      font-size:13px;
+      margin-top:7px;
+      max-width:none !important;
+      min-height:0 !important;
+    }
+
+    /* reduced-motion: drop the tall pinned stage, keep a static banner */
+    @media (prefers-reduced-motion: reduce){
+      .goal{ height:auto !important; padding:120px 0 !important; overflow:hidden !important }
+      .goal-stage{ position:static; height:auto }
+    }
+  </style>
 </head>
 <body>
 
@@ -812,15 +1057,17 @@
 
 <!-- ============ 09 · GOAL BANNER ============ -->
 <section class="section goal" data-screen-label="Goal">
-  <div class="goal-mark" aria-hidden="true">HMW?</div>
-  <div class="wrap reveal" style="position:relative;z-index:2">
-    <div style="max-width:880px;margin:0 auto;text-align:center">
-      <span class="goal-rule"></span>
-      <span class="kicker center goal-kicker" style="font-weight: 600">Defining the Goal</span>
-      <div class="goal-tag" style="font-weight: 600">How might we …</div>
-      <p class="pull goal-q">
-        충분한 차량과 경력을 가진 회사가,<br>첫 화면부터 <span class="hl" style="font-family: Pretendard">핵심 서비스를 전달</span>하고 문의까지 자연스럽게 이어지게 하려면?
-      </p>
+  <div class="goal-stage">
+    <div class="goal-mark" aria-hidden="true">HMW?</div>
+    <div class="wrap reveal goal-content" style="position:relative;z-index:2">
+      <div style="max-width:880px;margin:0 auto;text-align:center">
+        <span class="goal-rule"></span>
+        <span class="kicker center goal-kicker" style="font-weight: 600">Defining the Goal</span>
+        <div class="goal-tag" style="font-weight: 600">How might we …</div>
+        <p class="pull goal-q">
+          충분한 차량과 경력을 가진 회사가,<br>첫 화면부터 <span class="hl" style="font-family: Pretendard">핵심 서비스를 전달</span>하고 문의까지 자연스럽게 이어지게 하려면?
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -834,21 +1081,33 @@
       <p class="lead sub">홈 한 페이지 안에서 ‘이해 → 신뢰 → 비교 → 문의’가 한 흐름으로 이어지도록 다시 짰습니다.</p>
     </div>
 
-    <div class="showcase reveal redesign-showcase">
-      <div class="show-notes redesign-notes">
-        <div class="annos ok">
-          <div class="a"><span class="n">A</span><div class="tx"><h4>말을 거는 첫 화면</h4><p>‘품격 있는 이동 서비스’ 한 문장 + 상시 CTA로 3초 안에 무슨 회사인지 전달.</p></div></div>
-          <div class="a"><span class="n">B</span><div class="tx"><h4>신뢰를 먼저 증명</h4><p>안전·전문 기사·신속 대응을 신뢰 시스템으로<br>
-전면 배치.</p></div></div>
-          <div class="a"><span class="n">C</span><div class="tx"><h4>목적·인원별 차량</h4><p>고르고 바로 비교·문의로 이어지는 차량 진입.</p></div></div>
-          <div class="a"><span class="n">D</span><div class="tx"><h4>실고객 후기</h4><p>후기를 메인에 노출해 문의 결정의 부담을 낮춤.</p></div></div>
-        </div>
+    <div class="rh-stage reveal">
+      <div class="rh-mock">
+        <img class="shot" src="assets/main_page.png" alt="부자관광 리디자인 홈 전체">
       </div>
-      <div class="show-frame">
-        <div class="shot-panel shot-showcase">
-          <div class="tall"><img class="shot" src="assets/re-home.webp" alt="부자관광 리디자인 홈 전체"></div>
-        </div>
-        <div class="show-cap">리디자인 홈 — 전체 스크롤 (실제 퍼블리싱 화면)</div>
+
+      <div class="rh-a" style="top:8%">
+        <span class="rh-line" aria-hidden="true"></span>
+        <h4>말을 거는 첫 화면</h4>
+        <p>‘품격 있는 이동 서비스’ 한 문장 + 상시 CTA로<br>3초 안에 무슨 회사인지 전달.</p>
+      </div>
+
+      <div class="rh-a" style="top:29%">
+        <span class="rh-line" aria-hidden="true"></span>
+        <h4>신뢰를 먼저 증명</h4>
+        <p>안전 · 전문 기사 · 신속 대응을<br>신뢰 시스템으로 전면 배치.</p>
+      </div>
+
+      <div class="rh-a" style="top:61%">
+        <span class="rh-line" aria-hidden="true"></span>
+        <h4>목적 · 인원별 차량</h4>
+        <p>고르고 바로 비교 · 문의로<br>이어지는 차량 진입.</p>
+      </div>
+
+      <div class="rh-a" style="top:79%">
+        <span class="rh-line" aria-hidden="true"></span>
+        <h4>실고객 후기</h4>
+        <p>후기를 메인에 노출해<br>문의 결정의 부담을 낮춤.</p>
       </div>
     </div>
   </div>
@@ -863,20 +1122,49 @@
     </div>
 
     <!-- 차량안내 -->
-    <div class="reveal before-after-row" style="display:grid;grid-template-columns:250px 1fr 52px 1fr;gap:26px;align-items:center;border-top:1px solid var(--line);padding:40px 0">
-      <div><div class="h-md" style="color:var(--navy)">차량안내</div><p class="small compare-detail" style="margin-top: 8px; width: 235px">사진뿐이던 페이지에<br>
-스펙·좌석배치·편의사양과 온라인 견적 폼까지.</p></div>
-      <div><div class="cap" style="margin-bottom:10px">Before</div><div class="shot-panel shot-compare before-after-shot"><img class="shot" src="assets/old-vehicle.webp" style="height:228px;object-fit:cover;object-position:top" alt="기존 차량안내"></div></div>
-      <div style="text-align:center;color:var(--red);font-size:26px;font-weight:800">→</div>
-      <div><div class="cap" style="margin-bottom:10px;color:var(--red)">After</div><div class="shot-panel shot-compare before-after-shot"><img class="shot" src="assets/re-vehicles.webp" style="height:228px;object-fit:cover;object-position:top" alt="리디자인 차량안내"></div></div>
+    <div class="ba-row reveal">
+      <div class="ba-inner">
+        <div class="ba-head">
+          <h4 class="ba-label">차량안내</h4>
+          <p class="ba-desc">사진뿐이던 페이지에 스펙 · 좌석배치 · 편의사양과 온라인 견적 폼까지.</p>
+        </div>
+        <div class="ba-pair">
+          <figure class="ba-shot ba-before">
+            <figcaption>BEFORE</figcaption>
+            <div class="ba-imgwrap">
+              <img src="assets/before_1.png" alt="기존 차량안내">
+              <span class="ba-arrow" aria-hidden="true">→</span>
+            </div>
+          </figure>
+          <figure class="ba-shot ba-after">
+            <figcaption>AFTER</figcaption>
+            <img src="assets/after_1.png" alt="리디자인 차량안내">
+          </figure>
+        </div>
+      </div>
     </div>
 
     <!-- 문의 -->
-    <div class="reveal before-after-row" style="display:grid;grid-template-columns:250px 1fr 52px 1fr;gap:26px;align-items:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:40px 0">
-      <div><div class="h-md" style="color:var(--navy)">문의</div><p class="small compare-detail" style="margin-top: 8px">깊숙이 분리됐던 일반 양식을 <b>FAQ·기사모집·법인(B2B)</b>으로 분기되는 <b>문의 허브</b>로.</p></div>
-      <div><div class="cap" style="margin-bottom:10px">Before</div><div class="shot-panel shot-compare before-after-shot"><img class="shot" src="assets/old-contact.webp" style="height:228px;object-fit:cover;object-position:top" alt="기존 문의"></div></div>
-      <div style="text-align:center;color:var(--red);font-size:26px;font-weight:800">→</div>
-      <div><div class="cap" style="margin-bottom:10px;color:var(--red)">After</div><div class="shot-panel shot-compare before-after-shot"><img class="shot" src="assets/re-inquiry.webp" style="height:228px;object-fit:cover;object-position:top" alt="리디자인 문의"></div></div>
+    <div class="ba-row reveal">
+      <div class="ba-inner">
+        <div class="ba-head">
+          <h4 class="ba-label">문의</h4>
+          <p class="ba-desc">깊숙이 분리됐던 일반 양식을 <b>FAQ · 기사모집 · 법인(B2B)</b>으로 분기되는 <b>문의 허브</b>로.</p>
+        </div>
+        <div class="ba-pair">
+          <figure class="ba-shot ba-before">
+            <figcaption>BEFORE</figcaption>
+            <div class="ba-imgwrap">
+              <img src="assets/before_2.png" alt="기존 문의">
+              <span class="ba-arrow" aria-hidden="true">→</span>
+            </div>
+          </figure>
+          <figure class="ba-shot ba-after">
+            <figcaption>AFTER</figcaption>
+            <img src="assets/after_2.png" alt="리디자인 문의">
+          </figure>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -884,17 +1172,39 @@
 <!-- ============ 13 · PAGE TOUR ============ -->
 <section class="section bg-sand pages-soft-section" data-screen-label="Pages" style="background-color: rgb(250, 248, 244)">
   <div class="wrap">
-    <div class="shead reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; margin: 0px -10px 52px 0px; padding: 0px 14px 0px 0px">
-      <div style="max-width:560px"><span class="kicker">09_ THE PAGES</span><h2 class="h-xl" style="margin-top: 22px">다섯 개의 화면,<br>하나의 목적</h2></div>
-      <p class="body" style="max-width: 620px; width: 600px; margin: 0px 9px 0px 1px; padding: 0px 35px 0px 0px">모든 페이지가 결국 <b>‘차량 대절 문의’</b> 한 곳을 향하도록 설계했습니다.</p>
+    <div class="shead reveal pages-head">
+      <span class="kicker">09 _THE PAGES</span>
+      <h2 class="h-xl">다섯 개의 화면,<br>하나의 목적</h2>
+      <p class="body pages-lead">모든 페이지가 결국 <b>‘차량 대절 문의’</b> 한 곳을 향하도록 설계했습니다.</p>
     </div>
     <div class="pagestrip reveal">
-      <div class="pcell"><div class="shot-panel shot-page"><img class="shot" src="assets/re-home.webp" style="height:330px;object-fit:cover;object-position:top" alt="홈"></div><div class="pl"><span class="pi">01</span><span class="pt">홈</span></div><p class="pd">서비스·신뢰·차량·CTA를 한 흐름에</p></div>
-      <div class="pcell"><div class="shot-panel shot-page"><img class="shot" src="assets/re-vehicles.webp" style="height:330px;object-fit:cover;object-position:top" alt="차량안내"></div><div class="pl"><span class="pi">02</span><span class="pt">차량안내</span></div><p class="pd">스펙·좌석·견적을 한 화면에</p></div>
-      <div class="pcell"><div class="shot-panel shot-page"><img class="shot" src="assets/re-reviews.webp" style="height:330px;object-fit:cover;object-position:top" alt="고객후기"></div><div class="pl"><span class="pi">03</span><span class="pt">고객후기</span></div><p class="pd">필터·평점 있는 실고객 후기</p></div>
-      <div class="pcell"><div class="shot-panel shot-page"><img class="shot" src="assets/re-inquiry.webp" style="height:330px;object-fit:cover;object-position:top" alt="문의하기"></div><div class="pl"><span class="pi">04</span><span class="pt">문의하기</span></div><p class="pd">FAQ·기사모집·B2B 분기 허브</p></div>
+      <div class="pcell">
+        <div class="shot-panel shot-page"><img class="shot" src="assets/home_img.png" alt="홈"></div>
+        <div class="pl"><span class="pt">홈</span></div>
+        <p class="pd">서비스 · 신뢰 · 차량 CTA를 한 흐름에</p>
+      </div>
+      <div class="pcell">
+        <div class="shot-panel shot-page"><img class="shot" src="assets/sub_img.png" alt="차량안내"></div>
+        <div class="pl"><span class="pt">차량안내</span></div>
+        <p class="pd">스펙 · 좌석 · 견적을 한 화면에</p>
+      </div>
+      <div class="pcell">
+        <div class="shot-panel shot-page"><img class="shot" src="assets/sub_1_img.png" alt="고객후기"></div>
+        <div class="pl"><span class="pt">고객후기</span></div>
+        <p class="pd">필터 · 평점 있는 실고객 후기</p>
+      </div>
+      <div class="pcell">
+        <div class="shot-panel shot-page"><img class="shot" src="assets/sub_2_img.png" alt="문의하기"></div>
+        <div class="pl"><span class="pt">문의하기</span></div>
+        <p class="pd">FAQ · 기사모집 · B2B 분기 허브</p>
+      </div>
     </div>
   </div>
+</section>
+
+<!-- ============ 13.5 · FULL-BLEED MOCKUP ============ -->
+<section class="mockup-full" data-screen-label="Mockup">
+  <img src="assets/mockup_img.png" alt="부자관광 리디자인 목업">
 </section>
 
 <!-- ============ 14 · 영업 제안서 ============ -->

@@ -102,6 +102,122 @@ revealElements.forEach(function (element) {
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// ============================================================
+// Goal → navy scroll-driven chapter transition.
+// The Goal/HMW banner is a tall, pinned stage (see #goal-transition CSS).
+// As you scroll through it, the thin red "HMW?" outline turns navy and grows
+// steadily thicker; the stage background resolves cream → deep navy; the
+// overlaid question copy brightens (ink → white) so it stays readable; and the
+// thick outline finally drops away into the navy redesign chapter below.
+// Driven continuously off scroll progress, so nothing flickers.
+// ============================================================
+(function setupGoalTransition() {
+  var goalSection = document.querySelector(".goal");
+  if (!goalSection || exportSection) {
+    return;
+  }
+
+  var goalStage = goalSection.querySelector(".goal-stage");
+  var goalMark = goalSection.querySelector(".goal-mark");
+  var goalQ = goalSection.querySelector(".goal-q");
+
+  function clamp01(t) {
+    return t < 0 ? 0 : t > 1 ? 1 : t;
+  }
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+  function easeIn(t) {
+    return t * t;
+  }
+  function mix(c1, c2, t) {
+    return (
+      "rgba(" +
+      Math.round(lerp(c1[0], c2[0], t)) + "," +
+      Math.round(lerp(c1[1], c2[1], t)) + "," +
+      Math.round(lerp(c1[2], c2[2], t)) + "," +
+      lerp(c1[3], c2[3], t).toFixed(3) + ")"
+    );
+  }
+
+  var RED = [214, 56, 42, 0.18]; // thin faint red outline
+  var NAVY = [34, 55, 106, 0.95]; // bold navy outline (#22376A)
+  var CREAM = [250, 248, 243, 1];
+  var NAVY_DEEP = [34, 55, 106, 1]; // #22376A
+  var INK = [29, 28, 26, 1]; // question copy at rest
+  var WHITE = [255, 255, 255, 1]; // question copy brightened on navy
+
+  // Reduced-motion / no-stage fallback: just flip the navy chapter, no anim.
+  if (reduceMotion || !goalStage) {
+    var flip = function () {
+      var rect = goalSection.getBoundingClientRect();
+      document.body.classList.toggle(
+        "goal-navy",
+        rect.top + rect.height * 0.5 <= window.innerHeight * 0.5
+      );
+    };
+    window.addEventListener("scroll", flip, { passive: true });
+    window.addEventListener("resize", flip, { passive: true });
+    flip();
+    return;
+  }
+
+  var ticking = false;
+
+  function render() {
+    ticking = false;
+
+    var rect = goalSection.getBoundingClientRect();
+    var scrollable = rect.height - window.innerHeight;
+    var p = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
+
+    var pColor = clamp01(p / 0.42); // outline colour: red → navy
+    var pThick = clamp01(p / 0.58); // outline keeps thickening as you scroll
+    var pBg = clamp01((p - 0.45) / 0.16); // stage background: cream → navy fast (by ~p .61)
+    var pText = clamp01((p - 0.5) / 0.07); // overlaid copy: ink → white (by ~p .57, onto the now-dark bg)
+    var pFall = clamp01((p - 0.5) / 0.5); // outline falls + fades into the navy
+
+    // HMW outline turns navy and grows steadily thicker
+    var stroke = lerp(1.5, 7, pThick);
+    goalMark.style.webkitTextStroke =
+      stroke.toFixed(2) + "px " + mix(RED, NAVY, pColor);
+
+    // …then it drops away and fades as the navy takes over
+    var fall = lerp(0, window.innerHeight * 0.92, easeIn(pFall));
+    goalMark.style.transform = "translate(-50%, calc(-50% + " + fall.toFixed(1) + "px))";
+    goalMark.style.opacity = (1 - clamp01(pFall * 1.25)).toFixed(3);
+
+    // stage background resolves cream → deep navy
+    goalStage.style.backgroundColor = mix(CREAM, NAVY_DEEP, pBg);
+
+    // the overlaid copy goes ink → white as the navy arrives. A pure colour
+    // crossfade would pass through a mid-grey that's invisible on the mid-slate
+    // background, so we also dip the opacity across the swap (a cross-dissolve):
+    // the text briefly fades, hiding the muddy midpoint, then re-emerges white.
+    // NOTE: a `.goal-q{color:var(--ink)!important}` rule exists, so the inline
+    // colour must also be `!important` to win the cascade.
+    if (goalQ) {
+      goalQ.style.setProperty("color", mix(INK, WHITE, pText), "important");
+      var dip = 4 * pText * (1 - pText); // 0 at the ends, 1 at the swap midpoint
+      goalQ.style.opacity = (1 - 0.82 * dip).toFixed(3);
+    }
+
+    // navy redesign chapter — flipped while still off-screen, so no flicker
+    document.body.classList.toggle("goal-navy", p >= 0.5);
+  }
+
+  function onScrollGoal() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  window.addEventListener("scroll", onScrollGoal, { passive: true });
+  window.addEventListener("resize", onScrollGoal, { passive: true });
+  render();
+})();
+
 var figVals = Array.from(document.querySelectorAll(".figrow .fig .v"))
   .map(function (valueElement) {
     var node = valueElement.firstChild;
