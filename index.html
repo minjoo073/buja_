@@ -53,6 +53,15 @@
     background:#f8f4ec !important;
     color:var(--ink) !important;
   }
+  .comp-cell.current,
+  .comp-cell.current *,
+  .competitive-board-head .comp-col-head.current,
+  .competitive-finding,
+  .competitive-finding *{
+    color:#fff !important;
+    background-color:var(--navy) !important;
+  }
+  .comp-cell.current{ background:var(--navy) !important; }
 
   .h-xl,
   .background-section-title,
@@ -98,22 +107,50 @@
 
   .background-overview-title,
   .strategy-mini-title,
-  .pull,
   [data-screen-label="Behind the Process"] .tphase .ph-r .q{
     font-size:1.7rem !important;
     line-height:1.42 !important;
     font-weight:400 !important;
   }
 
+  /* pull quote — global default (non-Intro) */
+  .pull{
+    font-size:1.45rem !important;
+    line-height:1.52 !important;
+    font-weight:400 !important;
+  }
+
+  /* Intro section — pull quote */
+  .section[data-screen-label="Intro"] .pull{
+    font-size:1.35rem !important;
+    line-height:1.56 !important;
+    font-weight:400 !important;
+    letter-spacing:-.02em !important;
+  }
+  .section[data-screen-label="Intro"] .pull .hl{
+    font-weight:600 !important;
+    color:var(--sand-ink) !important;
+  }
+
+  /* Intro section — body text */
+  .section[data-screen-label="Intro"] .intro-body{
+    font-size:.9rem !important;
+    line-height:1.9 !important;
+    color:var(--ink-2) !important;
+  }
+
+  /* Intro section — grid & deliverables */
   .section[data-screen-label="Intro"] .deliverables{
-    width:min(760px,100%) !important;
+    width:min(800px,100%) !important;
     margin:0 auto !important;
   }
   .section[data-screen-label="Intro"] .intro-grid{
-    gap:48px !important;
+    gap:52px !important;
   }
   .section[data-screen-label="Intro"] .intro-grid > .reveal:last-child > .cap{
-    margin-bottom:12px !important;
+    margin-bottom:14px !important;
+    letter-spacing:.18em !important;
+    color:var(--muted) !important;
   }
   .deliverables .rn,
   .strategy-row-label,
@@ -122,35 +159,45 @@
     font-size:.66rem !important;
     font-weight:500 !important;
   }
+  .section[data-screen-label="Intro"] .deliverables .rn{
+    font-size:.65rem !important;
+    font-weight:600 !important;
+    color:var(--sand-ink) !important;
+    width:32px !important;
+    letter-spacing:.1em !important;
+  }
   .deliverables .rt,
   .redesign-notes .tx h4,
-  .competitive-row .comp-cell.current strong,
   [data-screen-label="Behind the Process"] .tphase .ph-l .pttl{
     font-size:.96rem !important;
     font-weight:400 !important;
     color:var(--ink) !important;
     line-height:1.34 !important;
   }
-  .deliverables .rd,
-  .competitive-row .comp-cell.current span{
+  .section[data-screen-label="Intro"] .deliverables .rt{
+    font-size:.88rem !important;
+    font-weight:500 !important;
+    color:var(--ink) !important;
+    flex:1 1 auto !important;
+  }
+  .deliverables .rd{
     font-size:.66rem !important;
     font-weight:300 !important;
     line-height:1.7 !important;
   }
-  .section[data-screen-label="Intro"] .deliverables .row{
-    gap:12px !important;
-    padding:12px 0 !important;
-  }
-  .section[data-screen-label="Intro"] .deliverables .rn{
-    width:36px !important;
-  }
-  .section[data-screen-label="Intro"] .deliverables .rt{
-    flex:0 1 280px !important;
-  }
   .section[data-screen-label="Intro"] .deliverables .rd{
-    flex:0 0 150px !important;
-    margin-left:0 !important;
-    text-align:left !important;
+    font-size:.75rem !important;
+    font-weight:400 !important;
+    color:var(--muted) !important;
+    flex:0 0 180px !important;
+    margin-left:auto !important;
+    text-align:right !important;
+    line-height:1.6 !important;
+  }
+  .section[data-screen-label="Intro"] .deliverables .row{
+    gap:16px !important;
+    padding:14px 0 !important;
+    border-top-color:rgba(29,28,26,.08) !important;
   }
 
   .show-cap,
@@ -160,7 +207,6 @@
     font-size:.88rem !important;
   }
   section[data-screen-label="Background"] .shead,
-  section[data-screen-label="Diagnosis"] .shead,
   section[data-screen-label="Competitive"] .shead,
   section[data-screen-label="Strategy"] .shead,
   section[data-screen-label="Goal"] .shead,
@@ -327,12 +373,7 @@
     .bg-paper,.bg-sand,.bg-navy,.bg-navy-2,.bg-red,.goal,.closing,footer.foot{
       background:#faf8f3 !important;
     }
-    .hero{
-      background:#faf8f3 !important;
-    }
-    .hero::before{
-      background:linear-gradient(90deg, rgba(250,248,243,.94) 0%, rgba(250,248,243,.82) 34%, rgba(250,248,243,.42) 62%, rgba(250,248,243,.12) 100%) !important;
-    }
+    /* hero background handled by .hero.hero-v2 in styles.css */
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -375,26 +416,41 @@
 <div class="progress" id="progress"></div>
 
 <!-- ============ 01 · HERO ============ -->
-<header class="hero" data-screen-label="Hero">
-  <div class="wrap">
-    <div class="hero-top">
-      <span class="kicker">UX / UI · Web Redesign</span>
-      <span class="cap" style="color: #8a94ab; letter-spacing: .04em">기획 · 디자인 · 퍼블리싱 · 영업 제안  |  2026</span>
+<header class="hero hero-v2" data-screen-label="Hero">
+  <div class="hero-v2-page-label">Website Redesign</div>
+  <div class="wrap hero-v2-inner">
+    <div class="hero-v2-left">
+      <div class="hero-v2-brand">
+        <span class="hero-v2-name">부자관광</span>
+        <span class="hero-v2-pipe">|</span>
+        <span>BUJA TOUR · 전세버스</span>
+      </div>
+      <h1 class="hero-v2-title">
+        부자관광 웹사이트<br>
+        <span class="hero-v2-red">리디자인</span>
+      </h1>
+      <p class="hero-v2-desc">28년 업력의 전세버스 회사 홈페이지를, 핵심 서비스(차량대절)가<br>첫 화면부터 보이고 문의까지 이어지도록 개선한 UX/UI 리디자인</p>
+      <hr class="hero-v2-rule">
+      <div class="hero-v2-meta">
+        <div class="hero-v2-meta-col">
+          <span class="hero-v2-meta-label">MY Role</span>
+          <span class="hero-v2-meta-val">UX · UI 리드<br>Publishing</span>
+        </div>
+        <div class="hero-v2-meta-col">
+          <span class="hero-v2-meta-label">Contribution</span>
+          <span class="hero-v2-meta-val hero-v2-meta-red">80% · 4인 팀</span>
+        </div>
+      </div>
     </div>
-
-    <h1 class="display">
-      <span class="sub-en">BUJA TOUR</span>
-      부자관광 웹사이트<br>리디자인
-    </h1>
-
-    <p class="lead" style="max-width:680px;margin-top:30px">28년 업력의 전세버스 회사 홈페이지를 — 핵심 서비스인 차량 대절이 첫 화면부터 보이고, <br>
-문의까지 자연스럽게 이어지도록 다시 설계했습니다.</p>
-
-    <div class="roleline">
-      <div class="ri"><span class="rk">My Role</span><span class="rv" style="padding: 9px 0px 0px">기획 · UX/UI · 퍼블리싱</span></div>
-      <div class="ri" style="gap: 6px; align-items: stretch; justify-content: flex-start; padding: 22px 35px 0px"><span class="rk">Team</span><span class="rv" style="padding: 9px 0px 0px">4인 프로젝트</span></div>
-      <div class="ri"><span class="rk">Contribution</span><span class="rv red" style="padding: 10px 0px 0px">기획·디자인·구현 주도</span></div>
-      <div class="ri"><span class="rk">Deliverable</span><span class="rv" style="padding: 10px 0px 0px">웹사이트 + 영업 제안서</span></div>
+    <div class="hero-v2-right">
+      <div class="hero-v2-before-wrap">
+        <span class="hero-v2-img-label">BEFORE · 사진 1장</span>
+        <div class="hero-v2-shot"><img src="assets/old-home.webp" alt="기존 홈"></div>
+      </div>
+      <div class="hero-v2-after-wrap">
+        <div class="hero-v2-shot"><img src="assets/re-home.webp" alt="리디자인 홈"></div>
+        <span class="hero-v2-img-label hero-v2-img-label-after">AFTER · 서비스+ CTA</span>
+      </div>
     </div>
   </div>
 </header>
@@ -425,32 +481,36 @@
 <!-- ============ 03 · OVERVIEW / 배경 ============ -->
 <section id="background" class="section bg-paper blend-next-sand" data-screen-label="Background">
   <div class="wrap">
-    <div class="shead reveal background-shead">
-      <span class="kicker" style="font-weight: 600">01 _BACKGROUND</span>
-      <h2 class="h-xl background-section-title">차량도, 경력도 충분한 회사가<br>왜 웹에서는 작아 보였을까</h2>
-      <p class="lead sub background-section-body">부자관광은 평택을 거점으로 통근·통학·전세버스를 운영하는 28년 업력의 회사입니다.
-보유 차량과 운행 경험은 넉넉했지만, 그 강점이 첫 화면에는 거의 담겨 있지 않았습니다.</p>
-    </div>
-    <div class="background-overview reveal">
-      <div class="background-overview-copy">
-        <div class="background-overview-kicker">Observation</div>
-        <p class="background-overview-title">문제는 회사의 규모가 아니라,<br>그 규모가 웹에서 <span>읽히지 않는 방식</span>이었습니다.</p>
-        <p class="background-overview-body">부자관광은 이미 충분한 운영 이력과 차량 인프라를 갖춘 회사였습니다. 하지만 기존 홈페이지 첫 화면은 그 사실을 설명하지 못했고, 사용자는 들어오자마자 서비스를 추측해야 했습니다.</p>
+    <div class="bg-sec-layout">
+      <div class="bg-sec-content">
+        <div class="shead reveal background-shead">
+          <span class="kicker" style="font-weight: 600">01 _BACKGROUND</span>
+          <h2 class="h-xl background-section-title">차량도, 경력도 충분한 회사가<br>왜 웹에서는 작아 보였을까</h2>
+          <p class="lead sub background-section-body">부자관광은 평택을 거점으로 통근·통학·전세버스를 운영하는 28년 업력의 회사입니다.<br>보유 차량과 운행 경험은 넉넉했지만, 그 강점이 첫 화면에는 거의 담겨 있지 않았습니다.</p>
+        </div>
+        <div class="background-overview reveal">
+          <div class="background-overview-copy">
+            <div class="background-overview-kicker">Observation</div>
+            <p class="background-overview-title">문제는 회사의 규모가 아니라,<br>그 규모가 웹에서 <span>읽히지 않는 방식</span>이었습니다.</p>
+            <p class="background-overview-body">부자관광은 이미 충분한 운영 이력과 차량 인프라를 갖춘 회사였습니다. 하지만 기존 홈페이지 첫 화면은 그 사실을 설명하지 못했고, 사용자는 들어오자마자 서비스를 추측해야 했습니다.</p>
+          </div>
+          <div class="background-facts">
+            <div class="background-fact">
+              <span class="num">28년</span>
+              <span class="label">전세·통근·통학 운행 업력</span>
+            </div>
+            <div class="background-fact">
+              <span class="num">5종</span>
+              <span class="label">보유 차량 라인업</span>
+            </div>
+            <div class="background-fact">
+              <span class="num">첫 화면</span>
+              <span class="label">서비스 설명과 CTA가 거의 없음</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="background-facts">
-        <div class="background-fact">
-          <span class="num">28년</span>
-          <span class="label">전세·통근·통학 운행 업력</span>
-        </div>
-        <div class="background-fact">
-          <span class="num">5종</span>
-          <span class="label">보유 차량 라인업</span>
-        </div>
-        <div class="background-fact">
-          <span class="num">첫 화면</span>
-          <span class="label">서비스 설명과 CTA가 거의 없음</span>
-        </div>
-      </div>
+      <div class="bg-sec-deco" aria-hidden="true">?</div>
     </div>
   </div>
 </section>
@@ -458,34 +518,51 @@
 <!-- ============ 04 · PROBLEM / 진단 ============ -->
 <section class="section bg-sand diagnosis-section blend-next-paper" data-screen-label="Diagnosis">
   <div class="wrap">
-    <div class="shead center reveal">
-      <span class="kicker center" style="font-weight: 600">02 _DIAGNOSIS</span>
-      <h2 class="h-xl">“사이트는 있었지만,<br><span class="red-ink" style="font-weight: 700">서비스</span>는 보이지 않았다”</h2>
-      <p class="lead sub" style="margin-left: auto; margin-right: auto">기존 화면들을 그대로 펼쳐 놓고 사용자의 첫 시선이 어디서 멈추는지 따라가 봤습니다. <br>
-문제는 한 페이지가 아니라 ‘첫인상 전체’에 있었습니다.</p>
-    </div>
+    <div class="diag-layout">
 
-    <div class="figrow c3 reveal" style="border:0;gap:26px;display:grid">
-      <div class="pcell">
-        <div class="shot-panel shot-diagnosis"><img class="shot" src="assets/old-home.webp" alt="기존 홈" style="height:240px;object-fit:cover;object-position:top"></div>
-        <div class="show-cap">기존 홈 — 사진 한 장 + 메뉴 4개</div>
-      </div>
-      <div class="pcell">
-        <div class="shot-panel shot-diagnosis"><img class="shot" src="assets/old-vehicle.webp" alt="기존 차량안내" style="height:240px;object-fit:cover;object-position:top"></div>
-        <div class="show-cap">기존 차량안내 — 사진만, 비교 불가</div>
-      </div>
-      <div class="pcell">
-        <div class="shot-panel shot-diagnosis"><img class="shot" src="assets/old-contact.webp" alt="기존 문의" style="height:240px;object-fit:cover;object-position:top"></div>
-        <div class="show-cap">기존 문의 — 일반 양식 하나로 분리</div>
-      </div>
-    </div>
+      <!-- left -->
+      <div class="diag-left">
+        <div class="shead reveal">
+          <span class="kicker" style="font-weight:600">02 _FIRST IMPRESSION</span>
+          <h2 class="h-xl" style="margin-top:20px">"사이트는 있었지만<br><span class="red-ink">서비스</span>는 보이지 않았다"</h2>
+          <p class="lead sub" style="margin-top:18px">기존 화면들을 그대로 펼쳐 놓고 사용자의 첫 시선이 어디서 멈추는지 따라가 봤습니다.<br>문제는 한 페이지가 아니라 '첫인상 전체'에 있었습니다.</p>
+        </div>
 
-    <div class="wrap-narrow reveal" style="margin-top:70px">
-      <div class="annos">
-        <div class="a"><span class="n">01</span><div class="tx"><h4>한 줄의 설명도 없다</h4><p>무엇을 하는 회사인지 첫 화면이 말해주지 않습니다. 진입한 사람은 ‘무슨 회사지?’부터 추측해야 했습니다.</p></div></div>
-        <div class="a"><span class="n">02</span><div class="tx"><h4>핵심 서비스가 메뉴 속에 숨어 있다</h4><p>차량·약관·문의가 모두 상단 메뉴 안에만 있어, 정작 핵심인 ‘차량 대절’의 단서를 첫 화면에서 찾기 어려웠습니다.</p></div></div>
-        <div class="a"><span class="n">03</span><div class="tx"><h4>다음 행동이 없다</h4><p>클릭하거나 문의할 버튼(CTA)이 화면에 없습니다. 정보를 ‘보여주는’ 화면일 뿐, 행동으로 이어주는 화면이 아니었습니다.</p></div></div>
+        <div class="diag-annos reveal">
+          <div class="diag-anno">
+            <span class="diag-n">01</span>
+            <div class="diag-tx"><span class="diag-strong">한 줄의 설명도 없다.</span> 무엇을 하는 회사인지 첫 화면이 말해주지 않습니다.</div>
+          </div>
+          <div class="diag-anno">
+            <span class="diag-n">02</span>
+            <div class="diag-tx">
+              <span class="diag-strong">서비스가 메뉴 속에 숨어 있다.</span>
+              <p>차량·약관·문의가 상단 메뉴 (회사소개 차량안내 운송약관 문의사항) 안에만 있습니다.</p>
+            </div>
+          </div>
+          <div class="diag-anno">
+            <span class="diag-n">03</span>
+            <div class="diag-tx"><span class="diag-strong">다음 행동이 없다.</span> 클릭하거나 문의할 버튼(CTA)이 화면에 보이지 않습니다.</div>
+          </div>
+        </div>
+
+        <div class="diag-quote reveal">
+          <p>"정보를 '보여주는' 화면일 뿐,<br><span class="red-ink">행동으로 이어주는</span> 화면이 아니었다."</p>
+        </div>
       </div>
+
+      <!-- right -->
+      <div class="diag-right reveal">
+        <div class="diag-shot-wrap">
+          <div class="shot-panel shot-diagnosis">
+            <img class="shot" src="assets/old-home.webp" alt="기존 홈">
+          </div>
+          <span class="diag-callout" style="top:6%;right:3%">2</span>
+          <span class="diag-callout" style="top:36%;left:6%">1</span>
+          <span class="diag-callout" style="bottom:10%;right:6%">3</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -493,12 +570,10 @@
 <!-- ============ 05 · USER JOURNEY ============ -->
 <section class="section bg-paper" data-screen-label="User Journey">
   <div class="wrap">
-    <div class="shead reveal" style="max-width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
-      <div style="max-width:560px">
-        <span class="kicker" style="font-weight: 600">03 _USER JOURNEY</span>
-        <h2 class="h-xl" style="margin-top: 22px">진입에서 문의까지,<br>어디서 멈칫했을까</h2>
-      </div>
-      <p class="body" style="max-width: 380px">‘무엇을 하는 곳이지?’부터 ‘어떻게 물어보지?’까지 — 매 단계마다 사용자를 멈춰 세우는 지점이 있었습니다.</p>
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight:600">03 _USER JOURNEY</span>
+      <h2 class="h-xl">진입에서 문의까지,<br>어디서 멈칫했을까</h2>
+      <p class="lead sub" style="white-space:nowrap">’무엇을 하는 곳이지?’부터 ‘어떻게 물어보지?’까지 — 매 단계마다 사용자를 멈춰 세우는 지점이 있었습니다.</p>
     </div>
 
     <div class="journey reveal" style="border-color: rgb(136, 136, 153)">
@@ -519,7 +594,7 @@
           <div class="fr warn"><span class="fl" style="font-weight: 500">문의 도달</span><span class="fb" style="width:18%"></span><span class="fv">18</span></div>
         </div>
       </div>
-      <div style="border-left: 2px solid var(--red); padding-left: 26px">
+      <div style="border-left: 2px solid var(--red); padding-left: 26px; margin-left: 40px">
         <div class="cap" style="margin-bottom: 10px">핵심 인사이트</div>
         <p class="pull" style="font-weight: 500">이탈은 ‘문의 단계’가 아니라<br><span class="hl" style="font-weight: 650">첫인상에서 이미</span> 시작되고 있었다.</p>
       </div>
@@ -530,13 +605,10 @@
 <!-- ============ 06 · COMPETITIVE ============ -->
 <section class="section bg-sand" data-screen-label="Competitive" style="font-weight: 400; background-color: rgb(250, 248, 244)">
   <div class="wrap">
-    <div class="shead reveal" style="max-width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap">
-      <div style="max-width:560px">
-        <span class="kicker" style="font-weight: 600">04 _COMPETITIVE REVIEW</span>
-        <h2 class="h-xl" style="margin-top: 22px">경쟁사는 무엇을<br>‘<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
-      </div>
-      <p class="body" style="max-width: 560px; width: 540px; margin: 0px -33px 0px 0px; padding: 0px">전세버스 업체 사이트 5곳을 휴리스틱으로 비교했습니다. <br>
-공통점은 첫 화면에서 ‘무엇을’과 ‘바로 문의’를 동시에 보여준다는 점이었습니다.</p>
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight:600">04 _COMPETITIVE REVIEW</span>
+      <h2 class="h-xl">경쟁사는 무엇을<br>‘<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
+      <p class="lead sub">전세버스 업체 사이트 5곳을 휴리스틱으로 비교했습니다.<br>공통점은 첫 화면에서 ‘무엇을’과 ‘바로 문의’를 동시에 보여준다는 점이었습니다.</p>
     </div>
     <div class="competitive-board reveal">
       <div class="competitive-board-head">
@@ -605,55 +677,116 @@
 <section class="section bg-paper" data-screen-label="Strategy">
   <div class="wrap">
     <div class="shead reveal">
-      <span class="kicker" style="font-weight: 600">05 — Strategy</span>
+      <span class="kicker" style="font-weight:600">05 _STRATEGY</span>
       <h2 class="h-xl">문제를 하나씩,<br>화면의 결정으로 바꾸다</h2>
       <p class="lead sub">진단에서 나온 문제를 ‘무엇을 어떻게 바꿀지’로 1:1 매핑했습니다. 더 넣기보다, 순서를 바꾸는 결정이 많았습니다.</p>
     </div>
-    <div class="strategy-minimal reveal">
-      <p class="strategy-mini-title">진단에서 나온 문제를<br>화면의 방향으로 다시 정리했습니다.</p>
-      <div class="strategy-flow">
-        <div class="strategy-row-label">AS-IS</div>
-        <div class="strategy-pill-row is-as">
-          <div class="strategy-pill">
-            <strong>설명 카피 없는</strong>
-            <span>큰 사진 한 장</span>
-          </div>
-          <div class="strategy-pill">
-            <strong>메뉴 안에 숨어 있는</strong>
-            <span>핵심 서비스</span>
-          </div>
-          <div class="strategy-pill">
-            <strong>행동을 유도하지 못하는</strong>
-            <span>첫 화면</span>
-          </div>
-          <div class="strategy-pill">
-            <strong>흩어져 있는 문의와</strong>
-            <span>빈약한 신뢰 근거</span>
-          </div>
+    <div class="sf-flow">
+      <div class="sf-grid">
+        <div class="sf-side-label" aria-hidden="true">
+          <div class="sf-label-cell">AS-IS</div>
+          <div class="sf-label-gap"></div>
+          <div class="sf-label-cell">TO-BE</div>
         </div>
-        <div class="strategy-arrow-row" aria-hidden="true">
-          <span>↓</span>
-          <span>↓</span>
-          <span>↓</span>
-          <span>↓</span>
-        </div>
-        <div class="strategy-row-label">TO-BE</div>
-        <div class="strategy-pill-row is-to">
-          <div class="strategy-pill">
+        <div class="sf-col reveal" style="transition-delay:0s">
+          <div class="sf-pill sf-as">
+            <strong>큰 사진 한 장</strong>
+            <span>설명 없는</span>
+          </div>
+          <div class="sf-arrow" aria-hidden="true">↓</div>
+          <div class="sf-pill sf-to">
             <strong>한 문장 히어로로</strong>
             <span>서비스를 먼저 설명</span>
           </div>
-          <div class="strategy-pill">
+        </div>
+        <div class="sf-col reveal" style="transition-delay:.18s">
+          <div class="sf-pill sf-as">
+            <strong>메뉴 안에 숨어 있는</strong>
+            <span>핵심 서비스</span>
+          </div>
+          <div class="sf-arrow" aria-hidden="true">↓</div>
+          <div class="sf-pill sf-to">
             <strong>차량·신뢰·후기를</strong>
             <span>메인 전면에 배치</span>
           </div>
-          <div class="strategy-pill">
+        </div>
+        <div class="sf-col reveal" style="transition-delay:.36s">
+          <div class="sf-pill sf-as">
+            <strong>행동을 유지하지 못하는</strong>
+            <span>첫 화면</span>
+          </div>
+          <div class="sf-arrow" aria-hidden="true">↓</div>
+          <div class="sf-pill sf-to">
             <strong>문의 CTA를 상시 노출해</strong>
             <span>다음 행동으로 연결</span>
           </div>
-          <div class="strategy-pill">
+        </div>
+        <div class="sf-col reveal" style="transition-delay:.54s">
+          <div class="sf-pill sf-as">
+            <strong>흩어져 있는 문의와</strong>
+            <span>빈약한 신뢰 근거</span>
+          </div>
+          <div class="sf-arrow" aria-hidden="true">↓</div>
+          <div class="sf-pill sf-to">
             <strong>문의 허브와 후기·실적을</strong>
             <span>하나의 흐름으로 정리</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 · STYLE GUIDE ============ -->
+<section class="section bg-paper" data-screen-label="Style Guide">
+  <div class="wrap">
+    <div class="shead reveal">
+      <span class="kicker" style="font-weight:600">06 _STYLE GUIDE</span>
+      <h2 class="h-xl">신뢰는 어떻게 디자인되는가</h2>
+      <p class="lead sub">화려함보다 '품격'과 '안정감'. 절제된 네이비와 시그니처 레드, 넉넉한 여백과 정돈된 타이포로 신뢰를 시각화했습니다.</p>
+    </div>
+
+    <div class="sg2-grid reveal">
+      <!-- COLOR -->
+      <div class="sg2-block">
+        <div class="sg2-sub-label">COLOR</div>
+        <div class="sg2-swatches">
+          <div class="sg2-sw" style="background:#0c1830">
+            <span class="sg2-hex" style="color:rgba(255,255,255,.6)">#0C1830</span>
+          </div>
+          <div class="sg2-sw" style="background:#13264a">
+            <span class="sg2-hex" style="color:rgba(255,255,255,.6)">#13264A</span>
+          </div>
+          <div class="sg2-sw" style="background:#d6382a">
+            <span class="sg2-hex" style="color:rgba(255,255,255,.6)">#D6382A</span>
+          </div>
+          <div class="sg2-sw" style="background:#f0eae0;border:1px solid #e3ddd1">
+            <span class="sg2-hex" style="color:#8a857c">#F0EAE0</span>
+          </div>
+        </div>
+        <p class="small" style="margin-top:20px;max-width:420px">네이비·레드 일변도를 벗어나 샌드를 중간톤으로 더해, 강조(레드)가 더 또렷하게 보이도록 균형을 잡았습니다.</p>
+      </div>
+
+      <!-- TYPOGRAPHY -->
+      <div class="sg2-block">
+        <div class="sg2-sub-label">TYPOGRAPHY</div>
+        <div class="sg2-font-name">PRETENDARD</div>
+        <div class="sg2-type-list">
+          <div class="sg2-trow">
+            <span class="sg2-tsample" style="font-size:2.2rem;font-weight:800">부자관광</span>
+            <span class="sg2-tweight">Display 800</span>
+          </div>
+          <div class="sg2-trow">
+            <span class="sg2-tsample" style="font-size:1.6rem;font-weight:600">품격 있는 이동 서비스</span>
+            <span class="sg2-tweight">Heading 600</span>
+          </div>
+          <div class="sg2-trow">
+            <span class="sg2-tsample" style="font-size:1.15rem;font-weight:450;color:var(--ink-2)">안전하고 편안한 운행으로</span>
+            <span class="sg2-tweight">Body 450</span>
+          </div>
+          <div class="sg2-trow">
+            <span class="sg2-tsample" style="font-size:.82rem;font-weight:700;letter-spacing:.18em;color:var(--red)">SERVICE / CTA</span>
+            <span class="sg2-tweight">Label 700</span>
           </div>
         </div>
       </div>
@@ -672,69 +805,6 @@
       <p class="pull goal-q">
         충분한 차량과 경력을 가진 회사가,<br>첫 화면부터 <span class="hl" style="font-family: Pretendard">핵심 서비스를 전달</span>하고 문의까지 자연스럽게 이어지게 하려면?
       </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 10 · STYLE GUIDE ============ -->
-<section class="section bg-paper blend-next-sand" data-screen-label="Style Guide">
-  <div class="wrap">
-    <div class="shead center reveal" style="width: 789px; margin: 0px 254px 52px 216px">
-      <span class="kicker center" style="font-weight: 600">06 _STYLE GUIDE</span>
-      <h2 class="h-xl">신뢰는 어떻게 디자인되는가</h2>
-      <p class="lead sub style-guide-sub">화려함보다 ‘품격’과 ‘안정감’. 절제된 네이비와 시그니처 레드, 넉넉한 여백과 정돈된 타이포로 신뢰를 시각화했습니다.</p>
-    </div>
-
-    <div class="sg-grid reveal">
-      <div class="sg-block">
-        <div class="sgk">Color</div>
-        <div class="swatches">
-          <div class="sw" style="background:#0c1830"><span style="color:#fff">Navy Deep</span><span class="hex" style="color:#fff">#0C1830</span></div>
-          <div class="sw" style="background:#13264a"><span style="color:#fff">Navy</span><span class="hex" style="color:#fff">#13264A</span></div>
-          <div class="sw" style="background:#4a5c80"><span style="color:#fff">Slate</span><span class="hex" style="color:#fff">#4A5C80</span></div>
-          <div class="sw" style="background:#d6382a"><span style="color:#fff">Signature Red</span><span class="hex" style="color:#fff">#D6382A</span></div>
-          <div class="sw" style="background:#f0eae0;border-color:#e3ddd1"><span style="color:#403d39">Sand</span><span class="hex" style="color:#8a857c">#F0EAE0</span></div>
-          <div class="sw" style="background:#1d1c1a"><span style="color:#fff">Ink</span><span class="hex" style="color:#fff">#1D1C1A</span></div>
-        </div>
-        <p class="small" style="margin-top:18px">네이비·레드 일변도를 벗어나 샌드·슬레이트를 중간톤으로 더해, <br>
-강조(레드)가 더 또렷하게 보이도록 균형을 잡았습니다.</p>
-      </div>
-
-      <div class="sg-block">
-        <div class="sgk">Typography · Pretendard</div>
-        <div class="type-spec">
-          <div class="tl"><span class="tn" style="font-size: 34px; font-weight: 800">부자관광.</span><span class="tm">Display · 800</span></div>
-          <div class="tl"><span class="tn" style="font-size: 25px; font-weight: 600">품격 있는 이동 서비스</span><span class="tm">Heading · 600</span></div>
-          <div class="tl"><span class="tn" style="font-size:18px;font-weight:450;color:var(--ink-2)">안전하고 편안한 운행으로</span><span class="tm">Body · 450</span></div>
-          <div class="tl"><span class="tn" style="font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--red)">SERVICE / CTA</span><span class="tm">Label · 700</span></div>
-        </div>
-      </div>
-
-      <div class="sg-block">
-        <div class="sgk">Spacing &amp; Layout</div>
-        <div class="sg-stack">
-          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">4</span><span style="height:14px;width:4%;background:var(--slate);border-radius:2px"></span></div>
-          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">8</span><span style="height:14px;width:8%;background:var(--slate);border-radius:2px"></span></div>
-          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">16</span><span style="height:14px;width:16%;background:var(--slate);border-radius:2px"></span></div>
-          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">24</span><span style="height:14px;width:24%;background:var(--slate);border-radius:2px"></span></div>
-          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">40</span><span style="height:14px;width:40%;background:var(--navy);border-radius:2px"></span></div>
-          <div style="display:flex;align-items:center;gap:14px"><span class="cap" style="width:46px">64</span><span style="height:14px;width:64%;background:var(--navy);border-radius:2px"></span></div>
-        </div>
-        <p class="small" style="margin-top:18px">4px 기반 스페이싱 스케일. 섹션 간 큰 여백으로 정보의 위계와 ‘숨’을 만들었습니다.</p>
-      </div>
-
-      <div class="sg-block">
-        <div class="sgk">Components</div>
-        <div class="sg-component-row">
-          <span style="background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:11px 20px;border-radius:8px">문의하기 →</span>
-          <span style="border:1.5px solid var(--navy);color:var(--navy);font-weight:700;font-size:14px;padding:10px 18px;border-radius:8px">서비스 살펴보기</span>
-          <span class="tag"><span class="d"></span>16인승</span>
-          <span class="tag">Wi-Fi</span>
-          <span style="background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:5px 11px;border-radius:5px">BEST 기사님</span>
-        </div>
-        <p class="small" style="margin-top:18px">버튼·태그·뱃지·후기 카드 등 재사용 단위를 규칙으로 정의해, <br>
-화면 전체에 일관된 톤을 유지했습니다.</p>
-      </div>
     </div>
   </div>
 </section>
