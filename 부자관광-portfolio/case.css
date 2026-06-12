@@ -128,7 +128,7 @@ img{display:block;max-width:100%}
 .goal-kicker{color:#fff!important}
 .goal-kicker::before{display:none}
 .goal-tag{font-size:var(--type-micro);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:22px}
-.goal-q{font-size:var(--type-section-a);font-weight:600;line-height:1.52;letter-spacing:-.025em;color:#fff}
+.goal-q{font-size:var(--type-section-a);font-weight:600;line-height:1.52;letter-spacing:-.025em;color:#fff;text-align:center!important}
 .goal-q .hl{color:var(--red);white-space:nowrap}
 
 .eyenum{font-size:var(--type-micro);font-weight:700;letter-spacing:.2em;color:var(--faint)}

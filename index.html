@@ -57,17 +57,27 @@
   .comp-cell.current *,
   .competitive-board-head .comp-col-head.current,
   .competitive-finding,
-  .competitive-finding *{
+  .competitive-finding *,
+  .competitive-finding strong,
+  .competitive-finding p strong{
     color:#fff !important;
     background-color:var(--navy) !important;
   }
+  /* zoom:0.88 보정 — 텍스트 크기 & 강조 */
+  .competitive-board-head .comp-col-head{ font-size:16px !important; }
+  .comp-row-label{ font-size:17px !important; font-weight:700 !important; }
+  .comp-cell strong{ font-size:19px !important; font-weight:700 !important; letter-spacing:-.02em !important; }
+  .comp-cell span{ font-size:15px !important; line-height:1.65 !important; }
+  .competitive-finding .finding-label{ font-size:16px !important; font-weight:700 !important; }
+  .competitive-finding p{ font-size:15px !important; line-height:1.7 !important; font-weight:400 !important; }
+  .competitive-finding p strong{ font-size:15px !important; font-weight:700 !important; }
   .comp-cell.current{ background:var(--navy) !important; }
 
   .h-xl,
   .background-section-title,
   .goal-q{
     font-size:clamp(2.1rem, 2.5vw, 3rem) !important;
-    font-weight:500 !important;
+    font-weight:700 !important;
     line-height:1.22 !important;
     letter-spacing:-.03em !important;
   }
@@ -156,8 +166,8 @@
   .strategy-row-label,
   .comp-row-label,
   .competitive-finding .finding-label{
-    font-size:.66rem !important;
-    font-weight:500 !important;
+    font-size:.85rem !important;
+    font-weight:600 !important;
   }
   .section[data-screen-label="Intro"] .deliverables .rn{
     font-size:.65rem !important;
@@ -207,7 +217,6 @@
     font-size:.88rem !important;
   }
   section[data-screen-label="Background"] .shead,
-  section[data-screen-label="Competitive"] .shead,
   section[data-screen-label="Strategy"] .shead,
   section[data-screen-label="Goal"] .shead,
   section[data-screen-label="Style Guide"] .shead,
@@ -246,9 +255,9 @@
   }
   section[data-screen-label="Style Guide"] .style-guide-sub,
   section[data-screen-label="Goal"] .goal-q{
-    margin-left:0 !important;
+    margin-left:auto !important;
     margin-right:auto !important;
-    text-align:left !important;
+    text-align:center !important;
   }
   .background-section-title{
     font-size:clamp(2.1rem, 2.5vw, 3rem) !important;
@@ -390,13 +399,7 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const competitiveSection = document.querySelector('[data-screen-label="Competitive"]');
-      if (!competitiveSection) return;
-      const candidates = [...competitiveSection.querySelectorAll('div')];
-      const board = candidates.find((el) => {
-        const text = (el.textContent || '').replace(/\s+/g, ' ');
-        return text.includes('경쟁사 공통') && text.includes('기존 부자관광') && text.includes('Key Finding');
-      });
+      const board = document.querySelector('[data-screen-label="Competitive"] .competitive-board');
       if (!board) return;
       board.style.zoom = '0.88';
       board.style.maxWidth = 'none';
@@ -405,6 +408,17 @@
       board.style.transformOrigin = 'top left';
     });
   </script>
+  <style id="sg2-layout">
+    .sg2-grid{ align-items:stretch !important; gap:0 120px !important; }
+    .sg2-block{ display:flex !important; flex-direction:column !important; }
+    .sg2-swatches{ flex:1 !important; min-height:400px !important; grid-template-columns:1fr 1fr !important; grid-template-rows:1fr 1fr !important; gap:14px !important; }
+    .sg2-sw{ aspect-ratio:unset !important; height:unset !important; width:unset !important; }
+    .sg2-type-list{ flex:1 !important; display:grid !important; grid-template-columns:auto auto !important; align-content:start !important; column-gap:200px !important; row-gap:50px !important; }
+    .sg2-trow{ display:contents !important; }
+    .sg2-tsample{ align-self:baseline !important; }
+    .sg2-tweight{ align-self:baseline !important; }
+    .sg2-font-name{ color:var(--ink,#1d1c1a) !important; font-size:1.8rem !important; }
+  </style>
 </head>
 <body>
 
@@ -605,9 +619,9 @@
 <!-- ============ 06 · COMPETITIVE ============ -->
 <section class="section bg-sand" data-screen-label="Competitive" style="font-weight: 400; background-color: rgb(250, 248, 244)">
   <div class="wrap">
-    <div class="shead reveal">
+    <div class="shead reveal" style="max-width:100%">
       <span class="kicker" style="font-weight:600">04 _COMPETITIVE REVIEW</span>
-      <h2 class="h-xl">경쟁사는 무엇을<br>‘<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
+      <h2 class="h-xl">경쟁사는 무엇을<br>’<span style="color:#d6382a">먼저</span>’ 보여주고 있을까</h2>
       <p class="lead sub">전세버스 업체 사이트 5곳을 휴리스틱으로 비교했습니다.<br>공통점은 첫 화면에서 ‘무엇을’과 ‘바로 문의’를 동시에 보여준다는 점이었습니다.</p>
     </div>
     <div class="competitive-board reveal">
@@ -764,13 +778,15 @@
             <span class="sg2-hex" style="color:#8a857c">#F0EAE0</span>
           </div>
         </div>
-        <p class="small" style="margin-top:20px;max-width:420px">네이비·레드 일변도를 벗어나 샌드를 중간톤으로 더해, 강조(레드)가 더 또렷하게 보이도록 균형을 잡았습니다.</p>
+        <p class="small" style="margin-top:20px;white-space:nowrap">네이비·레드에 샌드를 더해 강조(레드)가 더 또렷하게 보이도록 균형을 잡았습니다.</p>
       </div>
 
       <!-- TYPOGRAPHY -->
       <div class="sg2-block">
-        <div class="sg2-sub-label">TYPOGRAPHY</div>
-        <div class="sg2-font-name">PRETENDARD</div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:70px">
+          <div class="sg2-sub-label" style="margin-bottom:0">TYPOGRAPHY</div>
+          <div class="sg2-font-name" style="margin-bottom:0;font-size:1.8rem;font-weight:700;color:var(--ink,#1d1c1a);letter-spacing:.04em">PRETENDARD</div>
+        </div>
         <div class="sg2-type-list">
           <div class="sg2-trow">
             <span class="sg2-tsample" style="font-size:2.2rem;font-weight:800">부자관광</span>
