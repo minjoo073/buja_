@@ -1173,6 +1173,33 @@ footer.foot{
   border-color:rgba(19,38,74,.1) !important;
 }
 
+/* Behind the Process — light/warm meta labels that are illegible on
+   the cream background after the global .bg-navy→cream override.
+   Tone them up to muted ink so they read without competing with the
+   main kicker (kept red). */
+.tphase .ph-l .pnum,
+.tphase .ph-l .skill .sk-lab,
+.lesson .lk{
+  color:var(--muted) !important;
+}
+.lesson{
+  border-color:var(--line) !important;
+  background:transparent !important;
+}
+.lesson .pull{
+  color:var(--ink) !important;
+}
+.lesson .pull .hl{
+  color:var(--red) !important;
+  font-weight:700 !important;
+}
+.lesson .body{
+  color:var(--ink-2) !important;
+}
+.reflect .ritem{
+  border-color:var(--line) !important;
+}
+
 .closing .sign,
 footer.foot{
   color:var(--muted) !important;
@@ -1701,4 +1728,129 @@ footer.foot{
   white-space:nowrap;
   flex-shrink:0;
   margin-left:16px;
+}
+
+/* ============================================================
+   Beyond / "From Design to Proposal" chapter transition
+   Same mechanic as Goal/HMW but the stage colour pivot runs in
+   reverse: the pinned stage resolves from deep navy → cream as you
+   scroll through; the faint red "BEYOND" outline thickens into bold
+   navy and lands on the now-cream background as a strong chapter
+   header; the overlaid copy crossfades from white → ink. Driven by
+   main.js.
+   ============================================================ */
+/* Exact mirror of Goal/HMW (see #goal-transition inline styles in
+   index.html): 200vh section with a 100vh sticky stage. JS keeps the
+   section bg in lockstep with the stage bg so even when body's
+   zoom-scaled width prevents the stage from painting edge-to-edge
+   the same colour shows behind it. overflow MUST stay visible — an
+   ancestor with overflow:hidden breaks position:sticky. */
+.beyond{
+  position:relative;
+  height:280vh !important;                         /* 80vh taller than Goal so the
+                                                       motion has 180vh of pin range
+                                                       to play out (slower than Goal's
+                                                       100vh). post-pin = stage height
+                                                       (100vh) regardless, so the gap
+                                                       before Sales Proposal content
+                                                       is collapsed by its padding-top
+                                                       override below. */
+  padding:0 !important;
+  overflow:visible !important;
+  background:#0c1830;                              /* JS overrides via inline */
+}
+.beyond-stage{
+  position:sticky;
+  top:0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  text-align:center;
+  background:#0c1830;                              /* JS interpolates navy → cream */
+  will-change:background-color;
+}
+.beyond-stage .beyond-mark{will-change:transform,opacity}
+.beyond-content{will-change:opacity}
+
+/* Once BEYOND has passed its midpoint the proposal chapter underneath
+   takes on the same cream palette as the stage's end colour so there's
+   no visual break when the sticky stage releases and the next section
+   flows in. Mirrors how body.goal-navy re-themes the design chapter. */
+body.beyond-cream [data-screen-label="Sales Proposal"]{
+  background:#faf8f3 !important;                   /* === CREAM in main.js */
+  color:var(--ink) !important;
+  /* Collapse the default .section top padding (300px) so the proposal
+     content sits right under the BEYOND stage as the sticky pin
+     releases — no big cream void between the motion and the heading. */
+  padding-top:20px !important;
+  transition:background-color .5s ease, color .5s ease;
+}
+body.beyond-cream [data-screen-label="Sales Proposal"] :is(h1,h2,h3,h4,.h-xl,.h-md){
+  color:var(--ink) !important;
+}
+body.beyond-cream [data-screen-label="Sales Proposal"] .kicker{
+  color:var(--red) !important;
+}
+body.beyond-cream [data-screen-label="Sales Proposal"] .kicker::before{
+  background:var(--red) !important;
+}
+body.beyond-cream [data-screen-label="Sales Proposal"] :is(.lead,.sub,.body){
+  color:var(--ink-2) !important;
+}
+body.beyond-cream [data-screen-label="Sales Proposal"] .cap{
+  color:var(--muted) !important;
+}
+
+/* ---------------- sales proposal layout ----------------
+   Single column: kicker → heading → lede stacked on the left,
+   matching the design the user showed. Media row below stays
+   as the existing two-up grid. */
+.sales-proposal-shead{
+  display:block;
+  margin-bottom:48px;
+  max-width:780px;
+}
+.sales-proposal-headline h2{
+  margin-top:20px;
+}
+.sales-proposal-lede{
+  margin:32px 0 0;
+  line-height:1.85;
+  max-width:640px;
+}
+.sales-proposal-cap{
+  margin-top:18px;
+  color:var(--muted);
+}
+.beyond-stage .beyond-mark{will-change:transform}
+.beyond-content{will-change:opacity}
+.beyond-mark{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-46%);
+  /* BEYOND is 6 chars vs Goal's "HMW?" 4 chars, so we trim font-size +
+     letter-spacing so the whole word fits inside the viewport instead
+     of getting clipped at left/right edges. */
+  font-size:clamp(120px,22vw,340px);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.05em;
+  color:transparent;
+  -webkit-text-stroke:1.5px rgba(214,56,42,.45);   /* starts thin red — JS thickens to navy */
+  white-space:nowrap;
+  z-index:1;
+  pointer-events:none;
+}
+.beyond-stage .goal-q{color:#fff}                  /* JS morphs white → ink */
+
+@media (prefers-reduced-motion:reduce){
+  .beyond{height:auto !important}
+  .beyond-stage{position:relative;height:auto;min-height:80vh;padding:120px 24px}
+}
+@media(max-width:820px){
+  .beyond{height:180vh !important}
+  .beyond-mark{font-size:clamp(110px,26vw,320px)}
 }

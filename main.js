@@ -218,6 +218,209 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   render();
 })();
 
+// ============================================================
+// Beyond → "From Design to Proposal" chapter transition.
+// Direct mirror of setupGoalTransition: same 200vh sticky stage,
+// same outline thickens-then-falls behaviour, same text crossfade.
+// The only differences are the two colour pivots that get flipped:
+//   stage bg : navy → cream  (Goal does cream → navy)
+//   copy     : white → ink   (Goal does ink → white)
+// We also keep beyondSection's bg in lockstep with the stage so
+// any narrow gap left by body's zoom-scaled width is invisible.
+// ============================================================
+(function setupBeyondTransition() {
+  var beyondSection = document.querySelector(".beyond");
+  if (!beyondSection || exportSection) {
+    return;
+  }
+
+  var beyondStage = beyondSection.querySelector(".beyond-stage");
+  var beyondMark = beyondSection.querySelector(".beyond-mark");
+  var beyondQ = beyondSection.querySelector(".goal-q");
+
+  function clamp01(t) { return t < 0 ? 0 : t > 1 ? 1 : t; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function easeIn(t) { return t * t; }
+  function mix(c1, c2, t) {
+    return (
+      "rgba(" +
+      Math.round(lerp(c1[0], c2[0], t)) + "," +
+      Math.round(lerp(c1[1], c2[1], t)) + "," +
+      Math.round(lerp(c1[2], c2[2], t)) + "," +
+      lerp(c1[3], c2[3], t).toFixed(3) + ")"
+    );
+  }
+
+  var RED = [214, 56, 42, 0.45];        // faint red outline (start) — bumped vs Goal's 0.18 so it's visible on navy
+  var NAVY = [34, 55, 106, 0.95];       // bold navy outline (#22376A)
+  var NAVY_DEEP = [12, 24, 48, 1];      // stage start (#0c1830)
+  var CREAM = [250, 248, 243, 1];       // stage end (matches Sales Proposal cream)
+  var WHITE = [255, 255, 255, 1];       // copy on navy
+  var INK = [29, 28, 26, 1];            // copy on cream
+
+  if (reduceMotion || !beyondStage) {
+    return;
+  }
+
+  var ticking = false;
+  var body = document.body;
+
+  function render() {
+    ticking = false;
+
+    var rect = beyondSection.getBoundingClientRect();
+    var scrollable = rect.height - window.innerHeight;
+    var p = scrollable > 0 ? clamp01(-rect.top / scrollable) : 0;
+
+    // Exact same curves as setupGoalTransition.
+    var pColor = clamp01(p / 0.42); // outline colour: red → navy
+    var pThick = clamp01(p / 0.58); // outline keeps thickening
+    var pBg = clamp01((p - 0.45) / 0.16); // stage bg: navy → cream
+    var pText = clamp01((p - 0.5) / 0.07); // copy: white → ink
+    var pFall = clamp01((p - 0.5) / 0.5); // outline falls + fades
+
+    var stroke = lerp(1.5, 7, pThick);
+    beyondMark.style.webkitTextStroke =
+      stroke.toFixed(2) + "px " + mix(RED, NAVY, pColor);
+
+    var fall = lerp(0, window.innerHeight * 0.92, easeIn(pFall));
+    beyondMark.style.transform =
+      "translate(-50%, calc(-50% + " + fall.toFixed(1) + "px))";
+    beyondMark.style.opacity = (1 - clamp01(pFall * 1.25)).toFixed(3);
+
+    // Stage and section share the same interpolated bg colour so no
+    // frame leaks out even when the body's zoom-scaled width prevents
+    // the stage from painting edge-to-edge.
+    var bg = mix(NAVY_DEEP, CREAM, pBg);
+    beyondStage.style.backgroundColor = bg;
+    beyondSection.style.backgroundColor = bg;
+
+    if (beyondQ) {
+      // copy goes white → ink — flipped from Goal's ink → white
+      beyondQ.style.setProperty("color", mix(WHITE, INK, pText), "important");
+      var dip = 4 * pText * (1 - pText);
+      beyondQ.style.opacity = (1 - 0.82 * dip).toFixed(3);
+    }
+
+    // Flip the proposal chapter to cream once past the bg midpoint so
+    // it matches the stage end colour as the sticky pin releases.
+    body.classList.toggle("beyond-cream", p >= 0.5);
+  }
+
+  function onScrollBeyond() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  window.addEventListener("scroll", onScrollBeyond, { passive: true });
+  window.addEventListener("resize", onScrollBeyond, { passive: true });
+  render();
+})();
+
+// ============================================================
+// Behind the Process — scroll-driven timeline.
+//   Anchored at 42% from the viewport top: as the user scrolls,
+//   the red fill of the vertical line grows to that point, the
+//   phase whose node is nearest the anchor goes .is-active
+//   (dot enlarges + halo), and any phase whose dot is above the
+//   anchor goes .is-past (red filled dot, no halo).
+// ============================================================
+(function setupBehindTimeline() {
+  var timeline = document.querySelector(
+    '[data-screen-label="Behind the Process"] .timeline'
+  );
+  if (!timeline || exportSection) {
+    return;
+  }
+  var phases = Array.prototype.slice.call(
+    timeline.querySelectorAll(".tphase")
+  );
+  if (!phases.length) {
+    return;
+  }
+  var lesson = document.querySelector(
+    '[data-screen-label="Behind the Process"] .lesson'
+  );
+
+  // Where on the line does a phase's dot sit, relative to the .tphase top?
+  function dotOffset(phaseEl) {
+    return phaseEl === phases[0] ? 22 : 78; // matches the CSS top values
+  }
+
+  var ticking = false;
+
+  function render() {
+    ticking = false;
+    var tRect = timeline.getBoundingClientRect();
+    var anchor = window.innerHeight * 0.6;
+
+    // Filled height from the very top of the line down to the anchor,
+    // clamped to the line's actual length so it doesn't overshoot.
+    var filled = Math.max(0, Math.min(tRect.height, anchor - tRect.top));
+    timeline.style.setProperty("--timeline-progress", filled + "px");
+
+    phases.forEach(function (phase, i) {
+      var pRect = phase.getBoundingClientRect();
+      var dotY = pRect.top + dotOffset(phase);
+      var nextPhase = phases[i + 1];
+      var nextDotY = nextPhase
+        ? nextPhase.getBoundingClientRect().top + dotOffset(nextPhase)
+        : Infinity;
+
+      // .is-past: this phase's dot is above the anchor AND the next
+      // phase's dot has also reached the anchor (so it stays "past"
+      // even when the next is now active).
+      var past = dotY < anchor && nextDotY <= anchor;
+      // .is-active: this phase's dot is the current/most-recent above
+      // anchor (or just touched it).
+      var active = !past && dotY <= anchor + 1;
+
+      phase.classList.toggle("is-past", past);
+      phase.classList.toggle("is-active", active);
+    });
+
+    // Reveal the "What I Took Away" lesson box when ITS OWN dot
+    // reaches the anchor — not when the last phase's dot does. This
+    // way the lesson appears AFTER PHASE 03 (the user has to scroll
+    // further past PHASE 03 before the takeaway pops in). Once
+    // visible, also force the timeline's red fill to its full height
+    // so it meets the lesson's bridge line cleanly.
+    if (lesson) {
+      var lessonRect = lesson.getBoundingClientRect();
+      var lessonDotY = lessonRect.top + 10; // matches .lesson::after top
+      var lessonVisible = lessonDotY <= anchor;
+      lesson.classList.toggle("is-visible", lessonVisible);
+      if (lessonVisible) {
+        timeline.style.setProperty("--timeline-progress", tRect.height + "px");
+      }
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  if (!reduceMotion) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+  }
+  render();
+
+  // Phase text reveal is driven by the SAME scroll anchor as the dot
+  // fill (.is-active / .is-past). With anchor at 60% the dots light
+  // up early enough that PHASE 01 turns red — and its text appears
+  // — the moment the section header is at the top of the viewport.
+  if (reduceMotion) {
+    phases.forEach(function (phase) { phase.classList.add("is-revealed"); });
+    if (lesson) lesson.classList.add("is-visible");
+  }
+})();
+
 var figVals = Array.from(document.querySelectorAll(".figrow .fig .v"))
   .map(function (valueElement) {
     var node = valueElement.firstChild;
@@ -389,3 +592,87 @@ function setupDeliverablesTicker() {
 }
 
 setupDeliverablesTicker();
+
+// ============================================================
+// Section 07 — Redesign Home annotation lines draw-in.
+// Adds .is-drawn to .rh-stage when 20% of it enters viewport;
+// the dashed connectors scale from right to left with a stagger
+// driven by CSS transition-delay.
+// ============================================================
+(function setupRhDrawIn() {
+  var stage = document.querySelector("#redesign-home .rh-stage");
+  if (!stage || exportSection) {
+    return;
+  }
+  var annos = stage.querySelectorAll(".rh-a");
+  if (!annos.length) {
+    return;
+  }
+  if (reduceMotion) {
+    Array.prototype.forEach.call(annos, function (a) {
+      a.classList.add("is-shown");
+    });
+    return;
+  }
+  // Each annotation reveals its text + dashed line together, the
+  // moment it enters the viewport — so all four (incl. the lower
+  // ones) get the same draw-in motion as the user scrolls past.
+  var annoIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-shown");
+        annoIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.45 });
+  Array.prototype.forEach.call(annos, function (anno) {
+    annoIO.observe(anno);
+  });
+})();
+
+// ============================================================
+// Section 13.5 — Mockup full-bleed parallax.
+// The img is scaled up 1.12x via CSS; here we translate it on
+// scroll so it drifts at ~30% of the page scroll speed,
+// giving the full-bleed mockup a cinematic depth.
+// ============================================================
+(function setupMockupParallax() {
+  var section = document.querySelector(".mockup-full");
+  if (!section || exportSection || reduceMotion) {
+    return;
+  }
+  var img = section.querySelector("img");
+  if (!img) {
+    return;
+  }
+
+  var ticking = false;
+
+  function render() {
+    ticking = false;
+    var rect = section.getBoundingClientRect();
+    var vh = window.innerHeight;
+    // progress: -1 when section is below viewport, +1 when above.
+    var sectionMid = rect.top + rect.height / 2;
+    var viewportMid = vh / 2;
+    var distance = sectionMid - viewportMid;
+    var maxDistance = (rect.height + vh) / 2;
+    var progress = Math.max(-1, Math.min(1, distance / maxDistance));
+    // 8% of section height of vertical drift either way (scale 1.12
+    // gives us 12% of overscan to work with on each axis).
+    var offset = progress * rect.height * 0.08;
+    img.style.transform =
+      "translate3d(0," + (-offset).toFixed(2) + "px,0) scale(1.12)";
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  render();
+})();

@@ -6,7 +6,7 @@
 <title>부자관광 웹사이트 리디자인 — UX/UI Case Study</title>
 <meta name="description" content="부자관광 웹사이트 리디자인 UX/UI 포트폴리오 케이스 스터디">
 <link rel="stylesheet" href="styles.css?v=20260612-0039">
-<script defer src="main.js?v=20260612-0039"></script>
+<script defer src="main.js?v=20260614-0215"></script>
 <style id="live-overrides">
   :root{
     --page-margin:64px;
@@ -222,7 +222,8 @@
   section[data-screen-label="Style Guide"] .shead,
   section[data-screen-label="Before After"] .shead,
   section[data-screen-label="Pages"] .shead,
-  section[data-screen-label="Sales Proposal"] .shead{
+  section[data-screen-label="Sales Proposal"] .shead,
+  section[data-screen-label="Behind the Process"] .shead{
     width:min(calc(100vw - (var(--page-margin) * 2)), 980px) !important;
     max-width:980px !important;
     margin-left:0 !important;
@@ -237,7 +238,8 @@
   section[data-screen-label="Style Guide"] .shead .kicker,
   section[data-screen-label="Before After"] .shead .kicker,
   section[data-screen-label="Pages"] .shead .kicker,
-  section[data-screen-label="Sales Proposal"] .shead .kicker{
+  section[data-screen-label="Sales Proposal"] .shead .kicker,
+  section[data-screen-label="Behind the Process"] .shead .kicker{
     justify-content:flex-start !important;
   }
   section[data-screen-label="Background"] .shead.center,
@@ -248,7 +250,8 @@
   section[data-screen-label="Style Guide"] .shead.center,
   section[data-screen-label="Before After"] .shead.center,
   section[data-screen-label="Pages"] .shead.center,
-  section[data-screen-label="Sales Proposal"] .shead.center{
+  section[data-screen-label="Sales Proposal"] .shead.center,
+  section[data-screen-label="Behind the Process"] .shead.center{
     margin-left:0 !important;
     margin-right:auto !important;
     text-align:left !important;
@@ -383,6 +386,24 @@
       background:#faf8f3 !important;
     }
     /* hero background handled by .hero.hero-v2 in styles.css */
+
+    /* Hero — bump the BEFORE/AFTER mock sizes so the two screens read
+       more prominently. Keeps stacked layout, just scales up. */
+    .hero-v2-right{height:600px !important}
+    .hero-v2-before-wrap{width:68% !important}
+    .hero-v2-after-wrap{width:82% !important}
+    .hero-v2-shot img{height:280px !important}
+    .hero-v2-after-wrap .hero-v2-shot img{height:340px !important}
+    @media(max-width:980px){
+      .hero-v2-right{height:460px !important}
+      .hero-v2-shot img{height:230px !important}
+      .hero-v2-after-wrap .hero-v2-shot img{height:280px !important}
+    }
+    @media(max-width:560px){
+      .hero-v2-right{height:340px !important}
+      .hero-v2-shot img{height:175px !important}
+      .hero-v2-after-wrap .hero-v2-shot img{height:210px !important}
+    }
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -450,9 +471,9 @@
       color:#fff !important;
     }
     /* navy chapter darkens gradually toward the dark mock section that follows */
-    body.goal-navy #redesign-home{ background:linear-gradient(180deg,#22376A 0%,#1c2e56 100%) !important; }
+    body.goal-navy #redesign-home{ background:linear-gradient(180deg,#22376A 0%,#1c2e56 100%) !important; padding-top:40px !important; }
     body.goal-navy [data-screen-label="Before After"]{ background:linear-gradient(180deg,#1c2e56 0%,#0c1830 100%) !important; }
-    body.goal-navy [data-screen-label="Pages"]{ background:linear-gradient(180deg,#0c1830 0%,#0c1830 42%,#262629 100%) !important; }  /* navy → charcoal to meet the mockup top */
+    body.goal-navy [data-screen-label="Pages"]{ background:linear-gradient(180deg,#0c1830 0%,#13192f 35%,#191a1f 70%,#101115 100%) !important; }  /* navy → near-black so the bottom meets the Mockup image's dark top edge without a seam */
     #redesign-home,
     [data-screen-label="Before After"],
     [data-screen-label="Pages"]{
@@ -600,12 +621,16 @@
       [data-screen-label="Before After"] .ba-arrow{ display:none; }
     }
 
-    /* full-bleed mockup image — edge to edge, no wrap/padding */
+    /* full-bleed mockup image — edge to edge, no horizontal wrap.
+       Larger top padding so there's deeper breathing room before
+       the cinematic mockup image lands. bg matches the Pages
+       gradient bottom AND the dark top edge of the mockup image so
+       the boundary is invisible. */
     .mockup-full{
-      padding:0 !important;
+      padding:220px 0 0 !important;
       margin:0 !important;
       width:100%;
-      background:#262629;            /* matches Pages bottom + the mockup top edge */
+      background:#101115;
       line-height:0;
       overflow:hidden;
     }
@@ -663,6 +688,565 @@
       .goal{ height:auto !important; padding:120px 0 !important; overflow:hidden !important }
       .goal-stage{ position:static; height:auto }
     }
+
+    /* ========================================================
+       Unified typography hierarchy (last in source so it wins).
+       Goal: same hierarchy level → same size across every section
+       so scroll doesn't shift in/out of inconsistent sizes.
+       Also bumps weight + size for legibility — base 300/400 was
+       too thin/small on cream.
+       ======================================================== */
+
+    /* L0 — Section spacing. 100px top + 150px bottom so the visible
+       gap between consecutive sections totals 250px. Exclude the two
+       transition sections (.goal, .beyond) — they own their own
+       height and have padding:0 because the sticky stage fills the
+       viewport. */
+    .section:not(.goal):not(.beyond){padding:100px 40px 150px !important}
+    .section.tight:not(.goal):not(.beyond){padding:80px 40px 130px !important}
+
+    /* L1 — Section title (h2 / .h-xl). Lighter base weight so the
+       red .hl/.red-ink highlights inside actually read as emphasis. */
+    .h-xl,
+    .background-section-title,
+    .goal-q{
+      font-size:clamp(1.7rem,2vw,2.35rem) !important;
+      font-weight:450 !important;
+      line-height:1.3 !important;
+      letter-spacing:-.022em !important;
+    }
+    @media (min-width:1440px){
+      .h-xl,
+      .background-section-title,
+      .goal-q{
+        font-size:clamp(1.65rem,1.85vw,2.2rem) !important;
+      }
+    }
+    /* Red highlight inside section titles stays heavier so it pops. */
+    .h-xl .hl,
+    .h-xl .red-ink,
+    .background-section-title .hl,
+    .background-section-title .red-ink,
+    .goal-q .hl{
+      font-weight:700 !important;
+    }
+
+    /* GOAL/BEYOND quote — the non-highlight portion is white-on-navy
+       (or ink-on-cream after transition). White on dark optically reads
+       heavier, so we drop the base weight a notch below other titles
+       while .goal-q .hl above stays heavy for emphasis. */
+    .goal-q{
+      font-weight:400 !important;
+    }
+
+    /* L2 — Section subtitle / lede (one line of description) */
+    .lead,
+    .lead.sub,
+    .behind-sub,
+    .style-guide-sub,
+    .sales-proposal-lede{
+      font-size:1rem !important;
+      line-height:1.78 !important;
+      font-weight:400 !important;
+      color:var(--muted) !important;
+    }
+    /* Specificity boosters — the global ".bg-navy .lead { color: ink-2 }"
+       rule (specificity 2) otherwise beats the single-class subtitle
+       rule above on cream-themed navy sections. Also boost Sales
+       Proposal's lede over the body.beyond-cream override. */
+    .bg-navy .lead,
+    .bg-navy-2 .lead,
+    .bg-red .lead,
+    .bg-paper .lead,
+    .bg-sand .lead,
+    .bg-navy .behind-sub,
+    [data-screen-label="Behind the Process"] .behind-sub,
+    [data-screen-label="Sales Proposal"] .sales-proposal-lede,
+    body.beyond-cream [data-screen-label="Sales Proposal"] .sales-proposal-lede{
+      font-size:1rem !important;
+      line-height:1.78 !important;
+      color:var(--muted) !important;
+      font-weight:400 !important;
+    }
+
+    /* L3 — Body description (paragraph copy) */
+    .body,
+    .background-section-body,
+    .background-overview-body,
+    .compare-detail,
+    .redesign-notes .tx p,
+    [data-screen-label="Behind the Process"] .tphase .ph-r p,
+    .competitive-finding p,
+    .lesson .body{
+      font-size:1rem !important;
+      line-height:1.82 !important;
+      font-weight:450 !important;
+      color:var(--ink-2) !important;
+    }
+
+    /* L4 — Small / caption / meta */
+    .cap,
+    .small{
+      font-size:.88rem !important;
+      line-height:1.68 !important;
+      font-weight:450 !important;
+      color:var(--muted) !important;
+    }
+    .kicker{
+      font-size:.8rem !important;
+      font-weight:700 !important;
+      letter-spacing:.28em !important;
+    }
+
+    /* Inline bold/strong inside paragraph copy — must register as bold */
+    .body b,.body strong,
+    .lead b,.lead strong,
+    .background-section-body b,.background-section-body strong{
+      font-weight:650 !important;
+      color:var(--ink) !important;
+    }
+
+    /* Mid hierarchy (sub-section heads / pull quotes inside cards) */
+    .background-overview-title,
+    .strategy-mini-title,
+    [data-screen-label="Behind the Process"] .tphase .ph-r .q,
+    .lesson .pull{
+      font-size:1.6rem !important;
+      line-height:1.42 !important;
+      font-weight:550 !important;
+      color:var(--ink) !important;
+    }
+
+    /* Phase title / small section labels (unified) */
+    .deliverables .rt,
+    .redesign-notes .tx h4,
+    [data-screen-label="Behind the Process"] .tphase .ph-l .pttl{
+      font-size:1.05rem !important;
+      font-weight:600 !important;
+      color:var(--ink) !important;
+      line-height:1.34 !important;
+    }
+
+    /* Phase tag (subtitle under phase title) */
+    [data-screen-label="Behind the Process"] .tphase .ph-l .ptag,
+    .deliverables .rd{
+      font-size:.95rem !important;
+      font-weight:450 !important;
+      line-height:1.55 !important;
+      color:var(--muted) !important;
+    }
+
+    /* Re-tighten Sales Proposal top padding on cream theme — my 100px
+       .section rule above otherwise pushes the heading too far down,
+       reopening the BEYOND→Sales Proposal gap the user already closed.
+       Mirrors the GOAL→Redesign Home rule (padding-top:40px). */
+    body.beyond-cream [data-screen-label="Sales Proposal"].section{
+      padding-top:40px !important;
+    }
+
+    /* The L3 body rule above paints .competitive-finding p with
+       var(--ink-2) on navy, killing contrast. Force it back to white
+       (and any other strong/em emphasis inside it). */
+    .competitive-finding p,
+    .competitive-finding p strong,
+    .competitive-finding p b,
+    .competitive-finding p em{
+      color:#fff !important;
+    }
+    /* Bump the inline strong emphasis inside Key Finding so it visually
+       carries the punchline. */
+    .competitive-finding p strong,
+    .competitive-finding p b{
+      font-size:1.25rem !important;
+      font-weight:700 !important;
+    }
+
+    /* ========================================================
+       Behind the Process — design upgrades:
+       1) timeline (vertical line + node dot per phase)
+       2) PHASE 01/02/03 anchor weight
+       3) clear divider between phases
+       4) phase quote already added in HTML
+       5) sticky left column
+       ======================================================== */
+
+    /* timeline container — anchor for the vertical line */
+    [data-screen-label="Behind the Process"] .timeline{
+      position:relative;
+      padding-left:32px;
+      --timeline-progress:0%;
+    }
+    /* base (grey) line */
+    [data-screen-label="Behind the Process"] .timeline::before{
+      content:"";
+      position:absolute;
+      left:6.5px;
+      top:0;
+      bottom:0;
+      width:1px;
+      background:var(--line);
+    }
+    /* filled (red) line — height driven by JS via --timeline-progress */
+    [data-screen-label="Behind the Process"] .timeline::after{
+      content:"";
+      position:absolute;
+      left:6.5px;
+      top:0;
+      width:1px;
+      height:var(--timeline-progress);
+      background:var(--red);
+      transition:height .12s linear;
+      will-change:height;
+    }
+    /* node dot — sits at the line, aligned with PHASE label */
+    [data-screen-label="Behind the Process"] .tphase{
+      position:relative;
+    }
+    [data-screen-label="Behind the Process"] .tphase::before{
+      content:"";
+      position:absolute;
+      left:-32px;
+      top:78px;          /* aligns with the PHASE label baseline */
+      width:13px;
+      height:13px;
+      border-radius:50%;
+      background:#f8f4ec;
+      border:1.5px solid var(--line);
+      box-shadow:0 0 0 4px #f8f4ec;
+      z-index:2;
+      transition:background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+    /* states driven by JS */
+    [data-screen-label="Behind the Process"] .tphase.is-past::before{
+      background:var(--red);
+      border-color:var(--red);
+    }
+    [data-screen-label="Behind the Process"] .tphase.is-active::before{
+      background:var(--red);
+      border-color:var(--red);
+    }
+
+    /* What I Took Away — redesigned as Timeline Finale.
+       Strip the bordered box; the lesson now visually CONTINUES the
+       timeline: a short red vertical line drops from PHASE 03's tail
+       into a final red node dot, then "WHAT I TOOK AWAY" + the pull
+       quote + body sit aligned with that dot. */
+    [data-screen-label="Behind the Process"] .lesson{
+      position:relative;
+      margin:64px auto 0 !important;     /* matches the .tphase
+                                             padding-bottom rhythm so
+                                             the lesson reveals in the
+                                             same cadence as PHASE 01→
+                                             02→03. */
+      max-width:1380px !important;
+      padding:0 0 0 32px !important;
+      background:transparent !important;
+      border:0 !important;
+      border-radius:0 !important;
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+      will-change:opacity,transform;
+    }
+    [data-screen-label="Behind the Process"] .lesson.is-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+    /* Bridge line — covers the 64px gap into the dot at top:10. */
+    [data-screen-label="Behind the Process"] .lesson::before{
+      content:"";
+      position:absolute;
+      left:6.5px;
+      top:-74px;
+      width:1px;
+      height:84px;
+      background:var(--red);
+    }
+    /* Inner content keeps the editorial line length */
+    [data-screen-label="Behind the Process"] .lesson .lk,
+    [data-screen-label="Behind the Process"] .lesson .pull,
+    [data-screen-label="Behind the Process"] .lesson .body{
+      max-width:880px;
+    }
+    /* Final node dot — caps the timeline */
+    [data-screen-label="Behind the Process"] .lesson::after{
+      content:"";
+      position:absolute;
+      left:0;
+      top:10px;
+      width:13px;
+      height:13px;
+      border-radius:50%;
+      background:var(--red);
+      box-shadow:0 0 0 4px #f8f4ec;
+    }
+    /* Lk label — sit beside the dot, red so it ties to the finale */
+    [data-screen-label="Behind the Process"] .lesson .lk{
+      color:var(--red) !important;
+      font-size:.78rem !important;
+      font-weight:700 !important;
+      letter-spacing:.24em !important;
+      text-transform:uppercase;
+      display:block;
+      line-height:1;
+      padding-top:10px;
+    }
+    [data-screen-label="Behind the Process"] .lesson .pull{
+      margin-top:26px !important;
+    }
+    [data-screen-label="Behind the Process"] .lesson .body{
+      margin-top:24px !important;
+    }
+
+    /* Phase content slides up into place AT THE SAME MOMENT its dot
+       turns red. Both are driven by the same scroll anchor in JS
+       (.is-active and .is-past), so the red fill and the text reveal
+       are visually synchronised. */
+    [data-screen-label="Behind the Process"] .tphase .ph-l,
+    [data-screen-label="Behind the Process"] .tphase .ph-r{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+      will-change:opacity,transform;
+    }
+    [data-screen-label="Behind the Process"] .tphase.is-revealed .ph-l,
+    [data-screen-label="Behind the Process"] .tphase.is-revealed .ph-r,
+    [data-screen-label="Behind the Process"] .tphase.is-active .ph-l,
+    [data-screen-label="Behind the Process"] .tphase.is-active .ph-r,
+    [data-screen-label="Behind the Process"] .tphase.is-past .ph-l,
+    [data-screen-label="Behind the Process"] .tphase.is-past .ph-r{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* PHASE label anchor */
+    [data-screen-label="Behind the Process"] .tphase .ph-l .pnum{
+      font-size:1.05rem !important;
+      font-weight:600 !important;
+      letter-spacing:.14em !important;
+      color:var(--ink) !important;
+      margin-bottom:14px !important;
+    }
+
+    /* clearer phase divider — replace the navy-era hairline */
+    [data-screen-label="Behind the Process"] .tphase{
+      border-top:1px solid var(--line) !important;
+      padding:64px 0 !important;
+    }
+    [data-screen-label="Behind the Process"] .tphase:first-child{
+      border-top:0 !important;
+      padding-top:64px !important;
+    }
+    [data-screen-label="Behind the Process"] .tphase:first-child::before{
+      top:78px;
+    }
+
+    /* sticky left column — phase meta follows along while body scrolls */
+    [data-screen-label="Behind the Process"] .tphase .ph-l{
+      position:sticky;
+      top:80px;
+      align-self:start;
+    }
+
+    /* phase quote (.q) styling — clean pull quote on cream */
+    [data-screen-label="Behind the Process"] .tphase .ph-r .q{
+      margin-top:28px !important;
+      padding-left:18px !important;
+      border-left:2px solid var(--red) !important;
+      color:var(--ink) !important;
+      font-weight:500 !important;
+      font-style:normal !important;
+      font-size:1.15rem !important;
+      line-height:1.55 !important;
+    }
+
+    /* Section 02 Diagnosis — nudge the right-side mock image down */
+    [data-screen-label="Diagnosis"] .diag-right{margin-top:70px}
+    /* Bump the annotation list type + indent the whole block toward
+       the image so it reads as a labelled call-out group. */
+    [data-screen-label="Diagnosis"] .diag-annos{
+      padding-left:64px !important;
+      margin-top:72px !important;
+    }
+    [data-screen-label="Diagnosis"] .diag-anno{
+      gap:32px !important;
+      padding:28px 0 !important;
+    }
+    [data-screen-label="Diagnosis"] .diag-quote{
+      margin-top:88px !important;
+    }
+    [data-screen-label="Diagnosis"] .diag-n{
+      font-size:.88rem !important;
+      flex:0 0 32px !important;
+      padding-top:3px !important;
+    }
+    [data-screen-label="Diagnosis"] .diag-strong{
+      font-size:1.08rem !important;
+    }
+    [data-screen-label="Diagnosis"] .diag-tx{
+      font-size:1rem !important;
+      line-height:1.74 !important;
+    }
+    [data-screen-label="Diagnosis"] .diag-tx p{
+      font-size:.95rem !important;
+      line-height:1.72 !important;
+    }
+    @media (max-width:1040px){
+      [data-screen-label="Diagnosis"] .diag-annos{padding-left:0 !important}
+    }
+
+    /* ========================================================
+       Section 07 — Redesign Home: each annotation's text AND its
+       dashed connector line reveal together, per row, as the user
+       scrolls past it. JS toggles .is-shown on each .rh-a.
+       ======================================================== */
+    #redesign-home .rh-a .rh-line{
+      transform:scaleX(0);
+      transform-origin:right center;
+      transition:transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    #redesign-home .rh-a .rh-line::after{
+      opacity:0;
+      transition:opacity .35s ease .55s;
+    }
+    #redesign-home .rh-a.is-shown .rh-line{transform:scaleX(1)}
+    #redesign-home .rh-a.is-shown .rh-line::after{opacity:1}
+
+    /* Text (h4 + p) eases up at the same moment the line draws. */
+    #redesign-home .rh-a h4,
+    #redesign-home .rh-a p{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .55s cubic-bezier(.2,.7,.2,1),
+                 transform .55s cubic-bezier(.2,.7,.2,1);
+      will-change:opacity,transform;
+    }
+    #redesign-home .rh-a.is-shown h4,
+    #redesign-home .rh-a.is-shown p{
+      opacity:1;
+      transform:translateY(0);
+    }
+    #redesign-home .rh-a.is-shown p{transition-delay:.14s}
+    @media (prefers-reduced-motion:reduce){
+      #redesign-home .rh-a .rh-line{transform:none;transition:none}
+      #redesign-home .rh-a .rh-line::after{opacity:1;transition:none}
+      #redesign-home .rh-a h4,
+      #redesign-home .rh-a p{opacity:1;transform:none;transition:none}
+    }
+
+    /* ========================================================
+       Section 13.5 — Mockup full-bleed parallax.
+       Scale the image up so vertical translation never exposes
+       a gap. JS drives translateY from scroll.
+       ======================================================== */
+    .mockup-full img{
+      transform:translate3d(0,0,0) scale(1.12);
+      transform-origin:center center;
+      will-change:transform;
+    }
+    @media (prefers-reduced-motion:reduce){
+      .mockup-full img{transform:none}
+    }
+
+    /* Background "?" deco — main ? + two smaller satellite ?s on
+       either side, bottoms aligned with the main one. Each drifts on
+       its own loop with a slight tilt so the trio reads as floating.
+       Bumped overall opacity for visibility. */
+    .bg-sec-deco{
+      opacity:.1 !important;
+      animation:bg-deco-float 6s ease-in-out infinite;
+      will-change:transform;
+    }
+    .bg-sec-deco::before,
+    .bg-sec-deco::after{
+      content:"?";
+      position:absolute;
+      bottom:8%;
+      font-size:46%;
+      font-weight:800;
+      line-height:1;
+      letter-spacing:-.04em;
+      color:var(--red);
+      pointer-events:none;
+      user-select:none;
+      will-change:transform;
+    }
+    /* Tucked in close — small overlap with the main ? so the trio
+       reads as one floating cluster. */
+    .bg-sec-deco::before{
+      right:78%;
+      transform-origin:bottom right;
+      animation:bg-deco-float-left 4.5s ease-in-out infinite;
+    }
+    .bg-sec-deco::after{
+      left:78%;
+      transform-origin:bottom left;
+      animation:bg-deco-float-right 5.2s ease-in-out infinite;
+    }
+    @keyframes bg-deco-float{
+      0%,100%{transform:translateY(-52%) rotate(0deg)}
+      25%{transform:translate(-3%,-58%) rotate(-3deg)}
+      50%{transform:translate(2%,-47%) rotate(2deg)}
+      75%{transform:translate(-2%,-55%) rotate(-2deg)}
+    }
+    @keyframes bg-deco-float-left{
+      0%,100%{transform:rotate(-14deg) translate(0,0)}
+      25%{transform:rotate(-26deg) translate(-3%,-9%)}
+      50%{transform:rotate(-10deg) translate(2%,-3%)}
+      75%{transform:rotate(-22deg) translate(-1%,-7%)}
+    }
+    @keyframes bg-deco-float-right{
+      0%,100%{transform:rotate(14deg) translate(0,0)}
+      25%{transform:rotate(8deg) translate(2%,-4%)}
+      50%{transform:rotate(28deg) translate(-2%,-11%)}
+      75%{transform:rotate(18deg) translate(1%,-6%)}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .bg-sec-deco,
+      .bg-sec-deco::before,
+      .bg-sec-deco::after{animation:none}
+    }
+
+    /* Closing — was rendering oversized. Trim the title + section.
+       Also pull the footer up by shrinking the closing's bottom padding
+       (the global 150px bottom on .section leaves too big a gap before
+       the © copyright line). */
+    .closing.section{
+      min-height:auto !important;
+      padding-bottom:40px !important;
+    }
+    footer.foot{
+      padding-top:18px !important;
+    }
+    .closing{
+      min-height:auto !important;
+    }
+    .closing .big{
+      font-size:clamp(1.5rem,2.2vw,2.4rem) !important;
+      font-weight:600 !important;
+      line-height:1.25 !important;
+      margin-top:22px !important;
+    }
+    .closing .sign{
+      margin-top:28px !important;
+      font-size:.78rem !important;
+    }
+    .closing .kicker.center{
+      font-size:.72rem !important;
+    }
+
+    /* In-section structural rhythm — give every section more breathing
+       room between its blocks so content doesn't read as one solid
+       wall. Bumps kicker→heading, heading→subtitle, shead→content,
+       and the gaps inside the Outcome reflection grid. */
+    .shead .kicker{margin-bottom:28px !important}
+    .shead .sub{margin-top:32px !important}
+    .shead{margin-bottom:88px !important}
+
+    .reflect{gap:72px !important}
+    .reflect .ritem{padding:44px 0 !important}
+    .reflect .ritem:first-child{padding-top:0 !important}
+    .reflect .ritem h4{margin-bottom:20px !important}
   </style>
 </head>
 <body>
@@ -976,7 +1560,7 @@
           </div>
           <div class="sf-arrow" aria-hidden="true">↓</div>
           <div class="sf-pill sf-to">
-            <strong>문의 CTA를 상시 노출해</strong>
+            <strong>문의 CTA를 상시 노출</strong>
             <span>다음 행동으로 연결</span>
           </div>
         </div>
@@ -1095,19 +1679,19 @@
       <div class="rh-a" style="top:29%">
         <span class="rh-line" aria-hidden="true"></span>
         <h4>신뢰를 먼저 증명</h4>
-        <p>안전 · 전문 기사 · 신속 대응을<br>신뢰 시스템으로 전면 배치.</p>
+        <p>안전 · 전문 기사 · 신속 대응을 신뢰 시스템으로 전면 배치.</p>
       </div>
 
       <div class="rh-a" style="top:61%">
         <span class="rh-line" aria-hidden="true"></span>
         <h4>목적 · 인원별 차량</h4>
-        <p>고르고 바로 비교 · 문의로<br>이어지는 차량 진입.</p>
+        <p>고르고 바로 비교 · 문의로 이어지는 차량 진입.</p>
       </div>
 
       <div class="rh-a" style="top:79%">
         <span class="rh-line" aria-hidden="true"></span>
         <h4>실고객 후기</h4>
-        <p>후기를 메인에 노출해<br>문의 결정의 부담을 낮춤.</p>
+        <p>후기를 메인에 노출해 문의 결정의 부담을 낮춤.</p>
       </div>
     </div>
   </div>
@@ -1207,23 +1791,38 @@
   <img src="assets/mockup_img.png" alt="부자관광 리디자인 목업">
 </section>
 
+<!-- ============ 13.7 · BEYOND BANNER (navy → cream transition) ============ -->
+<section class="section beyond" data-screen-label="Beyond">
+  <div class="beyond-stage">
+    <div class="beyond-mark" aria-hidden="true">BEYOND</div>
+    <div class="wrap reveal beyond-content" style="position:relative;z-index:2">
+      <div style="max-width:880px;margin:0 auto;text-align:center">
+        <span class="goal-rule"></span>
+        <span class="kicker center goal-kicker" style="font-weight: 600">Beyond the Screen</span>
+        <div class="goal-tag" style="font-weight: 600">From Design to Proposal</div>
+        <p class="pull goal-q">
+          디자인이 끝나는 곳에서 멈추지 않고,<br>회사가 실제로 검토할 수 있는 <span class="hl" style="font-family: Pretendard">영업 제안</span>까지 이어집니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 14 · 영업 제안서 ============ -->
 <section class="section bg-navy-2" data-screen-label="Sales Proposal">
   <div class="wrap">
-    <div class="shead reveal" style="max-width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-bottom: 48px; margin: 0px 17px 48px 0px">
-      <div>
+    <div class="shead reveal sales-proposal-shead">
+      <div class="sales-proposal-headline">
         <span class="kicker">10 — Beyond the Screen</span>
-        <h2 class="h-xl" style="margin-top: 22px">디자인에서 멈추지 않고,<br>제안까지</h2>
+        <h2 class="h-xl">디자인에서 멈추지 않고,<br>제안까지</h2>
       </div>
-      <p class="body" style="width: 583px; margin: 81px -62px 0px 3px; height: 74px">학습 프로젝트로 끝내고 싶지 않았습니다.  리디자인의 근거와 기대 효과를 정리해,  <br>
-회사가 실제로 검토할 수 있는 영업 제안서로 만들었습니다.  <br>
-‘왜 바꿔야 하는가’를 설득하는 문서까지가 이 프로젝트의 끝이었습니다.</p>
+      <p class="body sales-proposal-lede">학습 프로젝트로 끝내고 싶지 않았습니다. 리디자인의 근거와 기대 효과를 정리해, 회사가 실제로 검토할 수 있는 영업 제안서로 만들었습니다. ‘왜 바꿔야 하는가’를 설득하는 문서까지가 이 프로젝트의 끝이었습니다.</p>
     </div>
     <div class="reveal sales-proposal-media">
-      <div class="sales-proposal-item sales-proposal-cover"><img src="assets/proposal-cover-hires.png" alt="영업 제안서 — 표지" class="sales-proposal-cover-img"></div>
-      <div class="sales-proposal-item sales-proposal-mail"><img src="assets/proposal-mail-hires.jpg" alt="영업 제안서 — 전달 메일" class="sales-proposal-mail-img"></div>
+      <div class="sales-proposal-item sales-proposal-cover"><img src="assets/proposal-cover-hires.png?v=2" alt="영업 제안서 — 표지" class="sales-proposal-cover-img"></div>
+      <div class="sales-proposal-item sales-proposal-mail"><img src="assets/proposal-mail-hires.png?v=2" alt="영업 제안서 — 전달 메일" class="sales-proposal-mail-img"></div>
     </div>
-    <p class="cap reveal" style="margin-top:18px;color:#9aa3b8">↑ 회사에 실제로 전달한 영업 제안서와 메일.</p>
+    <p class="cap reveal sales-proposal-cap">↑ 회사에 실제로 전달한 영업 제안서와 메일.</p>
   </div>
 </section>
 
@@ -1233,7 +1832,7 @@
     <div class="shead center reveal">
       <span class="kicker center">11 _BEHIND THE PROCESS</span>
       <h2 class="h-xl">혼자가 아니라,<br>끝까지 끌고 간 시간</h2>
-      <p class="lead sub behind-sub" style="margin-left: auto; margin-right: auto">이 프로젝트는 팀으로 시작했습니다. <br>
+      <p class="lead sub behind-sub" style="margin-left: 0; margin-right: auto">이 프로젝트는 팀으로 시작했습니다. <br>
 가장 어려웠던 건 디자인이 아니라, 같은 결과를 향해 서로의 ‘노력의 농도’를 맞추는 일이었습니다.</p>
     </div>
 
@@ -1256,6 +1855,7 @@
           <p>진행될수록, 같은 목표를 보면서도 거기에 들이는 에너지의 농도가 서로 다르다는 걸 알게 됐습니다.  <br>
 누군가를 탓하기보다, 프로젝트가 멈추지 않게 하는 게 먼저였습니다.</p>
           <p>그래서 비는 부분을 메우는 방식을 택했습니다. 공통으로 쓸 화면 구조와 컴포넌트를 먼저 정리해 두니, 각자가 손대기 쉬워졌고 합치는 비용도 줄었습니다.</p>
+          <p class="q">탓하지 않고, 멈추지 않게 — 그게 다음 결정의 기준이었습니다.</p>
         </div>
       </div>
       <div class="tphase">
@@ -1267,6 +1867,7 @@
 기획과 UI를 다듬고, 실제 화면을 직접 퍼블리싱해 ‘돌아가는 결과물’로 만들었습니다.</p>
           <p>그 과정에서 욕심을 더 내,  디자인을 넘어 회사에 실제로 제안할 수 있는 영업 제안서까지 만들었습니다. <br>
 학습 프로젝트를 ‘쓸 수 있는 제안’으로 끌어올리고 싶었습니다.</p>
+          <p class="q">끝까지 가져가는 게 결국 ‘디자인이 일하게 만드는 일’이었습니다.</p>
         </div>
       </div>
     </div>
