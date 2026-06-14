@@ -676,3 +676,372 @@ setupDeliverablesTicker();
   window.addEventListener("resize", onScroll, { passive: true });
   render();
 })();
+
+// ============================================================
+// GSAP + Lenis enhancement layer
+// ============================================================
+window.addEventListener("load", function () {
+  if (typeof gsap === "undefined" || exportSection) {
+    return;
+  }
+  if (typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+
+  // ---------- 1. Lenis smooth scroll + ticker sync ----------
+  var lenis = null;
+  if (typeof Lenis !== "undefined" && !reduceMotion) {
+    lenis = new Lenis({
+      duration: 1.15,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      smoothTouch: false,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.2,
+    });
+    if (typeof ScrollTrigger !== "undefined") {
+      lenis.on("scroll", ScrollTrigger.update);
+    }
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // ---------- 2. Top progress bar ----------
+  var progressEl = document.getElementById("progress");
+  if (progressEl) {
+    function updateProgress() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var st = window.scrollY || document.documentElement.scrollTop;
+      progressEl.style.width = (h > 0 ? (st / h) * 100 : 0) + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+  }
+
+  // ---------- helper: split element into char spans ----------
+  function splitChars(el) {
+    if (!el) return [];
+    var nodes = Array.prototype.slice.call(el.childNodes);
+    var chars = [];
+    el.innerHTML = "";
+    nodes.forEach(function (node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        var text = node.textContent;
+        for (var i = 0; i < text.length; i++) {
+          var ch = text[i];
+          if (ch === " ") {
+            el.appendChild(document.createTextNode(" "));
+          } else {
+            var span = document.createElement("span");
+            span.className = "gsap-char";
+            span.textContent = ch;
+            el.appendChild(span);
+            chars.push(span);
+          }
+        }
+      } else {
+        el.appendChild(node);
+        // also push existing inline children for animation
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          chars.push(node);
+        }
+      }
+    });
+    return chars;
+  }
+
+  // ---------- 3. Hero intro reveal + image tilt ----------
+  (function setupHeroIntro() {
+    if (!reduceMotion) {
+      var heroEls = document.querySelectorAll(
+        ".hero-v2-brand, .hero-v2-title, .hero-v2-desc, .hero-v2-rule, .hero-v2-meta, .hero-v2-right"
+      );
+      if (heroEls.length) {
+        gsap.from(heroEls, {
+          y: 36,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.12,
+          delay: 0.1,
+        });
+      }
+    }
+    // Mousemove tilt on hero shots
+    if (!reduceMotion) {
+      var shots = document.querySelectorAll(".hero-v2-shot");
+      shots.forEach(function (shot) {
+        shot.addEventListener("mousemove", function (e) {
+          var rect = shot.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+          gsap.to(shot, {
+            rotateY: x * 6,
+            rotateX: -y * 6,
+            scale: 1.02,
+            duration: 0.4,
+            ease: "power2.out",
+            transformPerspective: 800,
+          });
+        });
+        shot.addEventListener("mouseleave", function () {
+          gsap.to(shot, {
+            rotateY: 0,
+            rotateX: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        });
+      });
+    }
+  })();
+
+  if (typeof ScrollTrigger === "undefined") {
+    return;
+  }
+
+  // ---------- 4. Diagnosis callouts sequential pulse ----------
+  (function setupDiagCallouts() {
+    var callouts = document.querySelectorAll(".diag-callout");
+    if (!callouts.length || reduceMotion) return;
+    ScrollTrigger.create({
+      trigger: ".diag-shot-wrap",
+      start: "top 70%",
+      once: true,
+      onEnter: function () {
+        Array.prototype.forEach.call(callouts, function (c, i) {
+          setTimeout(function () { c.classList.add("is-pulsed"); }, i * 220);
+        });
+      },
+    });
+  })();
+
+  // ---------- 5. Strategy AS-IS → TO-BE staggered reveal ----------
+  (function setupStrategy() {
+    var cols = document.querySelectorAll(".sf-col");
+    if (!cols.length || reduceMotion) return;
+    cols.forEach(function (col, i) {
+      var asPill = col.querySelector(".sf-as");
+      var arrow = col.querySelector(".sf-arrow");
+      var toPill = col.querySelector(".sf-to");
+      if (!asPill || !toPill) return;
+      gsap.set([asPill, arrow, toPill], { opacity: 0 });
+      gsap.set(asPill, { y: 24 });
+      gsap.set(toPill, { y: -24 });
+      gsap.set(arrow, { scale: 0.4, rotate: -90 });
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: col,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        defaults: { ease: "power3.out" },
+      });
+      tl.to(asPill, { y: 0, opacity: 1, duration: 0.55 })
+        .to(arrow, { scale: 1, rotate: 0, opacity: 1, duration: 0.45 }, "-=0.2")
+        .to(toPill, { y: 0, opacity: 1, duration: 0.55 }, "-=0.15");
+    });
+  })();
+
+  // ---------- 6. Style Guide swatches + type stagger ----------
+  (function setupStyleGuide() {
+    if (reduceMotion) return;
+    var sg = document.querySelector('[data-screen-label="Style Guide"]');
+    if (!sg) return;
+    var swatches = sg.querySelectorAll(".sg2-sw");
+    var typeRows = sg.querySelectorAll(".sg2-trow");
+    if (swatches.length) {
+      gsap.from(swatches, {
+        y: 30,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.08,
+        scrollTrigger: { trigger: sg, start: "top 75%", once: true },
+      });
+    }
+    if (typeRows.length) {
+      gsap.from(typeRows, {
+        x: -20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: { trigger: sg, start: "top 70%", once: true },
+      });
+    }
+  })();
+
+  // ---------- 7. Pages — native sticky horizontal pan ----------
+  //   .pages-pan-wrap is 260vh tall; .pages-pan-stage is
+  //   position:sticky;top:0;height:100vh inside it. As the user
+  //   scrolls through wrap, the stage stays glued to the top and we
+  //   translate the strip horizontally based on sticky progress.
+  //   The first 85% of scroll pans through the cards, the last 15%
+  //   holds the final card so the user has a beat to take it in.
+  //   No GSAP pin → no scroll hijacking, plays clean with Lenis.
+  (function setupPagesPan() {
+    var wrap = document.querySelector(".pages-pan-wrap");
+    var stage = document.querySelector(".pages-pan-stage");
+    var strip = document.querySelector(".pages-pan-stage .pagestrip");
+    if (!wrap || !stage || !strip) return;
+    if (window.innerWidth < 980 || reduceMotion) {
+      strip.style.transform = "none";
+      return;
+    }
+    function distance() {
+      return Math.max(0, strip.scrollWidth - window.innerWidth + 60);
+    }
+    var ticking = false;
+    function render() {
+      ticking = false;
+      var rect = wrap.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var scrollable = rect.height - vh;
+      if (scrollable <= 0) {
+        strip.style.transform = "translate3d(0,0,0)";
+        return;
+      }
+      var scrolled = Math.max(0, -rect.top);
+      var rawP = Math.min(1, scrolled / scrollable);
+      // Pan over first 85% of scroll, hold the last 15%.
+      var p = Math.min(1, rawP / 0.85);
+      var x = -distance() * p;
+      strip.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
+    }
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    render();
+  })();
+
+  // ---------- 8. Outcome reflect items staggered reveal ----------
+  (function setupOutcome() {
+    if (reduceMotion) return;
+    var items = document.querySelectorAll('[data-screen-label="Outcome"] .ritem');
+    if (!items.length) return;
+    gsap.from(items, {
+      y: 50,
+      opacity: 0,
+      rotateX: 8,
+      duration: 0.75,
+      ease: "power3.out",
+      stagger: 0.12,
+      transformPerspective: 800,
+      scrollTrigger: {
+        trigger: '[data-screen-label="Outcome"] .reflect',
+        start: "top 75%",
+        once: true,
+      },
+    });
+  })();
+
+  // ---------- 9. Closing THANK YOU split-text finale ----------
+  (function setupClosingFinale() {
+    if (reduceMotion) return;
+    var kicker = document.querySelector(".closing .kicker");
+    var big = document.querySelector(".closing .big");
+    if (kicker) {
+      var kcChars = splitChars(kicker);
+      gsap.set(kcChars, { y: 18, opacity: 0 });
+      ScrollTrigger.create({
+        trigger: kicker,
+        start: "top 80%",
+        once: true,
+        onEnter: function () {
+          gsap.to(kcChars, {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.04,
+          });
+        },
+      });
+    }
+    if (big) {
+      var bigChars = splitChars(big);
+      gsap.set(bigChars, { y: 40, opacity: 0 });
+      ScrollTrigger.create({
+        trigger: big,
+        start: "top 80%",
+        once: true,
+        onEnter: function () {
+          gsap.to(bigChars, {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.025,
+            delay: 0.15,
+          });
+        },
+      });
+    }
+  })();
+
+  // ---------- 10. Skill chips bouncy stagger on phase reveal ----------
+  (function setupSkillChips() {
+    if (reduceMotion) return;
+    var phases = document.querySelectorAll(
+      '[data-screen-label="Behind the Process"] .tphase'
+    );
+    phases.forEach(function (phase) {
+      var chips = phase.querySelectorAll(".sk-chips .chip");
+      if (!chips.length) return;
+      gsap.set(chips, { scale: 0.7, opacity: 0 });
+      ScrollTrigger.create({
+        trigger: phase,
+        start: "top 65%",
+        once: true,
+        onEnter: function () {
+          gsap.to(chips, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.55,
+            ease: "back.out(2)",
+            stagger: 0.07,
+          });
+        },
+      });
+    });
+  })();
+
+  // ---------- 12. Magnetic cursor ----------
+  (function setupMagneticCursor() {
+    if (reduceMotion) return;
+    if (window.matchMedia("(hover:none)").matches) return;
+    var cursor = document.createElement("div");
+    cursor.className = "mag-cursor";
+    document.body.appendChild(cursor);
+    var cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+    var tx = cx, ty = cy;
+    window.addEventListener("mousemove", function (e) {
+      tx = e.clientX;
+      ty = e.clientY;
+    });
+    gsap.ticker.add(function () {
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      cursor.style.transform = "translate(" + (cx - 6) + "px," + (cy - 6) + "px)";
+    });
+    var hoverables = "a, button, .pull, .goal-q, .h-xl, .hero-v2-shot, .chip, .diag-quote, .red-ink, .hl, .competitive-finding, .lesson .pull";
+    document.addEventListener("mouseover", function (e) {
+      if (e.target.closest(hoverables)) cursor.classList.add("is-active");
+    });
+    document.addEventListener("mouseout", function (e) {
+      if (e.target.closest(hoverables)) cursor.classList.remove("is-active");
+    });
+  })();
+
+  // Final refresh once everything's been registered
+  ScrollTrigger.refresh();
+});
+
