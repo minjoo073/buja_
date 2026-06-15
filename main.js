@@ -755,20 +755,32 @@ window.addEventListener("load", function () {
 
   // ---------- 3. Hero intro reveal + image tilt ----------
   (function setupHeroIntro() {
-    if (!reduceMotion) {
-      var heroEls = document.querySelectorAll(
-        ".hero-v2-brand, .hero-v2-title, .hero-v2-desc, .hero-v2-rule, .hero-v2-meta, .hero-v2-right"
-      );
-      if (heroEls.length) {
-        gsap.from(heroEls, {
-          y: 36,
-          opacity: 0,
+    // 히어로를 다시 보이게 한다(.js-anim으로 숨겨둔 상태 해제).
+    function revealHero() {
+      document.documentElement.classList.add("hero-ready");
+    }
+    var heroEls = document.querySelectorAll(
+      ".hero-v2-brand, .hero-v2-title, .hero-v2-desc, .hero-v2-rule, .hero-v2-meta, .hero-v2-right"
+    );
+    // GSAP이 없거나 모션 축소면 애니메이션 없이 바로 표시.
+    if (reduceMotion || typeof gsap === "undefined" || !heroEls.length) {
+      revealHero();
+    } else {
+      // fromTo로 시작/끝 상태를 명시 → CSS 완성 화면이 먼저 번쩍이지 않는다.
+      revealHero();
+      gsap.fromTo(
+        heroEls,
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
           duration: 0.9,
           ease: "power3.out",
           stagger: 0.12,
           delay: 0.1,
-        });
-      }
+          clearProps: "opacity,transform",
+        }
+      );
     }
     // Mousemove tilt on hero shots
     if (!reduceMotion) {
