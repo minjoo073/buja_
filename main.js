@@ -28,7 +28,9 @@ function updatePortfolioScale() {
     return;
   }
 
-  document.documentElement.style.setProperty("--portfolio-scale", scale.toFixed(4));
+  // Responsive mode: no global zoom — CSS handles all widths natively.
+  void scale;
+  document.documentElement.style.setProperty("--portfolio-scale", "1");
 }
 
 window.addEventListener("resize", updatePortfolioScale, { passive: true });

@@ -775,7 +775,7 @@ b,strong{font-weight:600;color:var(--ink)}
 .tphase .ph-r .q{font-size:15.5px;font-weight:600;color:#fff;line-height:1.6;border-left:2px solid var(--sand-ink);
   padding-left:20px;margin-top:18px}
 .behind-sub{max-width:920px}
-[data-screen-label="Behind the Process"] .timeline{max-width:1380px;margin:0 auto}
+[data-screen-label="Behind the Process"] .timeline{max-width:none;margin:0 auto}
 [data-screen-label="Behind the Process"] .tphase{grid-template-columns:minmax(260px,320px) minmax(0,1fr);gap:28px;padding:52px 0}
 [data-screen-label="Behind the Process"] .tphase .ph-l .pnum{font-size:13px}
 [data-screen-label="Behind the Process"] .tphase .ph-l .pttl{font-size:22px;line-height:1.2}
