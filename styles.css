@@ -637,6 +637,18 @@ b,strong{font-weight:600;color:var(--ink)}
 .journey .st .bar i{display:block;height:100%;background:var(--red);opacity:.9}
 .journey .st .dl{font-size:11.5px;font-weight:700;color:var(--red);margin-top:8px;letter-spacing:.02em}
 
+/* Severity scale — colour encodes drop-off level so red stays reserved
+   for the real danger point. low(calm grey) -> mid(amber) -> high(terracotta)
+   -> critical(brand red). Bar fill + label colour move together. */
+.journey .st.lv-low  .bar i{background:#b7b0a3;opacity:1}
+.journey .st.lv-mid  .bar i{background:#e0a52e;opacity:1}
+.journey .st.lv-high .bar i{background:#d2693e;opacity:1}
+.journey .st.lv-crit .bar i{background:var(--red);opacity:1}
+.journey .st.lv-low  .dl{color:#8a857c}
+.journey .st.lv-mid  .dl{color:#bd831c}
+.journey .st.lv-high .dl{color:#c2542c}
+.journey .st.lv-crit .dl{color:var(--red)}
+
 .funnel{display:flex;flex-direction:column;gap:11px}
 .funnel .fr{display:flex;align-items:center;gap:16px}
 .funnel .fr .fl{width:120px;flex:0 0 auto;font-size:14px;color:var(--ink-2);font-weight:600}
@@ -1457,18 +1469,20 @@ footer.foot{
   margin-top:36px !important;
 }
 [data-screen-label="Background"] .background-overview-title{
-  font-size:1.38rem !important;
+  font-size:1.62rem !important;
   font-weight:500 !important;
-  line-height:1.58 !important;
+  line-height:1.5 !important;
   letter-spacing:-.022em !important;
   color:var(--ink) !important;
-  border-left:3px solid var(--red) !important;
-  padding-left:22px !important;
+  border-left:5px solid var(--red) !important;
+  padding-left:28px !important;
   margin-left:0 !important;
   max-width:680px !important;
 }
 [data-screen-label="Background"] .background-overview-title span{
-  color:inherit !important;
+  color:var(--red) !important;
+  font-size:1.14em !important;
+  font-weight:700 !important;
 }
 
 /* section body text */
@@ -1547,15 +1561,20 @@ footer.foot{
 /* bottom quote */
 .diag-quote{
   margin-top:44px;
-  border-left:3px solid var(--red);
-  padding-left:20px;
+  border-left:5px solid var(--red);
+  padding-left:26px;
 }
 .diag-quote p{
-  font-size:1.38rem;
+  font-size:1.62rem;
   font-weight:600;
-  line-height:1.56;
+  line-height:1.5;
   color:var(--ink);
   letter-spacing:-.028em;
+}
+/* red-emphasised phrase reads one step above the black text */
+.diag-quote p .red-ink{
+  font-size:1.14em;
+  font-weight:700;
 }
 
 /* right screenshot with callouts */
@@ -1607,11 +1626,11 @@ footer.foot{
   gap:12px; /* matches sf-col gap */
 }
 .sf-label-cell{
-  height:160px; /* matches circle size */
+  height:204px; /* matches circle size */
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  font-size:11px;
+  font-size:13px;
   font-weight:700;
   letter-spacing:.1em;
   text-transform:uppercase;
@@ -1629,16 +1648,16 @@ footer.foot{
   gap:12px;
 }
 .sf-pill{
-  width:min(100%, 160px);
+  width:min(100%, 204px);
   aspect-ratio:1/1;
   border-radius:50%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:6px;
+  gap:8px;
   text-align:center;
-  padding:16px;
+  padding:22px;
   box-sizing:border-box;
 }
 .sf-as{
@@ -1646,13 +1665,13 @@ footer.foot{
   background:transparent;
 }
 .sf-as strong{
-  font-size:.85rem;
+  font-size:1.05rem;
   font-weight:600;
   color:var(--ink);
   line-height:1.3;
 }
 .sf-as span{
-  font-size:.72rem;
+  font-size:.88rem;
   color:var(--ink-2);
   line-height:1.4;
 }
@@ -1660,18 +1679,18 @@ footer.foot{
   background:var(--navy);
 }
 .sf-to strong{
-  font-size:.85rem;
+  font-size:1.05rem;
   font-weight:600;
   color:#fff !important;
   line-height:1.3;
 }
 .sf-to span{
-  font-size:.72rem;
+  font-size:.88rem;
   color:rgba(255,255,255,.75) !important;
   line-height:1.4;
 }
 .sf-arrow{
-  font-size:1.1rem;
+  font-size:1.35rem;
   color:var(--red);
   line-height:1;
   flex-shrink:0;
