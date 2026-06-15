@@ -111,7 +111,7 @@
     font-style:normal !important;
   }
 
-  .lead{font-size:1.1rem !important; line-height:1.8 !important; font-weight:400 !important}
+  .lead{font-size:1.1875rem !important; line-height:1.7 !important; font-weight:400 !important}
   .body{font-size:1rem !important; line-height:1.82 !important; font-weight:400 !important}
   .small{font-size:.88rem !important; line-height:1.72 !important; font-weight:300 !important}
   .cap,.kicker{font-size:.75rem !important}
@@ -771,8 +771,8 @@
     .behind-sub,
     .style-guide-sub,
     .sales-proposal-lede{
-      font-size:1rem !important;
-      line-height:1.78 !important;
+      font-size:1.1875rem !important;   /* L2 subtitle bumped 16px -> 19px for readability */
+      line-height:1.7 !important;
       font-weight:400 !important;
       color:var(--muted) !important;
       word-break:keep-all !important;   /* keep Korean words intact */
@@ -794,8 +794,8 @@
     [data-screen-label="Behind the Process"] .behind-sub,
     [data-screen-label="Sales Proposal"] .sales-proposal-lede,
     body.beyond-cream [data-screen-label="Sales Proposal"] .sales-proposal-lede{
-      font-size:1rem !important;
-      line-height:1.78 !important;
+      font-size:1.1875rem !important;   /* keep L2 subtitle at 19px on themed sections too */
+      line-height:1.7 !important;
       color:var(--muted) !important;
       font-weight:400 !important;
     }
@@ -964,11 +964,10 @@
        quote + body sit aligned with that dot. */
     [data-screen-label="Behind the Process"] .lesson{
       position:relative;
-      margin:64px auto 0 !important;     /* matches the .tphase
-                                             padding-bottom rhythm so
-                                             the lesson reveals in the
-                                             same cadence as PHASE 01→
-                                             02→03. */
+      margin:64px 0 0 !important;        /* left-align with the timeline:
+                                             the bridge line/dot must drop
+                                             straight under PHASE 03's tail,
+                                             not center inside the wide wrap. */
       max-width:1380px !important;
       padding:0 0 0 32px !important;
       background:transparent !important;
@@ -983,14 +982,16 @@
       opacity:1;
       transform:translateY(0);
     }
-    /* Bridge line — covers the 64px gap into the dot at top:10. */
+    /* Bridge line — drops from PHASE 03's tail straight into the dot.
+       Centered on the dot (left:0,width:13 -> center 6.5px) and tall
+       enough to reach the dot's center so the line visibly connects. */
     [data-screen-label="Behind the Process"] .lesson::before{
       content:"";
       position:absolute;
-      left:6.5px;
+      left:6px;
       top:-74px;
       width:1px;
-      height:84px;
+      height:90px;
       background:var(--red);
     }
     /* Inner content keeps the editorial line length */
@@ -1998,7 +1999,7 @@
         <span class="kicker">10 — Beyond the Screen</span>
         <h2 class="h-xl">디자인에서 멈추지 않고,<br>제안까지</h2>
       </div>
-      <p class="body sales-proposal-lede">학습 프로젝트로 끝내고 싶지 않았습니다. 리디자인의 근거와 기대 효과를 정리해, 회사가 실제로 검토할 수 있는 영업 제안서로 만들었습니다.<br>‘왜 바꿔야 하는가’를 설득하는 문서까지가 이 프로젝트의 끝이었습니다.</p>
+      <p class="body sales-proposal-lede">학습 프로젝트로 끝내고 싶지 않았습니다. 리디자인의 근거와 기대 효과를 정리해,<br>회사가 실제로 검토할 수 있는 영업 제안서로 만들었습니다.<br>‘왜 바꿔야 하는가’를 설득하는 문서까지가 이 프로젝트의 끝이었습니다.</p>
     </div>
     <div class="reveal sales-proposal-media">
       <div class="sales-proposal-item sales-proposal-cover"><img src="assets/proposal-cover-hires.png?v=2" alt="영업 제안서 — 표지" class="sales-proposal-cover-img"></div>
