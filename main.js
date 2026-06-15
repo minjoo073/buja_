@@ -1055,6 +1055,36 @@ window.addEventListener("load", function () {
     });
   })();
 
+  // ---------- Hero jump tag → #behind-process ----------
+  (function setupHeroJump() {
+    var jump = document.querySelector('.hero-v2-jump[data-jump="behind"]');
+    if (!jump) return;
+    var targetId = "behind-process";
+    jump.addEventListener("click", function (e) {
+      var target = document.getElementById(targetId);
+      if (!target) return;
+      e.preventDefault();
+      var navEl = document.querySelector(".nav");
+      var navH = navEl ? navEl.getBoundingClientRect().height : 58;
+      var pad = 24;
+      var offset = -(navH + pad);
+      if (lenis && typeof lenis.scrollTo === "function") {
+        lenis.scrollTo(target, { duration: 1.4, offset: offset });
+      } else {
+        var top = target.getBoundingClientRect().top + window.scrollY + offset;
+        window.scrollTo({ top: top, behavior: reduceMotion ? "auto" : "smooth" });
+      }
+      if (history.pushState) {
+        history.pushState(null, "", "#" + targetId);
+      }
+      var focusEl = target.querySelector(".h-xl");
+      if (focusEl) {
+        if (!focusEl.hasAttribute("tabindex")) focusEl.setAttribute("tabindex", "-1");
+        setTimeout(function () { focusEl.focus({ preventScroll: true }); }, 1500);
+      }
+    });
+  })();
+
   // Final refresh once everything's been registered
   ScrollTrigger.refresh();
 });

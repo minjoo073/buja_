@@ -76,13 +76,13 @@
     background-color:var(--navy) !important;
   }
   /* zoom:0.88 보정 — 텍스트 크기 & 강조 */
-  .competitive-board-head .comp-col-head{ font-size:19px !important; font-weight:700 !important; }
-  .comp-row-label{ font-size:19px !important; font-weight:700 !important; }
-  .comp-cell strong{ font-size:19px !important; font-weight:700 !important; letter-spacing:-.02em !important; }
-  .comp-cell span{ font-size:15px !important; line-height:1.65 !important; }
-  .competitive-finding .finding-label{ font-size:19px !important; font-weight:700 !important; }
-  .competitive-finding p{ font-size:15px !important; line-height:1.7 !important; font-weight:400 !important; }
-  .competitive-finding p strong{ font-size:15px !important; font-weight:700 !important; }
+  .competitive-board-head .comp-col-head{ font-size:22px !important; font-weight:700 !important; }
+  .comp-row-label{ font-size:22px !important; font-weight:700 !important; }
+  .comp-cell strong{ font-size:21px !important; font-weight:700 !important; letter-spacing:-.02em !important; }
+  .comp-cell span{ font-size:17px !important; line-height:1.65 !important; }
+  .competitive-finding .finding-label{ font-size:22px !important; font-weight:700 !important; }
+  .competitive-finding p{ font-size:17px !important; line-height:1.7 !important; font-weight:400 !important; }
+  .competitive-finding p strong{ font-size:17px !important; font-weight:700 !important; }
   .comp-cell.current{ background:var(--navy) !important; }
 
   .h-xl,
@@ -115,6 +115,35 @@
   .body{font-size:1rem !important; line-height:1.82 !important; font-weight:400 !important}
   .small{font-size:.88rem !important; line-height:1.72 !important; font-weight:300 !important}
   .cap,.kicker{font-size:.75rem !important}
+
+  /* 11_BEHIND THE PROCESS — 강조용: 사이즈 업 + 빨강/검정 번쩍 */
+  @keyframes behindKickerFlash {
+    0%, 49%   { color:#e63946 !important; text-shadow:0 0 14px rgba(230,57,70,.55); }
+    50%, 100% { color:#000000 !important; text-shadow:0 0 0 rgba(0,0,0,0); }
+  }
+  @keyframes behindKickerBarFlash {
+    0%, 49%   { background:#e63946 !important; box-shadow:0 0 10px rgba(230,57,70,.6); }
+    50%, 100% { background:#000000 !important; box-shadow:none; }
+  }
+  section[data-screen-label="Behind the Process"] .shead .kicker{
+    font-size:1.6rem !important;
+    letter-spacing:.32em !important;
+    gap:18px !important;
+    animation: behindKickerFlash 1.2s steps(1,end) infinite;
+  }
+  section[data-screen-label="Behind the Process"] .shead .kicker::before{
+    width:46px !important;
+    height:3px !important;
+    animation: behindKickerBarFlash 1.2s steps(1,end) infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    section[data-screen-label="Behind the Process"] .shead .kicker,
+    section[data-screen-label="Behind the Process"] .shead .kicker::before{
+      animation:none !important;
+    }
+    section[data-screen-label="Behind the Process"] .shead .kicker{ color:#e63946 !important; }
+    section[data-screen-label="Behind the Process"] .shead .kicker::before{ background:#e63946 !important; }
+  }
 
   .background-section-body,
   .background-overview-body,
@@ -196,6 +225,13 @@
     font-weight:400 !important;
     color:var(--ink) !important;
     line-height:1.34 !important;
+  }
+  /* Phase 제목(함께 출발 등) 강조 — 다른 그룹에서 분리해 키움 */
+  [data-screen-label="Behind the Process"] .tphase .ph-l .pttl{
+    font-size:1.6rem !important;
+    font-weight:700 !important;
+    line-height:1.25 !important;
+    letter-spacing:-.01em !important;
   }
   .section[data-screen-label="Intro"] .deliverables .rt{
     font-size:1.05rem !important;
@@ -1054,10 +1090,10 @@
 
     /* PHASE label anchor */
     [data-screen-label="Behind the Process"] .tphase .ph-l .pnum{
-      font-size:1.05rem !important;
-      font-weight:600 !important;
-      letter-spacing:.14em !important;
-      color:var(--ink) !important;
+      font-size:.82rem !important;
+      font-weight:500 !important;
+      letter-spacing:.16em !important;
+      color:var(--muted) !important;
       margin-bottom:14px !important;
     }
 
@@ -1441,6 +1477,10 @@
 <!-- ============ 01 · HERO ============ -->
 <header class="hero hero-v2" data-screen-label="Hero">
   <div class="hero-v2-page-label">Website Redesign</div>
+  <a class="hero-v2-jump" href="#behind-process" data-jump="behind" aria-label="섹션 11 — 메이킹 스토리로 이동">
+    <span class="hero-v2-jump-kicker"><span class="hero-v2-jump-dash"></span>11 _BEHIND THE PROCESS</span>
+    <span class="hero-v2-jump-label">결과보다, 끝까지 끌고 간 시간이 궁금하다면<span class="hero-v2-jump-arrow" aria-hidden="true">→</span></span>
+  </a>
   <div class="wrap hero-v2-inner">
     <div class="hero-v2-left">
       <div class="hero-v2-brand">
