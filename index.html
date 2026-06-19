@@ -113,8 +113,8 @@
 
   .lead{font-size:1.1875rem !important; line-height:1.7 !important; font-weight:400 !important}
   .body{font-size:1rem !important; line-height:1.82 !important; font-weight:400 !important}
-  .small{font-size:.88rem !important; line-height:1.72 !important; font-weight:300 !important}
-  .cap,.kicker{font-size:.75rem !important}
+  .small{font-size:.95rem !important; line-height:1.72 !important; font-weight:300 !important}
+  .cap,.kicker{font-size:.85rem !important}
 
   /* 11_BEHIND THE PROCESS — 강조용: 사이즈 업 + 빨강/검정 번쩍 */
   @keyframes behindKickerFlash {
@@ -716,17 +716,19 @@
     [data-screen-label="Pages"] .pagestrip::before{ display:none !important; }
     [data-screen-label="Pages"] .pcell{ flex:1 1 0; min-width:0; }   /* fill the row evenly */
     [data-screen-label="Pages"] .shot-page{
+      aspect-ratio:700/520;
       height:auto !important;
       border:none !important;
       background:transparent !important;
-      border-radius:4px;
+      border-radius:0;
       overflow:hidden;
       box-shadow:0 26px 54px -34px rgba(0,0,0,.55) !important;
     }
     [data-screen-label="Pages"] .shot-page .shot{
       width:100% !important;
-      height:auto !important;
-      object-fit:initial !important;
+      height:100% !important;
+      object-fit:cover !important;
+      object-position:top center !important;
     }
     [data-screen-label="Pages"] .pl{ margin-top:18px !important; min-height:0 !important; }
     [data-screen-label="Pages"] .pt{ color:#fff !important; font-size:16px; font-weight:650; }
@@ -1479,7 +1481,7 @@
   <div class="hero-v2-page-label">Website Redesign</div>
   <a class="hero-v2-jump" href="#behind-process" data-jump="behind" aria-label="섹션 11 — 메이킹 스토리로 이동">
     <span class="hero-v2-jump-kicker"><span class="hero-v2-jump-dash"></span>11 _BEHIND THE PROCESS</span>
-    <span class="hero-v2-jump-label">결과보다, 끝까지 끌고 간 시간이 궁금하다면<span class="hero-v2-jump-arrow" aria-hidden="true">→</span></span>
+    <span class="hero-v2-jump-label">팀원이 손 놓으면 그때부터 뭘 하나요<span class="hero-v2-jump-arrow" aria-hidden="true">→</span></span>
   </a>
   <div class="wrap hero-v2-inner">
     <div class="hero-v2-left">
@@ -1887,7 +1889,7 @@
 
     <div class="rh-stage reveal">
       <div class="rh-mock">
-        <img class="shot" src="assets/main_page.png" alt="부자관광 리디자인 홈 전체">
+        <img class="shot" src="assets/main_page.webp" alt="부자관광 리디자인 홈 전체">
       </div>
 
       <div class="rh-a" style="top:8%">
@@ -1902,13 +1904,13 @@
         <p>안전 · 전문 기사 · 신속 대응을 신뢰 시스템으로 전면 배치.</p>
       </div>
 
-      <div class="rh-a" style="top:61%">
+      <div class="rh-a" style="top:calc(61% - 80px)">
         <span class="rh-line" aria-hidden="true"></span>
         <h4>목적 · 인원별 차량</h4>
         <p>고르고 바로 비교 · 문의로 이어지는 차량 진입.</p>
       </div>
 
-      <div class="rh-a" style="top:79%">
+      <div class="rh-a" style="top:calc(79% - 80px)">
         <span class="rh-line" aria-hidden="true"></span>
         <h4>실고객 후기</h4>
         <p>후기를 메인에 노출해 문의 결정의 부담을 낮춤.</p>
@@ -1986,22 +1988,22 @@
     <div class="pages-pan-stage">
       <div class="pagestrip">
         <div class="pcell">
-          <div class="shot-panel shot-page"><img class="shot" src="assets/home_img.png" alt="홈"></div>
+          <div class="shot-panel shot-page"><img class="shot" src="assets/home_img.webp" alt="홈"></div>
           <div class="pl"><span class="pt">홈</span></div>
           <p class="pd">서비스 · 신뢰 · 차량 CTA를 한 흐름에</p>
         </div>
         <div class="pcell">
-          <div class="shot-panel shot-page"><img class="shot" src="assets/sub_img.png" alt="차량안내"></div>
+          <div class="shot-panel shot-page"><img class="shot" src="assets/sub_img.webp" alt="차량안내"></div>
           <div class="pl"><span class="pt">차량안내</span></div>
           <p class="pd">스펙 · 좌석 · 견적을 한 화면에</p>
         </div>
         <div class="pcell">
-          <div class="shot-panel shot-page"><img class="shot" src="assets/sub_1_img.png" alt="고객후기"></div>
+          <div class="shot-panel shot-page"><img class="shot" src="assets/sub_1_img.webp" alt="고객후기"></div>
           <div class="pl"><span class="pt">고객후기</span></div>
           <p class="pd">필터 · 평점 있는 실고객 후기</p>
         </div>
         <div class="pcell">
-          <div class="shot-panel shot-page"><img class="shot" src="assets/sub_2_img.png" alt="문의하기"></div>
+          <div class="shot-panel shot-page"><img class="shot" src="assets/sub_2_img.webp" alt="문의하기"></div>
           <div class="pl"><span class="pt">문의하기</span></div>
           <p class="pd">FAQ · 기사모집 · B2B 분기 허브</p>
         </div>
@@ -2012,7 +2014,7 @@
 
 <!-- ============ 13.5 · FULL-BLEED MOCKUP ============ -->
 <section class="mockup-full" data-screen-label="Mockup">
-  <img src="assets/mockup_img.png" alt="부자관광 리디자인 목업">
+  <img src="assets/mockup_img.webp" alt="부자관광 리디자인 목업">
 </section>
 
 <!-- ============ 13.7 · BEYOND BANNER (navy → cream transition) ============ -->
